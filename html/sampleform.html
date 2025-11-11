@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sales Entry Form</title>
+  <style>
+    :root{
+      --accent: #276EF1;
+      --muted: #6b7280;
+      --bg: purple;
+      --card: goldenrod;
+      --radius: 12px;
+      --pad: 18px;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    * { box-sizing: border-box; }
+    body{
+      margin:0;
+      background: linear-gradient(180deg, var(--bg), #eef3ff);
+      color:#111827;
+      line-height:1.4;
+      -webkit-font-smoothing:antialiased;
+      padding:24px;
+    }
+
+    .app {
+      max-width:1100px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns: 260px 1fr;
+      gap:22px;
+      align-items:start;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      background:var(--card);
+      border-radius: var(--radius);
+      padding:var(--pad);
+      box-shadow: 0 6px 18px rgba(38,78,255,0.06);
+      height:fit-content;
+      position:sticky;
+      top:24px;
+    }
+    .brand {
+      display:flex;
+      gap:12px;
+      align-items:center;
+      margin-bottom:12px;
+    }
+    .logo {
+      width:44px;
+      height:44px;
+      border-radius:8px;
+      background:linear-gradient(135deg,var(--accent), #1b9df8);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      color:white;
+      font-weight:700;
+      font-size:18px;
+      box-shadow: 0 4px 12px rgba(39,110,241,0.14);
+    }
+    .brand h2 { margin:0; font-size:16px; }
+    .muted { color:var(--muted); font-size:13px; margin-top:6px; }
+
+    .sidebar nav { margin-top:14px; }
+    .nav-item {
+      display:flex;
+      gap:10px;
+      align-items:center;
+      padding:10px;
+      border-radius:8px;
+      color:#0f172a;
+      text-decoration:none;
+      font-weight:600;
+      font-size:14px;
+    }
+    .nav-item:hover { background:#f1f7ff; cursor:pointer; }
+
+    .help {
+      margin-top:14px;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    /* Form card */
+    .card {
+      background:var(--card);
+      border-radius: var(--radius);
+      padding:20px;
+      box-shadow: 0 8px 22px rgba(13, 38, 76, 0.06);
+    }
+
+    h1 { margin:0 0 8px 0; font-size:20px; }
+    p.lead { margin:0 0 18px 0; color:var(--muted); font-size:14px; }
+
+    form {
+      display:grid;
+      gap:14px;
+      grid-template-columns: repeat(12, 1fr);
+    }
+
+    /* form controls */
+    label {
+      display:block;
+      font-size:16px;
+      margin-bottom:6px;
+      color:black;
+      font-weight:600;
+    }
+    .field {
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+    input[type="text"], input[type="number"], input[type="date"], input[type="tel"], input[type="email"], select, textarea {
+      width:100%;
+      padding:10px 12px;
+      border:1px solid #e6e9ef;
+      border-radius:10px;
+      background:linear-gradient(180deg,#fff,#fbfdff);
+      font-size:14px;
+      outline:none;
+    }
+    textarea { min-height:88px; resize:vertical; padding-top:10px; }
+
+    .row-6 { grid-column: span 6; }
+    .row-4 { grid-column: span 4; }
+    .row-3 { grid-column: span 3; }
+    .row-8 { grid-column: span 8; }
+    .row-12 { grid-column: span 12; }
+
+    .inline {
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .small {
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    .actions {
+      display:flex;
+      gap:12px;
+      margin-top:6px;
+    }
+    button {
+      border:0;
+      padding:10px 14px;
+      border-radius:10px;
+      font-weight:700;
+      cursor:pointer;
+    }
+    .btn-primary {
+      background:var(--accent);
+      color:white;
+      box-shadow: 0 6px 18px rgba(39,110,241,0.14);
+    }
+    .btn-ghost {
+      background:transparent;
+      border:1px solid #e6e9ef;
+      color:#0f172a;
+    }
+
+    .meta {
+      display:flex;
+      gap:10px;
+      align-items:center;
+      justify-content:flex-end;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    /* Responsive */
+    @media (max-width: 880px) {
+      .app { grid-template-columns: 1fr; padding:12px; }
+      .sidebar { position:relative; top:auto; order:2; margin-top:8px; }
+      .card { order:1; }
+      .row-6, .row-4, .row-3, .row-8 { grid-column: span 12; }
+    }
+
+    /* small helper */
+    .note { font-size:13px; color:var(--muted); margin-top:6px; }
+    .file-input { padding:8px; border-radius:8px; border:1px dashed #e6e9ef; background:#fbfdff; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" aria-label="Sidebar">
+      <div class="brand">
+        <div class="logo">S</div>
+        <div>
+          <h2>Sales Desk</h2>
+          <div class="muted">Quick sales entry</div>
+        </div>
+      </div>
+
+      <nav>
+        <div class="nav-item">📥 New sale</div>
+        <div class="nav-item">📄 Daily reports</div>
+        <div class="nav-item">📊 Monthly summary</div>
+        <div class="nav-item">⚙ Settings</div>
+      </nav>
+
+      <div class="help">
+        <strong>Tip:</strong> Use a unique receipt number for easier audits.<br>
+        Keep unit price in the local currency.
+      </div>
+    </aside>
+
+    <main>
+      <section class="card" aria-labelledby="form-heading">
+        <h1 id="form-heading">Sales entry</h1>
+        <p class="lead">Record a sale — all fields marked * are recommended for a complete receipt.</p>
+
+        <form action="/submit-sale" method="post" enctype="multipart/form-data" novalidate>
+          <!-- Row 1 -->
+          <div class="field row-6">
+            <label for="receiptNo">Receipt / Invoice No.</label>
+            <input id="receiptNo" name="receiptNo" type="text" placeholder="e.g. R-2025-0001" required>
+          </div>
+
+          <div class="field row-6">
+            <label for="saleDate">Date of sale *</label>
+            <input id="saleDate" name="saleDate" type="date" required>
+          </div>
+
+          <!-- Row 2 -->
+          <div class="field row-6">
+            <label for="customerName">Customer name *</label>
+            <input id="customerName" name="customerName" type="text" placeholder="Full name or company" required>
+          </div>
+
+          <div class="field row-6">
+            <label for="customerContact">Customer contact</label>
+            <input id="customerContact" name="customerContact" type="tel" placeholder="Phone or email">
+          </div>
+
+          <!-- Row 3: product details -->
+          <div class="field row-4">
+            <label for="productType">Product type *</label>
+            <select id="productType" name="productType" required>
+              <option value="">Select type</option>
+              <option>Furniture</option>
+              <option>Wood</option>
+              <option>Accessories</option>
+              <option>Service</option>
+            </select>
+          </div>
+
+          <div class="field row-4">
+            <label for="productName">Product name *</label>
+            <input id="productName" name="productName" type="text" placeholder="Product model or name" required>
+          </div>
+
+          <div class="field row-4">
+            <label for="unit">Unit / UOM</label>
+            <select id="unit" name="unit">
+              <option>pcs</option>
+              <option>m</option>
+              <option>kg</option>
+              <option>set</option>
+            </select>
+          </div>
+
+          <!-- Row 4: quantity & price -->
+          <div class="field row-3">
+            <label for="quantity">Quantity *</label>
+            <input id="quantity" name="quantity" type="number" min="1" step="1" value="1" required>
+          </div>
+
+          <div class="field row-3">
+            <label for="unitPrice">Unit price (local currency)</label>
+            <input id="unitPrice" name="unitPrice" type="number" min="0" step="0.01" placeholder="0.00">
+          </div>
+
+          <div class="field row-3">
+            <label for="discount">Discount</label>
+            <input id="discount" name="discount" type="number" min="0" step="0.01" placeholder="0.00">
+            <div class="small">Leave blank or 0 if none</div>
+          </div>
+
+          <div class="field row-3">
+            <label for="total">Total</label>
+            <input id="total" name="total" type="text" readonly placeholder="(Calculated on server or with JS)">
+            <div class="small">This field is readonly — calculate server-side or add a small script to compute client-side.</div>
+          </div>
+
+          <!-- Row 5: payment & agent -->
+          <div class="field row-6">
+            <label for="paymentType">Payment type *</label>
+            <select id="paymentType" name="paymentType" required>
+              <option value="">Choose payment</option>
+              <option value="cash">Cash</option>
+              <option value="cheque">Cheque</option>
+              <option value="bank_overdraft">Bank overdraft</option>
+              <option value="mobile_money">Mobile money / Transfer</option>
+              <option value="card">Card</option>
+            </select>
+          </div>
+
+          <div class="field row-6">
+            <label for="salesAgent">Sales agent *</label>
+            <input id="salesAgent" name="salesAgent" type="text" placeholder="Agent name or ID" required>
+          </div>
+
+        
+          <div class="field row-6">
+            <label for="notes">Notes / delivery instructions</label>
+            <textarea id="notes" name="notes" placeholder="Any extra details (delivery date, special packaging, etc.)"></textarea>
+          </div>
+
+          <!-- Row 7: internal codes -->
+          <div class="field row-4">
+            <label for="orderRef">Order reference</label>
+            <input id="orderRef" name="orderRef" type="text" placeholder="PO number or order ID">
+          </div>
+
+          <div class="field row-4">
+            <label for="warehouse">Warehouse / Location</label>
+            <input id="warehouse" name="warehouse" type="text" placeholder="Store or warehouse">
+          </div>
+
+          <!-- <div class="field row-4">
+            <label for="tax">Tax / VAT</label>
+            <input id="tax" name="tax" type="number" min="0" step="0.01" placeholder="e.g. 18.00">
+            <div class="small">Enter tax amount or percentage depending on your process</div>
+          </div> -->
+
+          <!-- Actions -->
+          <div class="field row-12" style="margin-top:8px;">
+            <div class="inline" style="justify-content:space-between; flex-wrap:wrap;">
+              <div class="meta">Fields with * are recommended</div>
+              <div class="actions">
+                <button type="reset" class="btn-ghost">Reset</button>
+                <button type="submit" class="btn-primary">Save sale</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

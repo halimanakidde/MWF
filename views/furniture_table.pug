@@ -1,0 +1,34 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title My Database Info
+  //-link(rel='stylesheet' href='/css/styles.css')
+  link(link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous")
+h2 Furniture Register
+table.table.table-dark.table-striped
+  tr
+    th Furniture Name
+    th Image
+    th Category
+    th Wood Type
+    th Quantity
+    th Unit Price
+    th Update 
+    th Delete
+  if Furniture.length > 0
+    each item in Furniture
+      tr
+        td #{item.furnitureType}
+        td 
+          img(src="/"+item.furnitureimage alt="furniture image" width="150px" height="170px") 
+        td #{item.category}
+        td #{item.material}
+        td #{item.quantity}
+        td #{item.unitprice}
+        td 
+          button.btn.btn-primary.btn-block(href=`/furniture/${item._id}`) Update
+        td 
+          form(action='/deletefurniture' method='post')
+            input(type='hidden' name='id' value=item._id)
+          button.btn.btn-danger.btn-block(type='submit') Delete

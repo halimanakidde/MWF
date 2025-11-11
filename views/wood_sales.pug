@@ -1,0 +1,67 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Sales Form with Sidebar
+  link(rel='stylesheet' href='css/sales.css')
+.sidebar
+  h2 Mayondo Sales System
+  a(href='/') Home
+  a(href='#') Sales Report
+  a(href='/furnitureRegistered') View Furniture Stock
+  a(href='/woodregistered') View Wood Stock
+  a(href='#') Add Furniture Sale
+  a(href='/recordwoodSale') Add Wood Sale
+  a(href='/logout')
+    button.login-btn Login 
+  a(href='/logout')
+    button.logout-btn Logout 
+
+.main-content
+  h1 Sales Entry Form
+  p Fill in the sales details below:
+  if wooditems.length
+  form#salesform(action='/recordwoodSale', method='post')
+    label(for='customerName') Customer Name
+    input#customerName(type='text' name='customerName' required='')
+
+    label(for='productType') Type of Product
+    input#productType(type='text' name='productType' required='')
+
+    label(for='productName') Name of Product
+    select#productName(type='text' name='productName' required='')
+      option(value='') Select a product 
+      - var groupedWoods = {}
+      each wood in wooditems 
+        - if (!groupedWoods[wood.woodName]) groupedWoods[wood.woodName]=0
+        - groupedWoods[wood.woodName] += wood.quantity
+      each qty, woodName in groupedWoods 
+        if qty > 0
+          option(value=name)= name + "(Available: " + qty + "units)"
+
+    label(for='quantity') Quantity Bought/Sold
+    input#quantity(type='number' name='quantity' min='1' required='')
+
+    label(for='date') Date
+    input#date(type='date' name='date' required='')
+
+    label(for='paymentType') Type of Payment
+    select#paymentType(name='paymentType' required='')
+      option(value='') Select payment type
+      option(value='cash') Cash
+      option(value='cheque') Cheque
+      option(value='bankOverdraft') Bank Overdraft
+
+    label(for='salesAgent') Sales Agent Name
+    input#salesAgent(type='text' name='salesAgent')
+    //- input#date(type='' name='transportProvidede' required='')
+
+    label(for='transport') Transport Provided
+    select#transport(name='transportprovided' required='')
+      option(value='') Select one 
+      option(value='Yes') Yes 
+      option(value='No') No
+      
+    label(for='notes') Additional Notes
+    textarea#notes(name='notes' rows='3' placeholder='Any additional information...')
+    button(type='submit') Submit Sale

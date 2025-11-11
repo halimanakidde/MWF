@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title My Database Info
+    link(rel='stylesheet' href='/css/tables.css')
+  body
+    h2 User Register
+    table.furnituretable
+      tr
+        th Full Name
+        th Email
+        th Role
+      if users.length > 0
+        each user in users
+          tr
+            td #{user.fullname}
+            td #{user.email}
+            td #{user.role}

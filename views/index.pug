@@ -1,0 +1,390 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1')
+  title Furniture Home
+  // Bootstrap CSS
+  link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB' crossorigin='anonymous')
+  link(rel='stylesheet' href='css/index.css')
+nav.navbar1
+  | Email us Today:
+  a(href='#')
+    ul mayondowf@gmail.com
+  a(href='/register') Register
+  a(href='/login') Sign In
+  a(href='#') Chat
+  a.cart(href='#') shopNow
+  |     We deliver to your door step.....
+nav.navbar
+  .logo MAYONDO WOOD AND FURNITURE
+  ul
+    li
+      a(href='/') Home
+    li
+      a(href='#aboutus') About
+    li
+      a(href='#services') Services
+    li
+      a(href='#contactus') Contact
+    li
+      a(href='/register') SignUp
+  .nav-right
+    .search-box
+      input(type='text' placeholder='Search...')
+      button Go
+    a(href='/login')
+      button.login-btn Login
+// Carousel
+#furnitureCarousel.carousel.slide(data-bs-ride='carousel' data-bs-interval='4000')
+  .carousel-inner
+    // 1st Image
+    .carousel-item.active
+      img.d-block.w-100(src='./images/Sofas/living.jpg' alt='Sofa set')
+      .carousel-caption
+        h5 For All Your Furnishing Needs
+        p Experience comfort and luxury with our modern furniture sets.
+    // 2nd Image
+    .carousel-item
+      img.d-block.w-100(src='./images/Tables/console.jpg' alt='Wooden Table')
+      .carousel-caption
+        h5 Trust Us Today
+        p We Craft Our Products from High-quality wood, Built to last a lifetime.
+    // 3rd Image
+    .carousel-item
+      img.d-block.w-100(src='./images/Beds/bed2.jpg' alt='Bedroom Furniture')
+      .carousel-caption
+        h5 Stylish Design is What We Do
+        p Transform your Space Today with beautiful and functional furniture.
+    .carousel-item
+      img.d-block.w-100(src='./images/Dinning/consdine.jpg' alt='Chair')
+      .carousel-caption
+        h5 MAYONDO WOOD AND FURNITURE
+        p For Furniture Fit to Purpose and Needs.
+  // Carousel Controls
+  button.carousel-control-prev(type='button' data-bs-target='#furnitureCarousel' data-bs-slide='prev')
+    span.carousel-control-prev-icon
+  button.carousel-control-next(type='button' data-bs-target='#furnitureCarousel' data-bs-slide='next')
+    span.carousel-control-next-icon
+.heading
+  h1 Welcome to MAYONDO
+.paragraph1
+  p We are glad to have you here. Explore our services and offerings.
+.container
+  h2.text-center.mb-4
+    b Our Furniture Collection
+  .grid-container
+    .card1
+      img.card-img-top(src='./images/Sofas/living.jpg' alt='Sofa')
+      .card-body
+        h5.card-title Modern sofa
+        p.card-text Comfort meets style in this elegant living room piece.
+    .card1
+      img.card-img-top(src='./images/Dinning/bachelordine.jpg' alt='Table')
+      .card-body
+        h5.card-title Wooden Table
+        p.card-text Perfect for dining rooms and minimalist interiors.
+    .card1
+      img.card-img-top(src='./images/Sofas/unique.jpg' alt='Chair')
+      .card-body
+        h5.card-title Designer Chair
+        p.card-text Handcrafted comfort with a sleek, modern design.
+    .card1
+      img.card-img-top(src='./images/Beds/woodbed.webp' alt='Bedroom')
+      .card-body
+        h5.card-title Bedroom Set
+        p.card-text A cozy retreat with style and functionality.
+// Moving cards
+.container.py-5
+  h2.text-center.mb-4
+    b Trending Furniture
+  .scroll-wrapper
+    .card-container
+      .card
+        img(src='./images/Doors/front_door.webp' alt='Sofa')
+        .card-body
+          h5.card-title Modern Sofa
+          p.card-text Luxury and comfort for your home.
+      .card
+        img(src='./images/Office/officereception.jpg' alt='Table')
+        .card-body
+          h5.card-title Wooden Table
+          p.card-text Timeless design for every space.
+      .card
+        img(src='./images/Sofas/sofa1.webp' alt='Chair')
+        .card-body
+          h5.card-title Comfort Chair
+          p.card-text Sit back in style.
+      .card
+        img(src='./images/Tables/table1.jpeg' alt='Bedroom')
+        .card-body
+          h5.card-title Bedroom Set
+          p.card-text Elegant and cozy designs.
+      .card
+        img(src='./images/wardrobe/wardrobe.jpg' alt='Bedroom')
+        .card-body
+          h5.card-title Bedroom Set
+          p.card-text Elegant and cozy designs.
+      .card
+        img(src='./images/Beds/crib.jpg' alt='Bedroom')
+        .card-body
+          h5.card-title Bedroom Set
+          p.card-text Elegant and cozy designs.
+  // second moving cards
+  .scroll-wrapper
+    .card-container
+      .card
+        img(src='./images/Beds/decker2.jpg' alt='Bedroom')
+        .card-body
+          h5.card-title Bedroom Set
+          p.card-text Elegant and cozy designs.
+      .card
+        img(src='./images/Tables/table5.jpg' alt='Bedroom')
+        .card-body
+          h5.card-title Bedroom Set
+          p.card-text Elegant and cozy designs.
+      .card
+        img(src='./images/Dinning/kitchen1.jpg' alt='Bedroom')
+        .card-body
+          h5.card-title Bedroom Set
+          p.card-text Elegant and cozy designs.
+      // Repeat cards to ensure smooth scrolling
+      .card
+        img(src='./images/Beds/babybed.jpg' alt='Sofa')
+        .card-body
+          h5.card-title Modern Sofa
+          p.card-text Luxury and comfort for your home.
+      .card
+        img(src='./images/Doors/front_door.webp' alt='Sofa')
+        .card-body
+          h5.card-title Modern Sofa
+          p.card-text Luxury and comfort for your home.
+      .card
+        img(src='./images/Beds/decker.webp' alt='Sofa')
+        .card-body
+          h5.card-title Modern Sofa
+          p.card-text Luxury and comfort for your home.
+.services-h2
+  h2#services
+    b &#x1FA91; Our Services
+.row.categories
+  .card
+    h4
+      b Custom Furniture Design
+    img(src='./images/Dinning/harddinner.jpeg')
+    | We design and craft furniture pieces that reflect your personal taste, space requirements, and functionality needs. Whether you need a modern office desk, a classic dining set, or luxury lounge furniture, our skilled artisans bring your ideas to life with precision and style.
+    a.btn(href='#') Read More
+  .card
+    h4
+      b Home &amp; Office Furnishing
+    img(src='./images/Doors/doo4.jpg')
+    | We supply and install a wide selection of furniture for homes, offices, schools, hotels, and other institutions. From living room sets to ergonomic office chairs and executive tables, we ensure comfort, durability, and a beautiful finish in every piece.
+    a.btn(href='#') Read More
+  .card
+    h4
+      b Furniture Repair &amp; Restoration
+    img(src='./images/Drawers/drawer1.webp')
+    | Our team restores worn-out or damaged furniture to its original beauty. We refinish, re-upholster, polish, and replace parts where necessary&mdash;extending the lifespan of your furniture and saving you replacement costs.
+    a.btn(href='#') Read More
+  .card
+    h4
+      b Interior Woodwork &amp; Joinery
+    img(src='./images/Sofas/johnson.jpg')
+    | We offer expert carpentry and joinery services, including cabinetry, wardrobes, wooden ceilings, doors, and partitions. Our craftsmen use locally sourced and imported wood species to match your design and durability preferences.
+    a.btn(href='#') Read More
+  .card
+    h4
+      b Bulk &amp; Contract Supply
+    img(src='./images/Dinning/dinner.jpg')
+    | We handle bulk furniture orders for institutions, construction projects, and real estate developments. Our production capacity and reliable delivery systems make us the preferred partner for large-scale furniture supply and installation.
+    a.btn(href='#') Read More
+  .card
+    h4
+      b Furniture Maintenance
+    img(src='./images/Office/officereception.jpg')
+    | We provide regular maintenance services to keep your furniture looking new and performing well. This includes re-polishing, tightening joints, and preventive treatments against termites and moisture.
+    a.btn(href='#') Read More
+  .card
+    h4
+      b Delivery &amp; Installation
+    img(src='./images/woodMachinery/wood machinery.jpg')
+    | We ensure safe delivery and professional installation of all our furniture products. Our team handles every item with care &mdash; from factory to your premises &mdash; guaranteeing that each piece is properly assembled and ready for use.
+    a.btn(href='#') Read More
+  .card
+    h4
+      img(src='./images/Tables/console..jpeg')
+    a.btn(href='#') And Many More
+.services-h2
+  h2#aboutus
+    b  About Mayondo Wood and Furniture Company
+section.about-section
+  p.about-paragraph
+    b
+      | With over 35 years of experience, Mayondo combines exceptional craftsmanship with cutting-edge machinery to turn your ideas into reality. We take pride in our wide range of equipment and skilled artisans who create custom-made, handcrafted furniture&mdash;each piece uniquely tailored to your taste and style. In addition, we provide premium wood supplies, offering both softwood and hardwood, as well as timber of all sizes and types to perfectly suit your project needs.
+  p.about-paragraph
+    b
+      | In our showroom, located in Kampala Industrial Area, we are staffed with quantity surveyors, design experts, engineers, architects, project managers, and other professionals to make your experience seamless.
+  p.about-paragraph
+    b
+      | The work starts in the minds of our clients and is met by phone, email, or an in-person meeting, then passed on to our drafters who create and design renderings, floor plans, and drawings for our customers.
+section.mission-section
+  .card-container-mission
+    // card1
+    .card-mission
+      .card-column-mission
+        h2
+          b Our Mission
+        p.about-paragraph
+          | To provide high-quality, locally crafted furniture that combines functionality, comfort, and timeless design &mdash; while empowering our community through sustainable wood practices and employment opportunities.
+      .card-column-mission
+        img(src='./images/Doors/door5.jpg' alt='timber')
+    // card2
+    .card-mission
+      .card-column-mission
+        img(src='./images/Drawers/dressing table.jpg' alt='timber')
+      .card-column-mission
+        h2
+          b Our Vision
+        p.about-paragraph
+          | To become Uganda&rsquo;s most trusted furniture brand, known for excellence in craftsmanship, innovation, and customer satisfaction.
+    // card3
+    .card-mission
+      .card-column-mission
+        h2
+          b Our Values
+        ul
+          li Quality and Durability
+          li Customer Satisfaction
+          li Integrity and Accountability
+          li Innovation and Creativity
+          li Sustainability
+      .card-column-mission
+        img(src='./images/Dinning/crafted dinn.webp' alt='timber')
+.card-container-mission
+  // Card 1
+  .card-mission
+    .card-column-mission
+      h3 Custom Furniture
+      p
+        | We design and craft unique, high-quality furniture tailored to your personal style and space. Our expert artisans blend creativity with durability to deliver timeless pieces.
+    .card-column-mission
+      img(src='./images/Office/office2.jpg' alt='Furniture')
+  // Card 2
+  .card-mission
+    .card-column-mission
+      img(src='./images/woodMachinery/hardwood2.jpeg' alt='Timber Supply')
+    .card-column-mission
+      h3 Timber Supply
+      p
+        | We import and supply premium softwood and hardwood timber sourced from trusted local and international partners&mdash;available in all sizes and finishes to suit your needs.
+.services-h2
+  h2#contactus
+    b  Visit Our Offices Today
+// Contact Section
+section.contact-section
+  h1 Contact Us
+  p
+    | We&rsquo;d love to hear from you! Whether you&rsquo;re looking for custom furniture, repairs, or bulk orders &mdash; our team is here to help.
+  .contact-container
+    .contact-info
+      h3 Our Address
+      p
+        | Mayondo Wood and Furniture Ltd
+        br
+        |         Plot 45, Malangala Road, Kampala, Uganda
+      h3 Email
+      p
+        a(href='mailto:mayondowf@gmail.com') mayondowf@gmail.com
+      h3 Phone
+      p +256 700 123 456 | +256 772 789 101
+      h3 Business Hours
+      p
+        | Mon - Sat: 8:00 AM - 6:00 PM
+        br
+        | Sunday: Closed
+    .contact-form
+      h3 Send Us a Message
+      // <form action="#" method="post">
+      label(for='name') Full Name
+      input#name(type='text' name='name' placeholder='Enter your name' required='')
+      label(for='email') Email
+      input#email(type='email' name='email' placeholder='Enter your email' required='')
+      label(for='message') Message
+      textarea#message(name='message' rows='5' placeholder='Type your message here' required='')
+      button.btn(type='submit') Send Message
+footer
+  .footer-content
+    .footer-section.about
+      p &copy; 2025 MAYONDO WOOD AND FURNITURE. All rights reserved.
+      .social-icons
+        a(href='#') Facebook
+        |  |
+        a(href='#') Twitter
+        |  |
+        a(href='#') LinkedIn
+        .contact-info
+          h3 Our Address
+          p
+            | Mayondo Wood and Furniture Ltd
+            br
+            |         Plot 45, Malangala Road, Kampala, Uganda
+          h3 Email
+          p
+            a(href='mailto:mayondowf@gmail.com') mayondowf@gmail.com
+          h3 Phone
+          p +256 700 123 456 | +256 772 789 101
+          h3 Business Hours
+          p
+            | Mon - Sat: 8:00 AM - 6:00 PM
+            br
+            | Sunday: Closed
+    // Bootstrap JS
+    script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js')
+    footer
+      .footer-content
+        .footer-section.about
+          p &copy; 2025 MAYONDO WOOD AND FURNITURE. All rights reserved.
+          .social-icons
+            a(href='#') Facebook
+            |  |
+            a(href='#') Twitter
+            |  |
+            a(href='#') LinkedIn
+            .contact-info
+              h3 Our Address
+              p
+                | Mayondo Wood and Furniture Ltd
+                br
+                |         Plot 45, Malangala Road, Kampala, Uganda
+              h3 Email
+              p
+                a(href='mailto:mayondowf@gmail.com') mayondowf@gmail.com
+              h3 Phone
+              p +256 700 123 456 | +256 772 789 101
+              h3 Business Hours
+              p
+                | Mon - Sat: 8:00 AM - 6:00 PM
+                br
+                | Sunday: Closed
+        .footer-section.quick-links
+          h3 Quick Links
+          ul
+            li
+              a(href='/') Home
+            li
+              a(href='#') Doors
+            li
+              a(href='#') Products
+            li
+              a(href='#') Living Room
+            li
+              a(href='#') Bedroom
+            li
+              a(href='#') Kitchens
+            li
+              a(href='#') Dining Room
+            li
+              a(href='#') Bar Furniture
+            li
+              a(href='#aboutus') About Us
+            li
+              a(href='#contactus') Contact Us

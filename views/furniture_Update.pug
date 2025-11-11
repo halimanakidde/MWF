@@ -1,0 +1,44 @@
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+body
+  head 
+    title Update furnirure 
+    //- link(rel='stylesheet' href='css/style.css')
+    link(rel='stylesheet' href='css/furniturePdt.css')
+    .heading
+      h1 Update Furniture
+    .paragraph1
+      p We are glad to have you here.
+    form#furnitureForm(action="/furniture/"+item._id method='post')
+      h2 Furniture Stock Registration
+      .form-row
+        label(for='itemName') Furniture Name
+        input#itemName(type='text' name='furnitureType' value=item.furnitureType placeholder='e.g., Office Desk')
+        label(for='category') Furniture Category
+        select#category(name='category')
+          option(value='Office' selected=item.category==='office') Office Furniture
+          option(value='Home' selected=item.category==='Home') Home Furniture
+          option(value='Outdoor' selected=item.category==='Outdoor') Outdoor Furniture
+          option(value='Custom' selected=item.category==='Custom') Custom Orders
+        
+      .form-row
+        label(for='material') Wood Type / Material
+        select#material(name='material')
+          option(value='Mahogany' selected=item.category==='Mahogany') Mahogany
+          option(value='Muvule' selected=item.category==='Muvule') Muvule
+          option(value='Teak' selected=item.category==='Teak') Teak
+          option(value='Pine' selected=item.category==='Pine') Pine
+          
+        label(for='quantity') Quantity
+        input#quantity(type='number' name='quantity' value=item.quantity min='1')
+       
+        label(for='price') Unit Price (UGX)
+        input#price(type='number' name='unitprice' value=item.unitprice min='1')
+       
+        
+        button(type='submit') Register Now
+
+       

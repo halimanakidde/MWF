@@ -1,0 +1,38 @@
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title Manager Dashboard
+    link(rel='stylesheet' href='css/sales.css')
+body
+     if currentUser && (currentUser.role === 'manager')
+.sidebar
+        .search-box
+          input(type='text' placeholder='Search...')
+          button Go
+        ul.nav-links
+          
+            a(href='/') Home
+          
+              a(href='/furnitureRegistration') Add Furniture Stock
+              a(href='/woodRegistration') Add Wood Stock
+              a(href='/woodRegistered') Wood Records
+              a(href='/furnitureRegistered') Furniture Records
+              a(href='/recordwoodSale') Add Wood Sale
+              a(href='#') Add Furniture Sale
+              a(href='#') Sales Report
+              a(href='/logout')
+                button.login-btn Logout   
+              a(href='/login')
+                button.login-btn Login
+        title Manager Dashboard
+.main-content
+      .topbar
+        h1 Manager Dashboard
+        p
+            | Welcome back, 
+            strong Manager
+    
+     
+        

@@ -1,0 +1,26 @@
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title My Database Info
+    link(rel='stylesheet' href='/css/tables.css')
+  body
+    h2 Wood Register
+    table.table.table-dark.table-striped
+      tr
+        th Wood Type
+        th Quantity
+        th Unit Price
+        th Supplier Name
+        th Supplier Contact
+        th Warehouse Location
+      if wood.length > 0
+        each item in wood
+          tr
+            td #{item.woodtype}
+            td #{item.quantity}
+            td #{item.unitprice}
+            td #{item.supplier}
+            td #{item.contact}
+            td #{item.warehouseLocation}

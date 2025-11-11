@@ -1,0 +1,20 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title My Company
+  link(rel='stylesheet' href='css/styles.css')
+  link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB' crossorigin='anonymous')
+
+.login-container
+  form#loginForm(action="/login" method="post")
+    h2 Login
+    label(for='email') Email Address
+    input#email(type='email' name='email' placeholder='Enter your email' required='')
+    label(for='password') Password
+    input#password(type='password' name='password' placeholder='Enter your password' required='')
+    button(type='submit' ) Login
+    p.helper-text
+      | Forgot your password? 
+      a(href='/register') Reset here<br>
+      a(href='/') HOME

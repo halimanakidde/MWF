@@ -1,0 +1,54 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Furniture Stock Registration
+  link(rel='stylesheet' href='css/furniturePdt.css')
+.sidebar
+  h2 MAYONDO SALES SYSTEM
+  a(href='/') Home
+  a(href='#') Sales Report
+  a(href='/furnitureRegistered') View Furniture Stock
+  a(href='/woodRegistered') View Wood Stock
+  a(href='/furnitureRegistration') Add Furniture Stock
+  a(href='/woodRegistration') Add Wood Stock
+  a(href='/logout')
+    button.login-btn Login 
+  a(href='/logout')
+    button.logout-btn Logout 
+form#furnitureForm
+  h2 Furniture Stock Registration
+  label(for='itemName') Furniture Name
+  input#itemName(type='text' placeholder='e.g., Console Table')
+  #itemNameError.error
+  label(for='category') Furniture Category
+  select#category
+    option(value='') -- Select Category --
+    option(value='Office') Office Furniture
+    option(value='Home') Home Furniture
+    option(value='Outdoor') Outdoor Furniture
+    option(value='Custom') Custom Orders
+  #categoryError.error
+  label(for='material') Wood Type / Material
+  select#material
+    option(value='') -- Select Material --
+    option(value='Mahogany') Mahogany
+    option(value='Muvule') Muvule
+    option(value='Teak') Teak
+    option(value='Pine') Pine
+    option(value='Metal') Metal Frame
+    option(value='Glass') Glass / Mixed
+  #materialError.error
+  label(for='quantity') Quantity
+  input#quantity(type='number' min='1')
+  #quantityError.error
+  label(for='price') Unit Price (UGX)
+  input#price(type='number' min='1')
+  #priceError.error
+  label(for='productionDate') Date Produced
+  input#productionDate(type='date')
+  #dateError.error
+  label(for='location') Storage / Warehouse Location
+  input#location(type='text' placeholder='e.g., Warehouse A - Ndeeba')
+  #locationError.error
+  button(type='submit') Register

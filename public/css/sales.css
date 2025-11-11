@@ -1,0 +1,146 @@
+ body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    height: 100vh;
+    background-color: #f4f6f9;
+  }
+
+  /* Sidebar styles */
+  .sidebar {
+    width: 300px;
+    background-color: purple;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .sidebar h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 1.3em;
+  }
+
+  .sidebar a {
+    text-decoration: none;
+    color: #fff;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 6px;
+    display: block;
+    transition: background 0.3s;
+  }
+
+  .sidebar a:hover {
+    background-color: #3b82f6;
+  }
+
+  /* Main content styles */
+  .main-content {
+    flex: 1;
+    padding: 30px;
+    overflow-y: auto;
+  }
+
+  h1 {
+    color: #1e3a8a;
+    margin-bottom: 10px;
+  }
+
+  form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    max-width: 800px;
+  }
+
+  label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+  }
+
+  input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+
+  button {
+    margin-top: 20px;
+    background-color: #1e3a8a;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #3b82f6;
+  }
+
+  /* ===== Content Wrapper ===== */
+.content {
+  margin-left: 260px; /* space for sidebar */
+  padding: 30px 40px;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.content h2 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 25px;
+}
+
+/* ===== Agents Table Styling ===== */
+.agents-table,
+.customers-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.agents-table th,
+.agents-table td,
+.customers-table th,
+.customers-table td{
+  text-align: left;
+  padding: 12px 15px;
+  border-bottom: 1px solid #dee2e6;
+  font-size: 15px;
+}
+
+.agents-table thead,
+.customers-table thead {
+  background-color: #2c3e50;
+  color: white;
+}
+
+.agents-table tr:hover,
+.cutomers-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Responsive table */
+@media (max-width: 768px) {
+  .agents-table,
+  .customers-table {
+    font-size: 13px;
+  }
+
+  .content {
+    margin-left: 0;
+    padding: 20px;
+  }
+}

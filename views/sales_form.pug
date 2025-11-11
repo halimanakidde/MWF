@@ -1,0 +1,37 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Mayondo Sales System
+  link(rel='stylesheet' href='sales.css')
+.sidebar
+  h2 MAYONDO SALES System
+  a(href='#') New Sale
+  a(href='#') Sales Report
+  a(href='#') View Furniture Stock
+  a(href='#') View Wood Stock
+.main-content
+  h1 Sales Entry Form
+  p Fill in the sales details below:
+  form
+    label(for='customerName') Customer Name
+    input#customerName(type='text' name='customerName' required='')
+    label(for='productType') Type of Product
+    input#productType(type='text' name='productType' required='')
+    label(for='productName') Name of Product
+    input#productName(type='text' name='productName' required='')
+    label(for='quantity') Quantity Bought/Sold
+    input#quantity(type='number' name='quantity' min='1' required='')
+    label(for='date') Date
+    input#date(type='date' name='date' required='')
+    label(for='paymentType') Type of Payment
+    select#paymentType(name='paymentType' required='')
+      option(value='') Select payment type
+      option(value='cash') Cash
+      option(value='mobileMoney') Mobile Money
+      option(value='cheque') Cheque
+    label(for='salesAgent') Sales Agent Name
+    input#salesAgent(type='text' name='salesAgent')
+    label(for='notes') Additional Notes
+    textarea#notes(name='notes' rows='3' placeholder='Any additional information...')
+    button(type='submit') Submit Sale
