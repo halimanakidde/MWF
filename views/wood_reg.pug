@@ -1,73 +1,74 @@
 doctype html
 head
-  meta(charset='UTF-8')
-  meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  title Wood Registration
-  link(rel='stylesheet' href='css/sales.css')
-  //- link(rel='stylesheet' href='css/furniturePdt.css')
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title Wood Registration
+    link(rel='stylesheet' href='css/sales.css')
+    //- link(rel='stylesheet' href='css/furniturePdt.css')
 .sidebar
-  h2 MAYONDO SALES SYSTEM
-  a(href='/') Home
-  a(href='#') Sales Report
-  a(href='/furnitureRegistered') View Furniture Stock
-  a(href='/woodRegistered') View Wood Stock
-  a(href='/furnitureRegistration') Add Furniture Stock
-  a(href='/woodRegistration') Add Wood Stock
-  a(href='/logout')
-    button.login-btn Login 
-  a(href='/logout')
-    button.logout-btn Logout
- form#woodForm(action='/woodRegister' method='post')
-      h2 Wood Stock Registration
-      label(for='woodName') Wood Name
-      select#woodName(name='woodName')
-        option(value='') -- Select Wood Name --
-        option(value='Mahogany') Mahogany
-        option(value='Muvule') Muvule
-        option(value='Pine') Pine
-        option(value='Teak') Teak
-        option(value='Eucalyptus') Eucalyptus
+    h2 MAYONDO INVENTORY MANAGEMENT SYSTEM
+    a(href='/') Home
+    a(href='#') Sales Report
+    a(href='/furnitureRegistered') View Furniture Stock
+    a(href='/woodRegistered') View Wood Stock
+    a(href='/furnitureRegistration') Add Furniture Stock
+    a(href='/woodRegistration') Add Wood Stock
+    a(href='/logout')
+      button.login-btn Login 
+    a(href='/logout')
+      button.logout-btn Logout
+form#woodForm(action='/woodRegistration' method='post')
+        h2 Wood Stock Registration
+        label(for='woodName') Wood Name
+        select#woodName(name='woodName')
+          option(value='') -- Select Wood Name --
+          option(value='Mahogany') Mahogany
+          option(value='Muvule') Muvule
+          option(value='Pine') Pine
+          option(value='Teak') Teak
+          option(value='Eucalyptus') Eucalyptus
 
-      label(for='woodType') Wood Type
-      select#woodType(name='woodType')
-        option(value='') -- Select Wood Type --
-        option(value='timber') Timber
-        option(value='hardwood') Hard Wood
-        option(value='softwood') Soft Wood
+        label(for='woodType') Wood Type
+        select#woodType(name='woodType')
+          option(value='') -- Select Wood Type --
+          option(value='timber') Timber
+          option(value='timber') Poles
+          option(value='hardwood') Hard Wood
+          option(value='softwood') Soft Wood
+        
+        label(for='woodcolor') Wood Color
+        input#woodcolor(type='text' name='woodcolor')
+
+        label(for='measurements') Measurements
+        select#measurements(name='measurements')
+          option(value='') -- Select Measurement --
+          option(value='1.2-1.5mm') 1.2-1.5mm
+          option(value='1.6-2mm') 1.6-2mm
+
+        label(for='quality') Quality
+        select#quality(name='quality')
+          option(value='') -- Select Quality--
+          option(value='firstgrade') first grade
+          option(value='Muvulegrade') Medium grade
+        //- label(for='image') Wood Image
+        //- input#image(type='file' name='woodimage' placeholder='upload image')
+        label(for='date') Date
+        input#date(type='date' name='date' required='')
+
+        label(for='quantity') Quantity
+        input#quantity(type='nu' name='quantity')
+
+        label(for='supplier') Supplier Name
+        input#supplier(type='text' name='supplier')
       
-      label(for='woodcolor') Wood Color
-      input#woodcolor(type='text' name='woodcolor')
+        label(for='contact') Supplier Contact
+        input#contact(type='text' name='contact')
+        
+        label(for='price') Price per Piece (UGX)
+        input#price(type='number' name='unitprice' min='1')
+        
+        label(for='location') Storage Location
+        input#location(type='text' name='warehouseLocation')
 
-      label(for='measurements') Measurements
-      select#measurements(name='measurements')
-        option(value='') -- Select Measurement --
-        option(value='1.2-1.5mm') 1.2-1.5mm
-        option(value='1.6-2mm') 1.6-2mm
-
-      label(for='quality') Quality
-      select#quality(name='quality')
-        option(value='') -- Select Quality--
-        option(value='firstgrade') first grade
-        option(value='Muvulegrade') Medium grade
-      //- label(for='image') Wood Image
-      //- input#image(type='file' name='woodimage' placeholder='upload image')
-      label(for='date') Date
-      input#date(type='date' name='date' required='')
-
-      label(for='quantity') Quantity
-      input#quantity(type='nu' name='quantity')
-
-      label(for='supplier') Supplier Name
-      input#supplier(type='text' name='supplier')
-    
-      label(for='contact') Supplier Contact
-      input#contact(type='text' name='contact')
-      
-      label(for='price') Price per Piece (UGX)
-      input#price(type='number' name='unitprice' min='1')
-      
-      label(for='location') Storage Location
-      input#location(type='text' name='warehouseLocation')
-
-      button(type='submit') Register
-    script(src='woodreg.js')
+        button(type='submit') Register
+//- script(src='woodreg.js')

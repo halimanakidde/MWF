@@ -3,24 +3,56 @@ html
   head
     meta(charset='UTF-8')
     meta(name='viewport' content='width=device-width, initial-scale=1.0')
-    title My Database Info
-    link(rel='stylesheet' href='/css/tables.css')
+    title Wood Register
+ 
+    link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css')
+    link(rel="stylesheet", href="/css/tables.css")
   body
-    h2 Wood Register
-    table.table.table-dark.table-striped
-      tr
-        th Wood Type
-        th Quantity
-        th Unit Price
-        th Supplier Name
-        th Supplier Contact
-        th Warehouse Location
+    nav.navbar.navbar-expand-lg.navbar-custom
+      .container-fluid
+        a.navbar-brand(href='/') MAYONDO INVENTORY MANAGEMENT SYSTEM
+        button.navbar-toggler(type='button', data-bs-toggle='collapse', data-bs-target='#navbarNav', aria-controls='navbarNav', aria-expanded='false', aria-label='Toggle navigation')
+          span.navbar-toggler-icon
+        #navbarNav.collapse.navbar-collapse
+          ul.navbar-nav.ms-auto
+            li.nav-item
+              a.nav-link(href='/') Home  |
+            li.nav-item
+              a.nav-link(href='/woodRegistered') View Wood Stock  |
+            li.nav-item
+              a.nav-link(href='/furnitureRegistered') View Furniture Stock  |
+            li.nav-item
+              a.nav-link(href='#') View Sales  |
+            li.nav-item
+              a.nav-link(href='/recordwoodSale') Add Wood Sale  |
+            li.nav-item
+              a.nav-link(href='/recordfurnitureSale') Add Furniture Sale  |
+            li.nav-item
+              a.nav-link(href='/logout')
+                button.login-btn Logout
+    .container.mt-4
+      h2.text-center.text-primary Wood Register
+
       if wood.length > 0
-        each item in wood
-          tr
-            td #{item.woodtype}
-            td #{item.quantity}
-            td #{item.unitprice}
-            td #{item.supplier}
-            td #{item.contact}
-            td #{item.warehouseLocation}
+        .table-responsive
+          table.table.table-striped.table-hover.align-middle
+            thead.table-dark
+              tr
+                th(scope='col') Wood Type
+                th(scope='col') Quantity
+                th(scope='col') Unit Price (UGX)
+                th(scope='col') Supplier Name
+                th(scope='col') Supplier Contact
+                th(scope='col') Warehouse Location
+            tbody
+              each item in wood
+                tr
+                  td= item.woodtype
+                  td= item.quantity
+                  td= item.unitprice
+                  td= item.supplier
+                  td= item.contact
+                  td= item.warehouseLocation
+      else
+        .alert.alert-warning.text-center.mt-4 No wood records found.
+    script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js')

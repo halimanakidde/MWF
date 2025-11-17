@@ -64,6 +64,62 @@ const furnitureSale = require('../models/furniture_sale')
  });
 
 
+ //route for furniture sales
+router.get("/recordfurnitureSale", async (req,res)=>{
+    try {
+        const furnitureitems = await furnitureStock.find();
+        res.render("furniture_sales", {furnitureitems});
+
+    } catch (error) {
+       console.log(error.message) 
+    }
+ });
+
+ router.post("/recordfurnitureSale", async(req,res)=>{
+   try {
+     const {customerName,productType,productName,quantity,unitprice,date,paymentType,transportprovided,totalprice}= req.body;
+     //find all wood stockwith wood name
+     const stocks= await furnitureStock.find({furniturename: productName})
+     if(!stocks || stocks.length === 0)
+      return res.status(400).send("Stock not found");
+   //calculate total available quantity across all stock entities
+   const totalAvailable = stocks.reduce((sum,stock) => sum + stock.quantity,0)
+   if (totalAvailable < Number(quantity))
+      return res.status(400).send("insufficient stock")
+    //calculate total price
+    let total = unitprice * Number(quantity)
+    if(transportprovided ==='Yes')
+      total *=1.05;
+   const sale= new woodSale({
+    customerName,
+    productType,
+    productName,
+    quantity,
+    unitprice,
+    date,
+    paymentType,
+    transportprovided:!!transportprovided,
+    salesAgent:req.user ? req.user._id : null,
+    totalprice:total 
+   })
+   await sale.save();
+   //deduct quantity sold from the stock
+   let remainingToDeduct=Number(quantity)
+    for(const stock of stocks){
+      if(remainingToDeduct <= 0) break;
+      const deductFromThis = Math.min(stock.quantity, remainingToDeduct)
+      stock.quantity -=deductFromThis
+      remainingToDeduct -=deductFromThis
+      await stock.save();
+    }
+     res.redirect("/recordfurnitureSale")
+   } catch (error) {
+      res.status(400).send('Unable to add item in the database')
+      console.log(error);
+   }
+ });
+
+
  
 
 

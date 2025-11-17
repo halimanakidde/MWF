@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const furniturestockSchema = new mongoose.Schema({
-    furnitureType:{
+    furniturename:{
         type: String,
     },
     furnitureimage:{
@@ -19,6 +19,9 @@ const furniturestockSchema = new mongoose.Schema({
     unitprice:{
         type: Number
     },
-});
+     date:{
+        type: Date,
+    },
+   });
 
 module.exports=mongoose.model('furnitureStock', furniturestockSchema)

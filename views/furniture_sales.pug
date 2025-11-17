@@ -1,0 +1,70 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Sales Form with Sidebar
+  link(rel='stylesheet' href='css/sales.css')
+.sidebar
+  h2 MAYONDO INVENTORY MANAGEMENT SYSTEM
+  a(href='/') Home
+  a(href='#') Sales Report
+  a(href='/furnitureRegistered') View Furniture Stock
+  a(href='/woodregistered') View Wood Stock
+  a(href='/recordfurnitureSale') Add Furniture Sale
+  a(href='/recordwoodSale') Add Wood Sale
+  a(href='/logout')
+    button.login-btn Login 
+  a(href='/logout')
+    button.logout-btn Logout 
+
+.main-content
+  h1 Sales Entry Form
+  p Fill in the sales details below:
+  if furnitureitems.length
+  form#salesform(action='/recordfurnitureSale', method='post')
+    label(for='customerName') Customer Name
+    input#customerName(type='text' name='customerName' required='')
+
+    label(for='productType') Type of Product
+    input#productType(type='text' name='productType' required='')
+
+    label(for='productName') Name of Product
+    select#productName(type='text' name='productName' required='')
+      option(value='') Select a product 
+      - var groupedfurnitures = {}
+      each furniture in furnitureitems 
+        - if (!groupedfurnitures[furniture.furniturename]) groupedfurnitures[furniture.furniturename]=0
+        - groupedfurnitures[furniture.furniturename] += furniture.quantity
+      each qty, furniturename in groupedfurnitures 
+        if qty > 0
+          option(value=name)= name + "(Available: " + qty + "units)"
+
+    label(for='quantity') Quantity Bought/Sold
+    input#quantity(type='number' name='quantity' min='1' required='')
+
+    label(for='unitprice') Price per unit
+    input#date(type='number' name='unitprice' required='')
+
+    label(for='date') Date
+    input#date(type='date' name='date' required='')
+
+    label(for='paymentType') Type of Payment
+    select#paymentType(name='paymentType' required='')
+      option(value='') Select payment type
+      option(value='cash') Cash
+      option(value='cheque') Cheque
+      option(value='bankOverdraft') Bank Overdraft
+
+    label(for='salesAgent') Sales Agent Name
+    input#salesAgent(type='text' name='salesAgent')
+    //- input#date(type='' name='transportProvidede' required='')
+
+    label(for='transport') Transport Provided
+    select#transport(name='transportprovided' required='')
+      option(value='') Select one 
+      option(value='Yes') Yes 
+      option(value='No') No
+      
+    label(for='totalcost') Total Cost
+    textarea#totalcost(name='totalcost' rows='3' placeholder='calculate total cost')
+    button(type='submit') Submit Sale

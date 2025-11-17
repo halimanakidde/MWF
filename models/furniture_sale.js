@@ -13,6 +13,9 @@ const furnituresaleSchema = new mongoose.Schema({
     quantity:{
         type: String,
     },
+    unitprice:{
+        type: Number,
+    },
     date:{
         type: Date,
     },

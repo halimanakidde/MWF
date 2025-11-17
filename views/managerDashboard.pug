@@ -4,10 +4,13 @@ html
     meta(charset='UTF-8')
     meta(name='viewport' content='width=device-width, initial-scale=1.0')
     title Manager Dashboard
+    link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css' integrity='sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB' crossorigin='anonymous')
     link(rel='stylesheet' href='css/sales.css')
 body
      if currentUser && (currentUser.role === 'manager')
 .sidebar
+      .logo
+        h2 MAYONDO INVENTORY MANAGEMENT SYSTEM
         .search-box
           input(type='text' placeholder='Search...')
           button Go
@@ -20,7 +23,7 @@ body
               a(href='/woodRegistered') Wood Records
               a(href='/furnitureRegistered') Furniture Records
               a(href='/recordwoodSale') Add Wood Sale
-              a(href='#') Add Furniture Sale
+              a(href='/recordfurnitureSale') Add Furniture Sale
               a(href='#') Sales Report
               a(href='/logout')
                 button.login-btn Logout   
@@ -33,6 +36,82 @@ body
         p
             | Welcome back, 
             strong Manager
-    
+
+        .card-container
+          .card
+            h3 Expenses on Hardwood
+            p Total Expenses on Hardwood : #{new Intl.NumberFormat().format(totalHardwood.totalcost)} UGX
+          .card
+            h3 Expenses on Softwood
+            p Total Expenses on Softwood : #{new Intl.NumberFormat().format(totalSoftwood.totalcost)} UGX
+          .card
+            h3 Total Hardwood Stock
+            p Quantity of Hardwood in stock: #{totalHardwood.totalquantity} Pieces
+          .card
+            h3 Total Softwood Stock
+            p Quantity of Softwood in stock: #{totalSoftwood.totalquantity} Pieces
+          .card
+        
+            h3 Total wood Expenses
+            p #{new Intl.NumberFormat().format((totalHardwood.totalcost)+(totalSoftwood.totalcost)+(totalHardwood.totalquantity)+(totalSoftwood.totalquantity))}UGX
+          .card
+            h3 Total Wood Revenue
+            p #{new Intl.NumberFormat().format(woodExpenses)}
+          .card
+            i(class='fa-solid fa-couch icon')
+            h3 Total Revenue
+            p #{new Intl.NumberFormat().format(totalRevenue)}UGX
+
+          .card
+            i(class='fa-solid fa-tree icon')
+            h3 Total Profits
+            p #{new Intl.NumberFormat().format(grossProfit)}UGX
+
+          .card
+            i(class='fa-solid fa-hammer icon')
+            h3 Low Stock alerts
+            // Stock Alerts
+.row.mb-4
+  .col-md-6
+    .card
+      .card-header.bg-danger.text-white
+        h5.mb-0
+          i.fas.fa-exclamation-triangle.me-2
+          | Low Stock Alerts
+      .card-body
+        if lowWoodstock.length > 0 || lowFurniturestock.length > 0
+          if lowWoodstock.length > 0
+            h6.text-danger Wood Stock (< 10 units):
+            ul.list-group.list-group-flush.mb-3
+              each item in lowWoodstock
+                li.list-group-item.d-flex.justify-content-between.align-items-center
+                  div
+                    strong= item.woodName
+                    br
+                    small.text-muted= item.woodType
+                  span.badge.bg-danger= item.quantity + ' units'
+
+            if lowFurniturestock.length > 0
+              h6.text-danger Furniture Stock (< 10 units):
+              ul.list-group.list-group-flush
+                each item in lowFurniturestock
+                  li.list-group-item.d-flex.justify-content-between.align-items-center
+                    div
+                      strong= item.name
+                      br
+                      small.text-muted= item.type
+                    span.badge.bg-danger= item.quantity + ' units'
+        else
+          .text-center.text-success
+          i.fas.fa-check-circle.fa-3x.mb-2
+          h6 All Stock Levels Good!
+          p.text-muted No low stock alerts at this time.
+
+        
+
+        
+                
+//- script(src='manager-dashboard.js')
+
      
         

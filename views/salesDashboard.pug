@@ -8,7 +8,7 @@ html
   body
     .sidebar
       .logo
-        h2 MAYONDO WOOD AND FURNITURE
+        h2 MAYONDO INVENTORY MANAGEMENT SYSTEM
       .search-box
         input(type='text' placeholder='Search...')
         button Go
@@ -19,7 +19,7 @@ html
           a(href='/furnitureRegistered') View Furniture Stock
           a(href='#') View Sales
           a(href='/recordwoodSale') Add Wood Sale
-          a(href='#') Add Furniture Sale
+          a(href='/recordfurnitureSale') Add Furniture Sale
           a(href='/logout')
             button.login-btn Logout
             if currentUser && (currentUser.role == 'salesexecutive')

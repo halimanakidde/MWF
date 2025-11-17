@@ -5,7 +5,7 @@ head
   title Furniture Stock Registration
   link(rel='stylesheet' href='css/furniturePdt.css')
 .sidebar
-  h2 MAYONDO SALES SYSTEM
+  h2 MAYONDO INVENTORY MANAGEMENT SYSTEM
   a(href='/') Home
   a(href='#') Sales Report
   a(href='/furnitureRegistered') View Furniture Stock
@@ -16,21 +16,25 @@ head
     button.login-btn Login 
   a(href='/logout')
     button.logout-btn Logout 
-form#furnitureForm
+form#furnitureForm(action='/furnitureRegistration' method='post' enctype='multipart/form-data')
   h2 Furniture Stock Registration
   label(for='itemName') Furniture Name
-  input#itemName(type='text' placeholder='e.g., Console Table')
+  input#itemName(type='text' name='furniturename' placeholder='e.g., Console Table')
   #itemNameError.error
+  label(for='itemName') Furniture Image
+  input#image(type='file' name='furnitureimage' placeholder='upload image')
+        
   label(for='category') Furniture Category
-  select#category
+  select#category(name='category')
     option(value='') -- Select Category --
     option(value='Office') Office Furniture
     option(value='Home') Home Furniture
     option(value='Outdoor') Outdoor Furniture
     option(value='Custom') Custom Orders
   #categoryError.error
+
   label(for='material') Wood Type / Material
-  select#material
+  select#material(name='material')
     option(value='') -- Select Material --
     option(value='Mahogany') Mahogany
     option(value='Muvule') Muvule
@@ -39,16 +43,17 @@ form#furnitureForm
     option(value='Metal') Metal Frame
     option(value='Glass') Glass / Mixed
   #materialError.error
+
   label(for='quantity') Quantity
-  input#quantity(type='number' min='1')
+  input#quantity(type='number' name='quantity' min='1')
   #quantityError.error
+
   label(for='price') Unit Price (UGX)
-  input#price(type='number' min='1')
+  input#price(type='number' name='unitprice' min='1')
   #priceError.error
-  label(for='productionDate') Date Produced
-  input#productionDate(type='date')
+
+  label(for='date') Date Produced
+  input#productionDate(type='date' name='date')
   #dateError.error
-  label(for='location') Storage / Warehouse Location
-  input#location(type='text' placeholder='e.g., Warehouse A - Ndeeba')
-  #locationError.error
+
   button(type='submit') Register

@@ -1,0 +1,93 @@
+/* ===============================
+   tables.css
+   Unified Navbar and Page Styling
+   =============================== */
+
+/* Body styling */
+body {
+  background-color: #218838; /* Green background */
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Navbar customization */
+.navbar-custom {
+  background-color: #970c8cd5; /* Purple color */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-custom .nav-link,
+.navbar-custom .navbar-brand {
+  color: white !important;
+  font-weight: 500;
+}
+
+.navbar-custom .nav-link:hover {
+  color: #d1b3ff !important; /* Light purple hover */
+  transition: color 0.3s ease;
+}
+
+/* Login button styling */
+.login-btn {
+  background-color: #dc3545;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-btn:hover {
+  background-color: #c82333;
+}
+
+/* Headings */
+h2 {
+  margin-top: 20px;
+  text-align: center;
+  color: white;
+}
+
+/* Optional: Table styling if used on database pages */
+table {
+  width: 90%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  background-color: rgb(255, 255, 255);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+table th, table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+table th {
+  background-color: #87107dd5;
+  color: white;
+}
+
+table tr:hover {
+  background-color: #f2f2f2;
+}
+
+.form-label{
+    color: #000;
+}
+/* Target the Update Furniture heading */
+.text-center.mb-4 h1.text-primary,
+ h2.text-center.mb-4.text-primary,
+ h2.text-center.text-primary {
+    color: #ff8800 !important; /* Replace with your desired color */
+}
+
+#updateForm {
+  background-color: #6d99b8; /* light blue */
+  border-radius: 10px;
+  padding: 20px;
+}
+

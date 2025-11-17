@@ -32,7 +32,7 @@ router.post('/furnitureRegistration',upload.single("furnitureimage"), async(req,
         res.redirect('/woodRegistration');
     } catch (error) {
         console.error(error);
-        res.redirect('/furnitureRegistration');
+       res.redirect('/furnitureRegistration');
     }
 });
 
@@ -66,7 +66,7 @@ res.redirect('/furnitureRegistration');//redirect to a route path not to a file
  //route for updating furniture/ get furniture stock to update
  router.get('/furniture/:id', async(req,res)=>{
     try {
-        const furnitureUpdate = await furnitureStock.findOne({_id:req.query.id});
+        const furnitureUpdate = await furnitureStock.findOne({_id:req.params.id});
         res.render('furniture_Update', {item:furnitureUpdate})
     } catch (error) {
       res.status(400).send('Unable to find item in the database')
@@ -97,12 +97,12 @@ res.redirect('/furnitureRegistration');//redirect to a route path not to a file
 
 
  //route for deleting furniture 
- router.post('/deletefurniture', async(req,res)=>{
+ router.post('/deletefurniture/:id', async(req,res)=>{
     try {
-        await furnitureStock.deleteOne({_id:req.body.id}, req.body);
+        await furnitureStock.deleteOne({_id:req.params.id}, req.body);
         res.redirect('/furnitureRegistered')
     } catch (error) {
-      res.status(400).send('Unable to update furniture in the database')
+      res.status(400).send('Unable to delete furniture from the database')
       console.log(error);  
     }
  });
