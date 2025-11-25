@@ -6,6 +6,12 @@ html
     title Manager Dashboard
     link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css' integrity='sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB' crossorigin='anonymous')
     link(rel='stylesheet' href='css/sales.css')
+    //- material icons 
+    link(href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet")
+    script(src="https://cdn.jsdelivr.net/npm/apexcharts")
+    script(src="/js/salesChart.js")
+
+
 body
      if currentUser && (currentUser.role === 'manager')
 .sidebar
@@ -15,20 +21,51 @@ body
           input(type='text' placeholder='Search...')
           button Go
         ul.nav-links
-          
-            a(href='/') Home
-          
-              a(href='/furnitureRegistration') Add Furniture Stock
-              a(href='/woodRegistration') Add Wood Stock
-              a(href='/woodRegistered') Wood Records
-              a(href='/furnitureRegistered') Furniture Records
-              a(href='/recordwoodSale') Add Wood Sale
-              a(href='/recordfurnitureSale') Add Furniture Sale
-              a(href='#') Sales Report
-              a(href='/logout')
-                button.login-btn Logout   
-              a(href='/login')
-                button.login-btn Login
+            
+          a(href='/')
+            span.material-icons-outlined.me-2 home
+            | Home
+
+          a(href='/furnitureRegistration')
+            span.material-icons-outlined.me-2 chair
+            | Add Furniture Stock
+
+          a(href='/woodRegistration')
+            span.material-icons-outlined.me-2 forest
+            | Add Wood Stock
+
+          a(href='/woodRegistered')
+            span.material-icons-outlined.me-2 inventory_2
+            | Wood Records
+
+          a(href='/furnitureRegistered')
+            span.material-icons-outlined.me-2 view_list
+            | Furniture Records
+
+          a(href='/recordwoodSale')
+            span.material-icons-outlined.me-2 shopping_cart
+            | Add Wood Sale
+
+          a(href='/recordfurnitureSale')
+            span.material-icons-outlined.me-2 point_of_sale
+            | Add Furniture Sale
+
+          a(href='/salesReport')
+            span.material-icons-outlined.me-2 bar_chart
+            | Sales Report
+
+          a(href='/manager/all')
+            span.material-icons-outlined.me-2 bar_chart
+            | Sales By Agent
+
+          a(href='/manager/summary')
+            span.material-icons-outlined.me-2 bar_chart
+            | Sales Summary
+
+          a(href='/logout')
+            button.login-btn Logout   
+          a(href='/login')
+            button.login-btn Login
         title Manager Dashboard
 .main-content
       .topbar
@@ -41,77 +78,99 @@ body
           .card
             h3 Expenses on Hardwood
             p Total Expenses on Hardwood : #{new Intl.NumberFormat().format(totalHardwood.totalcost)} UGX
+
           .card
             h3 Expenses on Softwood
             p Total Expenses on Softwood : #{new Intl.NumberFormat().format(totalSoftwood.totalcost)} UGX
+
+          .card
+            h3 Expenses on Timber
+            p Total Expenses on Timber : #{new Intl.NumberFormat().format(totalTimber.totalcost)} UGX
+
+          .card
+            h3 Expenses on Poles
+            p Total Expenses on Poles : #{new Intl.NumberFormat().format(totalPoles.totalcost)} UGX
+
+          .card
+            h3 Total Wood Expenses
+            p #{new Intl.NumberFormat().format(woodExpenses)} UGX
+
+          //- .card
+          //-   h3 Furniture Stock
+          //-   p #{new Intl.NumberFormat().format(woodExpenses)}
           .card
             h3 Total Hardwood Stock
-            p Quantity of Hardwood in stock: #{totalHardwood.totalquantity} Pieces
+            p #{totalHardwood.totalquantity} Pieces
           .card
             h3 Total Softwood Stock
-            p Quantity of Softwood in stock: #{totalSoftwood.totalquantity} Pieces
+            p #{totalSoftwood.totalquantity} Pieces
+
           .card
-        
-            h3 Total wood Expenses
-            p #{new Intl.NumberFormat().format((totalHardwood.totalcost)+(totalSoftwood.totalcost)+(totalHardwood.totalquantity)+(totalSoftwood.totalquantity))}UGX
+            h3 Total Timber in Stock
+            p #{totalTimber.totalquantity} Pieces
+
+          .card
+            h3 Total Poles in Stock
+            p #{totalPoles.totalquantity} Pieces
+          .card
+            h3 Total Wood Sales
+            p #{woodsales.length} Sales
+
+
+          .card
+            h3 Total Furniture Sales
+            p #{furnitureSales.length} Sales
+
           .card
             h3 Total Wood Revenue
-            p #{new Intl.NumberFormat().format(woodExpenses)}
+            p #{new Intl.NumberFormat().format(woodExpenses)} UGX
+            
           .card
-            i(class='fa-solid fa-couch icon')
-            h3 Total Revenue
-            p #{new Intl.NumberFormat().format(totalRevenue)}UGX
+            h3 Total furniture Revenue
+            p #{new Intl.NumberFormat().format(furnitureRevenue)} UGX
 
           .card
-            i(class='fa-solid fa-tree icon')
+            h3 Total Revenue
+            p #{new Intl.NumberFormat().format(totalRevenue)} UGX
+          
+          .card
             h3 Total Profits
             p #{new Intl.NumberFormat().format(grossProfit)}UGX
+          
+.col-md-4
+  .card.low-stock-card(style="position: sticky; top: 20px;")
+    .card-header.bg-danger.text-white
+      h5.mb-0
+        i.fas.fa-exclamation-triangle.me-2
+        | Low Stock Alerts
 
-          .card
-            i(class='fa-solid fa-hammer icon')
-            h3 Low Stock alerts
-            // Stock Alerts
-.row.mb-4
-  .col-md-6
-    .card
-      .card-header.bg-danger.text-white
-        h5.mb-0
-          i.fas.fa-exclamation-triangle.me-2
-          | Low Stock Alerts
-      .card-body
-        if lowWoodstock.length > 0 || lowFurniturestock.length > 0
-          if lowWoodstock.length > 0
-            h6.text-danger Wood Stock (< 10 units):
-            ul.list-group.list-group-flush.mb-3
-              each item in lowWoodstock
-                li.list-group-item.d-flex.justify-content-between.align-items-center
-                  div
-                    strong= item.woodName
-                    br
-                    small.text-muted= item.woodType
-                  span.badge.bg-danger= item.quantity + ' units'
+    .card-body
+      if lowWoodstock.length > 0 || lowFurniturestock.length > 0
 
-            if lowFurniturestock.length > 0
-              h6.text-danger Furniture Stock (< 10 units):
-              ul.list-group.list-group-flush
-                each item in lowFurniturestock
-                  li.list-group-item.d-flex.justify-content-between.align-items-center
-                    div
-                      strong= item.name
-                      br
-                      small.text-muted= item.type
-                    span.badge.bg-danger= item.quantity + ' units'
-        else
-          .text-center.text-success
+        if lowWoodstock.length > 0
+          h6.text-danger Wood Stock (< 10 units):
+          ul.list-group.list-group-flush.mb-3
+            each item in lowWoodstock
+              li.list-group-item.low-item.d-flex.justify-content-between.align-items-center
+                div
+                  strong= item.woodName
+                  br
+                  small.text-muted= item.woodType
+                span.badge.bg-danger= item.quantity + ' units'
+
+        if lowFurniturestock.length > 0
+          h6.text-danger Furniture Stock (< 10 units):
+          ul.list-group.list-group-flush
+            each item in lowFurniturestock
+              li.list-group-item.low-item.d-flex.justify-content-between.align-items-center
+                div
+                  strong= item.furniturename
+                  br
+                  small.text-muted= item.woodtype
+                span.badge.bg-danger= item.quantity + ' units'
+
+      else
+        .text-center.text-success
           i.fas.fa-check-circle.fa-3x.mb-2
           h6 All Stock Levels Good!
           p.text-muted No low stock alerts at this time.
-
-        
-
-        
-                
-//- script(src='manager-dashboard.js')
-
-     
-        

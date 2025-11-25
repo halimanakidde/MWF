@@ -5,37 +5,84 @@ html
     meta(name='viewport' content='width=device-width, initial-scale=1.0')
     title Sales Executive Dashboard
     link(rel='stylesheet' href='/css/sales.css')
+    // Material Icons
+    link(href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet")
+
   body
     .sidebar
       .logo
         h2 MAYONDO INVENTORY MANAGEMENT SYSTEM
+
       .search-box
         input(type='text' placeholder='Search...')
         button Go
+
       ul.nav-links
-        
-          a(href='/') Home
-          a(href='/woodRegistered') View Wood Stock
-          a(href='/furnitureRegistered') View Furniture Stock
-          a(href='#') View Sales
-          a(href='/recordwoodSale') Add Wood Sale
-          a(href='/recordfurnitureSale') Add Furniture Sale
-          a(href='/logout')
-            button.login-btn Logout
-            if currentUser && (currentUser.role == 'salesexecutive')
-          a(href='/login')
-            button.login-btn Login
-            a(href='/register')
+        a(href='/')
+          span.material-icons-outlined.me-2 home
+          | Home
+
+        a(href='/woodRegistered')
+          span.material-icons-outlined.me-2 inventory_2
+          | View Wood Stock
+
+        a(href='/furnitureRegistered')
+          span.material-icons-outlined.me-2 view_list
+          | View Furniture Stock
+
+        // FIXED AGENT SALES LINK
+        a(href=`/agentDashboard/${currentUser._id}`)
+          span.material-icons-outlined.me-2 bar_chart
+          | View My Sales
+
+        a(href='/recordwoodSale')
+          span.material-icons-outlined.me-2 shopping_cart
+          | Add Wood Sale
+
+        a(href='/recordfurnitureSale')
+          span.material-icons-outlined.me-2 point_of_sale
+          | Add Furniture Sale
+
+        a(href='/logout')
+          button.login-btn Logout
+
+      if !currentUser
+        a(href='/login')
+          button.login-btn Login
+        a(href='/register')
+
     .main-content
       .topbar
         .user-info
-      
-                  //-   if !currentUser
-        //-   else
-        //-     span Welcome #{currentUser.name || 'Sales Executive'}
+
       header
         h1 Sales Executive Dashboard
-        p
-          | Welcome, 
-          span#username John Doe
-      
+        p Welcome,
+          span#username= currentUser?.name || "Sales Executive"
+
+      // ================================
+      // PLACE WHERE SALES TABLE WILL SHOW
+      // ================================
+      section.mt-4
+        h2 Your Sales Records
+        p Here are all the products you have sold.
+
+        if sales && sales.length > 0
+          table.sales-table
+            thead
+              tr
+                th Product
+                th Price (UGX)
+                th Quantity
+                th Total
+                th Date
+            tbody
+              each sale in sales
+                tr
+                  td= sale.product.name
+                  td= sale.product.price
+                  td= sale.quantity
+                  td= sale.product.price * sale.quantity
+                  td= sale.date.toLocaleDateString()
+        else
+          p No sales recorded yet.

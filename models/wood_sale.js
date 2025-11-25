@@ -4,10 +4,10 @@ const woodsaleSchema = new mongoose.Schema({
     customerName:{
         type: String,
     },
-   productName:{
+   productType:{
         type: String,
     },
-    woodType:{
+    productName:{
         type: String,
     },
     quantity:{
@@ -17,7 +17,7 @@ const woodsaleSchema = new mongoose.Schema({
         type: String,
     },
     unitprice:{
-        type: String,
+        type: Number,
     },
     date:{
         type: Date,

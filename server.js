@@ -18,6 +18,8 @@ const indexRoutes=require('./routes/index_Routes');
 const stockRoutes=require('./routes/stock_Routes');
 const authRoutes=require('./routes/auth_Routes');
 const salesRoutes=require('./routes/sales_Routes');
+const messagesRoutes=require('./routes/messages_Routes');
+const reportRoutes=require('./routes/report_Routes');
 
 //2. instantiations
 const app=express();//creating an express application
@@ -39,7 +41,7 @@ app.set('view engine', 'pug');//setting pug as the view engine
 app.set('views', path.join(__dirname, 'views',));//specifying views directory
 
 //4. middleware
-app.use(express.urlencoded({extended: false}));//middleware to parse urlencoded request bodies 
+app.use(express.urlencoded({extended: true}));//middleware to parse urlencoded request bodies 
 app.use(express.static(path.join(__dirname, "public")));
 app.use('/public/images/uploads', express.static(__dirname + '/public/images/uploads'));
 
@@ -65,6 +67,8 @@ app.use('/', indexRoutes);//using imported route
 app.use('/', stockRoutes);// always use full route path
 app.use('/', authRoutes);
 app.use('/', salesRoutes);
+app.use('/', messagesRoutes);
+app.use('/', reportRoutes);
 
 
  //non existing routes

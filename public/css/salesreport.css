@@ -1,0 +1,42 @@
+
+      body {
+        background: #f2f4f7;        /* page background */
+      }
+
+      h1 {
+        color: #0d6efd;            /* blue title color */
+        font-weight: 700;
+      }
+
+      .report-card {
+        background: #ffffff;       /* card background */
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        padding: 20px;
+      }
+
+      .revenue-box {
+        background: #d1e7dd;       /* light green */
+      }
+
+      .sales-box {
+        background: #cfe2ff;       /* light blue */
+
+      }
+
+.report-card {
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* vertically center text */
+}
+
+.revenue-box {
+  background-color: #1cb7ce; /* light green */
+}
+
+.sales-box {
+  background-color: #cfe2ff; /* light blue */
+}

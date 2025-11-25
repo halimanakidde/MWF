@@ -38,7 +38,11 @@ html
           table.table.table-striped.table-hover.align-middle
             thead.table-dark
               tr
+                th(scope='col') Wood Name
                 th(scope='col') Wood Type
+                th(scope='col') Wood color
+                th(scope='col') Measurements 
+                th(scope='col') Quality
                 th(scope='col') Quantity
                 th(scope='col') Unit Price (UGX)
                 th(scope='col') Supplier Name
@@ -47,12 +51,17 @@ html
             tbody
               each item in wood
                 tr
-                  td= item.woodtype
-                  td= item.quantity
-                  td= item.unitprice
-                  td= item.supplier
-                  td= item.contact
-                  td= item.warehouseLocation
+                  td #{item.woodName}
+                  td #{item.woodType}
+                  td #{item.woodcolor}
+                  td #{item.measurements}
+                  td #{item.quality}
+                  td #{item.quantity}
+                  td #{item.unitprice}
+                  td #{item.supplier}
+                  td #{item.contact}
+                  td #{item.warehouseLocation}
       else
         .alert.alert-warning.text-center.mt-4 No wood records found.
     script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js')
+

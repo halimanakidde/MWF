@@ -3,19 +3,41 @@ head
   meta(charset='UTF-8')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
   title Furniture Stock Registration
-  link(rel='stylesheet' href='css/furniturePdt.css')
+  link(rel='stylesheet' href='css/sales.css')
+   //- material icons 
+  link(href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet")
 .sidebar
   h2 MAYONDO INVENTORY MANAGEMENT SYSTEM
-  a(href='/') Home
-  a(href='#') Sales Report
-  a(href='/furnitureRegistered') View Furniture Stock
-  a(href='/woodRegistered') View Wood Stock
-  a(href='/furnitureRegistration') Add Furniture Stock
-  a(href='/woodRegistration') Add Wood Stock
+  a(href='/')
+    span.material-icons-outlined.me-2 home
+    | Home
+
+  a(href='/salesReport')
+    span.material-icons-outlined.me-2 bar_chart
+    | Sales Report
+
+  a(href='/furnitureRegistered')
+    span.material-icons-outlined.me-2 view_list
+    | View Furniture Stock
+
+  a(href='/woodRegistered')
+    span.material-icons-outlined.me-2 inventory_2
+    | View Wood Stock
+
+  a(href='/recordfurnitureSale')
+    span.material-icons-outlined.me-2 point_of_sale
+    | Add Furniture Sale
+
+  a(href='/recordwoodSale')
+    span.material-icons-outlined.me-2 shopping_cart
+    | Add Wood Sale
   a(href='/logout')
     button.login-btn Login 
   a(href='/logout')
     button.logout-btn Logout 
+div.video-background
+  video(autoplay muted loop playsinline)
+    source(src="/videos/navvideo.mp4" type="video/mp4")
 form#furnitureForm(action='/furnitureRegistration' method='post' enctype='multipart/form-data')
   h2 Furniture Stock Registration
   label(for='itemName') Furniture Name

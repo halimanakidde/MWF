@@ -20,7 +20,7 @@ const furnituresaleSchema = new mongoose.Schema({
         type: Date,
     },
    paymentType:{
-        type: Number,
+        type: String,
     },
    salesAgent:{
         type: mongoose.Schema.Types.ObjectId,
@@ -29,9 +29,10 @@ const furnituresaleSchema = new mongoose.Schema({
     transportProvided:{
         type: String,
     },
-    totalPrice:{
+    totalprice:{
         type: Number,
-    }
-});
+    },
+     
+}, {timestamps: true});
 
 module.exports=mongoose.model('furnitureSale', furnituresaleSchema)

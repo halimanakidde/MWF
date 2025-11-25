@@ -16,11 +16,14 @@ const woodstockSchema = new mongoose.Schema({
     quality:{
         type:String,
     },
-        quantity:{
+    quantity:{
         type:Number,
     },
     unitprice:{
         type:Number,
+    },
+    date: {
+        type: Date, // Use the Date type for the HTML date input
     },
     supplier:{
         type:String,

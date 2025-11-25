@@ -2,48 +2,71 @@ doctype html
 head
   meta(charset='UTF-8')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  title Sales Form with Sidebar
+  title Furniture Sales Form
   link(rel='stylesheet' href='css/sales.css')
+  //- material icons 
+  link(href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet")
 .sidebar
   h2 MAYONDO INVENTORY MANAGEMENT SYSTEM
-  a(href='/') Home
-  a(href='#') Sales Report
-  a(href='/furnitureRegistered') View Furniture Stock
-  a(href='/woodregistered') View Wood Stock
-  a(href='/recordfurnitureSale') Add Furniture Sale
-  a(href='/recordwoodSale') Add Wood Sale
+  a(href='/')
+    span.material-icons-outlined.me-2 home
+    | Home
+
+  a(href='#')
+    span.material-icons-outlined.me-2 bar_chart
+    | Sales Report
+
+  a(href='/furnitureRegistered')
+    span.material-icons-outlined.me-2 view_list
+    | View Furniture Stock
+
+  a(href='/woodRegistered')
+    span.material-icons-outlined.me-2 inventory_2
+    | View Wood Stock
+
+  a(href='/recordfurnitureSale')
+    span.material-icons-outlined.me-2 point_of_sale
+    | Add Furniture Sale
+
+  a(href='/recordwoodSale')
+    span.material-icons-outlined.me-2 shopping_cart
+    | Add Wood Sale
+
   a(href='/logout')
     button.login-btn Login 
   a(href='/logout')
     button.logout-btn Logout 
 
 .main-content
-  h1 Sales Entry Form
+  h1 Furniture Sale
   p Fill in the sales details below:
   if furnitureitems.length
-  form#salesform(action='/recordfurnitureSale', method='post')
+  form#furnitureform(action='/recordfurnitureSale', method='post')
     label(for='customerName') Customer Name
     input#customerName(type='text' name='customerName' required='')
 
     label(for='productType') Type of Product
-    input#productType(type='text' name='productType' required='')
+    select#productType(name='productType' required)
+        option(value='') Select type
+        option(value='hardwood') Hard wood
+        option(value='softwood') Soft Wood
 
-    label(for='productName') Name of Product
+    label(for='productName') Name of Furniture
     select#productName(type='text' name='productName' required='')
       option(value='') Select a product 
       - var groupedfurnitures = {}
-      each furniture in furnitureitems 
-        - if (!groupedfurnitures[furniture.furniturename]) groupedfurnitures[furniture.furniturename]=0
-        - groupedfurnitures[furniture.furniturename] += furniture.quantity
+      each Furniture in furnitureitems 
+        - if (!groupedfurnitures[Furniture.furniturename]) groupedfurnitures[Furniture.furniturename]=0
+        - groupedfurnitures[Furniture.furniturename] += Furniture.quantity
       each qty, furniturename in groupedfurnitures 
         if qty > 0
-          option(value=name)= name + "(Available: " + qty + "units)"
+          option(value=furniturename)= furniturename + "(Available: " + qty + "units)"
 
     label(for='quantity') Quantity Bought/Sold
     input#quantity(type='number' name='quantity' min='1' required='')
 
     label(for='unitprice') Price per unit
-    input#date(type='number' name='unitprice' required='')
+    input#unitprice(type='number' name='unitprice' required='')
 
     label(for='date') Date
     input#date(type='date' name='date' required='')
@@ -56,15 +79,22 @@ head
       option(value='bankOverdraft') Bank Overdraft
 
     label(for='salesAgent') Sales Agent Name
-    input#salesAgent(type='text' name='salesAgent')
-    //- input#date(type='' name='transportProvidede' required='')
+      select#salesAgent(name='salesAgent' required)
+        option(value='') Select Sales Agent
+        each agent in agents
+          option(value=agent._id)= agent.fullname
 
     label(for='transport') Transport Provided
-    select#transport(name='transportprovided' required='')
+    select#transportprovided(name='transportprovided' required='')
       option(value='') Select one 
       option(value='Yes') Yes 
       option(value='No') No
       
-    label(for='totalcost') Total Cost
-    textarea#totalcost(name='totalcost' rows='3' placeholder='calculate total cost')
+    label(for="total") Total Cost (UGX)
+    input#totalcost(type="text" name="totalcost" readonly)
+  
+    //- label(for='totalcost') Total Cost
+    //- textarea#totalcost(name='totalcost' rows='2' readonly placeholder='0 UGX')
     button(type='submit') Submit Sale
+  script(src='/js/sales.js')
+

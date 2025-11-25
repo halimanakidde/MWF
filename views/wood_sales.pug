@@ -1,67 +1,122 @@
+
 doctype html
 head
   meta(charset='UTF-8')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  title Sales Form with Sidebar
+  title Wood Sales Form 
   link(rel='stylesheet' href='css/sales.css')
+  //- material icons 
+  link(href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet")
+
 .sidebar
   h2 MAYONDO INVENTORY MANAGEMENT SYSTEM
-  a(href='/') Home
-  a(href='#') Sales Report
-  a(href='/furnitureRegistered') View Furniture Stock
-  a(href='/woodregistered') View Wood Stock
-  a(href='/recordfurnitureSale') Add Furniture Sale
-  a(href='/recordwoodSale') Add Wood Sale
+  a(href='/')
+    span.material-icons-outlined.me-2 home
+    | Home
+
+  a(href='#')
+    span.material-icons-outlined.me-2 bar_chart
+    | Sales Report
+
+  a(href='/furnitureRegistered')
+    span.material-icons-outlined.me-2 view_list
+    | View Furniture Stock
+
+  a(href='/woodRegistered')
+    span.material-icons-outlined.me-2 inventory_2
+    | View Wood Stock
+
+  a(href='/recordfurnitureSale')
+    span.material-icons-outlined.me-2 point_of_sale
+    | Add Furniture Sale
+
+  a(href='/recordwoodSale')
+    span.material-icons-outlined.me-2 shopping_cart
+    | Add Wood Sale
+
   a(href='/logout')
     button.login-btn Login 
   a(href='/logout')
     button.logout-btn Logout 
 
 .main-content
-  h1 Sales Entry Form
+  h1 Wood Sale
   p Fill in the sales details below:
+
   if wooditems.length
-  form#salesform(action='/recordwoodSale', method='post')
-    label(for='customerName') Customer Name
-    input#customerName(type='text' name='customerName' required='')
+    form#salesform(action='/recordwoodSale', method='post')
 
-    label(for='productType') Type of Product
-    input#productType(type='text' name='productType' required='')
+      // CUSTOMER NAME
+      label(for='customerName') Customer Name
+      input#customerName(type='text' name='customerName' required)
 
-    label(for='productName') Name of Product
-    select#productName(type='text' name='productName' required='')
-      option(value='') Select a product 
-      - var groupedWoods = {}
-      each wood in wooditems 
-        - if (!groupedWoods[wood.woodName]) groupedWoods[wood.woodName]=0
-        - groupedWoods[wood.woodName] += wood.quantity
-      each qty, woodName in groupedWoods 
-        if qty > 0
-          option(value=name)= name + "(Available: " + qty + "units)"
+      // PRODUCT TYPE
+      label(for='productType') Type of Wood
+      select#productType(name='productType' required)
+        option(value='') Select type
+        option(value='hardwood') Hard wood
+        option(value='softwood') Soft Wood
+        option(value='timber') Timber
+        option(value='poles') Poles
 
-    label(for='quantity') Quantity Bought/Sold
-    input#quantity(type='number' name='quantity' min='1' required='')
+      // PRODUCT NAME
+      label(for='productName') Name of Wood
+      select#productName(name='productName' required)
+        option(value='') Select product
+        - var groupedWoods = {}
+        each wood in wooditems
+          - if (!groupedWoods[wood.woodName]) groupedWoods[wood.woodName] = 0
+          - groupedWoods[wood.woodName] += Number(wood.quantity)
+        each qty, name in groupedWoods
+          if qty > 0
+            option(value=name)= name + " (Available: " + qty + " units)"
 
-    label(for='date') Date
-    input#date(type='date' name='date' required='')
+      // QUANTITY
+      label(for='quantity') Quantity Bought/Sold
+      input#quantity(type='number' name='quantity' min='1' required)
 
-    label(for='paymentType') Type of Payment
-    select#paymentType(name='paymentType' required='')
-      option(value='') Select payment type
-      option(value='cash') Cash
-      option(value='cheque') Cheque
-      option(value='bankOverdraft') Bank Overdraft
+      // QUALITY (exists in your model)
+      label(for='quality') Quality
+        select#quality(name='quality')
+          option(value='') -- Select Quality--
+          option(value='firstgrade') first grade
+          option(value='Mediumgrade') Medium grade
 
-    label(for='salesAgent') Sales Agent Name
-    input#salesAgent(type='text' name='salesAgent')
-    //- input#date(type='' name='transportProvidede' required='')
+      // UNIT PRICE (exists in your model)
+      label(for='unitprice') Unit Price (UGX)
+      input#unitprice(type='number' name='unitprice' min='0' required)
 
-    label(for='transport') Transport Provided
-    select#transport(name='transportprovided' required='')
-      option(value='') Select one 
-      option(value='Yes') Yes 
-      option(value='No') No
-      
-    label(for='notes') Additional Notes
-    textarea#notes(name='notes' rows='3' placeholder='Any additional information...')
+      // DATE
+      label(for='date') Date
+      input#date(type='date' name='date' required)
+
+      // PAYMENT TYPE
+      label(for='paymentType') Type of Payment
+      select#paymentType(name='paymentType' required)
+        option(value='') Select payment type
+        option(value='cash') Cash
+        option(value='cheque') Cheque
+        option(value='bankOverdraft') Bank Overdraft
+
+      // SALES AGENT (must be ID from Registration model)
+      label(for='salesAgent') Sales Agent Name
+      select#salesAgent(name='salesAgent' required)
+        option(value='') Select Sales Agent
+        each agent in agents
+          option(value=agent._id)= agent.fullname
+
+      label(for='transportprovided') Transport Provided
+      select#transportprovided(name='transportprovided' required)
+        option(value='') Select one 
+        option(value='Yes') Yes 
+        option(value='No') No
+
+      label(for='notes') Additional Notes
+      textarea#notes(name='notes' rows='3' placeholder='Any additional information...')
+
+      label(for="total") Total Cost (UGX)
+      input#totalcost(type="text" name="totalcost" readonly)
+  
     button(type='submit') Submit Sale
+  script(src='/js/sales.js')
+

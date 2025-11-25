@@ -4,19 +4,41 @@ head
     meta(name='viewport' content='width=device-width, initial-scale=1.0')
     title Wood Registration
     link(rel='stylesheet' href='css/sales.css')
-    //- link(rel='stylesheet' href='css/furniturePdt.css')
+     //- material icons 
+    link(href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet")
 .sidebar
     h2 MAYONDO INVENTORY MANAGEMENT SYSTEM
-    a(href='/') Home
-    a(href='#') Sales Report
-    a(href='/furnitureRegistered') View Furniture Stock
-    a(href='/woodRegistered') View Wood Stock
-    a(href='/furnitureRegistration') Add Furniture Stock
-    a(href='/woodRegistration') Add Wood Stock
+    a(href='/')
+      span.material-icons-outlined.me-2 home
+      | Home
+
+    a(href='/salesReport')
+      span.material-icons-outlined.me-2 bar_chart
+      | Sales Report
+
+    a(href='/furnitureRegistered')
+      span.material-icons-outlined.me-2 view_list
+      | View Furniture Stock
+
+    a(href='/woodRegistered')
+      span.material-icons-outlined.me-2 inventory_2
+      | View Wood Stock
+
+    a(href='/recordfurnitureSale')
+      span.material-icons-outlined.me-2 point_of_sale
+      | Add Furniture Sale
+
+    a(href='/recordwoodSale')
+      span.material-icons-outlined.me-2 shopping_cart
+      | Add Wood Sale
     a(href='/logout')
       button.login-btn Login 
     a(href='/logout')
       button.logout-btn Logout
+
+//- div.video-background
+//-   video(autoplay muted loop playsinline)
+//-     source(src="/videos/furndid.mp4" type="video/mp4")
 form#woodForm(action='/woodRegistration' method='post')
         h2 Wood Stock Registration
         label(for='woodName') Wood Name
@@ -32,7 +54,7 @@ form#woodForm(action='/woodRegistration' method='post')
         select#woodType(name='woodType')
           option(value='') -- Select Wood Type --
           option(value='timber') Timber
-          option(value='timber') Poles
+          option(value='poles') Poles
           option(value='hardwood') Hard Wood
           option(value='softwood') Soft Wood
         
@@ -49,20 +71,20 @@ form#woodForm(action='/woodRegistration' method='post')
         select#quality(name='quality')
           option(value='') -- Select Quality--
           option(value='firstgrade') first grade
-          option(value='Muvulegrade') Medium grade
+          option(value='Mediumgrade') Medium grade
         //- label(for='image') Wood Image
         //- input#image(type='file' name='woodimage' placeholder='upload image')
         label(for='date') Date
         input#date(type='date' name='date' required='')
 
         label(for='quantity') Quantity
-        input#quantity(type='nu' name='quantity')
+        input#quantity(type='number' name='quantity')
 
         label(for='supplier') Supplier Name
         input#supplier(type='text' name='supplier')
       
         label(for='contact') Supplier Contact
-        input#contact(type='text' name='contact')
+        input#contact(type='number' name='contact')
         
         label(for='price') Price per Piece (UGX)
         input#price(type='number' name='unitprice' min='1')

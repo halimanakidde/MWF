@@ -45,6 +45,7 @@ router.post('/login', passport.authenticate('local',{failureRedirect:'/login'}),
 req.session.user=req.user
 if(req.user.role==='manager'){
     res.redirect('/viewboard')
+
 }else if(req.user.role==='salesexecutive'){
 res.redirect('/viewsales')
 }else{
@@ -108,30 +109,63 @@ router.get("/users", async(req,res)=>{
       ]) 
     totalHardwood = totalHardwood[0]??{totalquantity:0, totalcost:0}
     totalSoftwood = totalSoftwood[0]??{totalquantity:0, totalcost:0}
-    totalSoftwood = totalTimber[0]??{totalquantity:0, totalcost:0}
+    totalTimber = totalTimber[0]??{totalquantity:0, totalcost:0}
     totalPoles = totalPoles[0]??{totalquantity:0, totalcost:0}
     
-   //get all sales
-    const woodsales = await woodsale.find().populate('salesAgent','fullname')
-    const furnitureSales = await furnitureSale.find().populate('salesAgent','fullname')
-    const totalSales = woodsales.length + furnitureSales.length
-    //get all stock
-    const furnitureStocks = await furnitureStock.find()
-    const woodstocks = await WoodStock.find()
+//    //get all sales
+//     const woodsales = await woodsale.find().populate('salesAgent','fullname')
+//     const furnitureSales = await furnitureSale.find().populate('salesAgent','fullname')
+//     const totalSales = woodsales.length + furnitureSales.length
+//     //get all stock
+//     const furnitureStocks = await furnitureStock.find()
+//     const woodstocks = await WoodStock.find()
     
-    //calculate revenue
-    const woodRevenue = woodsales.reduce((sum,sale)=>sum + sale.totalprice,0)
-    const furnitureRevenue = furnitureSales.reduce((sum,sale)=>sum + sale.totalprice,0)
-    const totalRevenue = woodRevenue + furnitureRevenue
+//     //calculate revenue
+//     const woodRevenue = woodsales.reduce((sum,sale)=>sum + sale.totalprice,0)
+//     const furnitureRevenue = furnitureSales.reduce((sum,sale)=>sum + sale.totalprice,0)
+//     const totalRevenue = woodRevenue + furnitureRevenue
     
-    //calculate expenses(from purchase of woodstock)
-    const woodExpenses = woodstocks.reduce((sum,stock)=>sum +(stock.unitprice*stock.quantity),0)
+//     //calculate expenses(from purchase of woodstock)
+//     const woodExpenses = woodstocks.reduce((sum,stock)=>sum +(stock.unitprice*stock.quantity),0)
       
-    //calculate profit
-    const grossProfit = totalRevenue - woodExpenses;
-    //Low stock alerts
-    const lowWoodstock = woodstocks.filter(stock=>stock.quantity < 10);
-    const lowFurniturestock = furnitureStocks.filter(stock=>stock.quantity < 10);
+//     //calculate profit
+//     const grossProfit = totalRevenue - woodExpenses;
+//     //Low stock alerts
+//     const lowWoodstock = woodstocks.filter(stock=>stock.quantity < 10);
+//     const lowFurniturestock = furnitureStocks.filter(stock=>stock.quantity < 10);
+      //get all sales
+const woodsales = await woodsale.find().populate('salesAgent', 'fullname');
+const furnitureSales = await furnitureSale.find().populate('salesAgent', 'fullname');
+
+const totalSales = woodsales.length + furnitureSales.length;
+
+//get all stock
+const furnitureStocks = await furnitureStock.find();
+const woodstocks = await WoodStock.find();
+
+//calculate revenue (prevent NaN)
+const woodRevenue = woodsales.reduce((sum, sale) => {
+  return sum + (Number(sale.totalprice) || 0);
+}, 0);
+
+const furnitureRevenue = furnitureSales.reduce((sum, sale) => {
+  return sum + (Number(sale.totalprice) || 0);
+}, 0);
+
+const totalRevenue = woodRevenue + furnitureRevenue;
+
+//calculate expenses (prevent NaN)
+const woodExpenses = woodstocks.reduce((sum, stock) => {
+  return sum + ((Number(stock.unitprice) || 0) * (Number(stock.quantity) || 0));
+}, 0);
+
+//calculate profit
+const grossProfit = totalRevenue - woodExpenses;
+
+//Low stock alerts
+const lowWoodstock = woodstocks.filter(stock => Number(stock.quantity) < 10);
+const lowFurniturestock = furnitureStocks.filter(stock => Number(stock.quantity) < 10);
+
     res.render("managerDashboard",{
         totalHardwood,
         totalSoftwood,
@@ -143,7 +177,10 @@ router.get("/users", async(req,res)=>{
         totalSales,
         lowWoodstock,
         lowFurniturestock,
-        totalRevenue
+        totalRevenue,
+        woodsales,
+        furnitureSales,
+        furnitureRevenue
     });
       
         } catch (error) {
@@ -154,6 +191,8 @@ router.get("/users", async(req,res)=>{
  router.get('/viewsales', (req,res)=>{
     res.render("salesDashboard")
  });
+
+ 
 //last line
 module.exports=router;
 //always import your route file into the server file

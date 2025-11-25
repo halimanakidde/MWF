@@ -303,9 +303,9 @@ section.contact-section
         | Sunday: Closed
     .contact-form
       h3 Send Us a Message
-      // <form action="#" method="post">
+      form(action="/sendMessage" method="POST")
       label(for='name') Full Name
-      input#name(type='text' name='name' placeholder='Enter your name' required='')
+      input#fullName(type='text' name='fullName' placeholder='Enter your name' required='')
       label(for='email') Email
       input#email(type='email' name='email' placeholder='Enter your email' required='')
       label(for='message') Message

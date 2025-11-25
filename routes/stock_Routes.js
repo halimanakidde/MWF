@@ -29,7 +29,7 @@ router.post('/furnitureRegistration',upload.single("furnitureimage"), async(req,
         furniture.furnitureimage = req.file.path
         console.log(furniture);
     await furniture.save();
-        res.redirect('/woodRegistration');
+        res.redirect('/viewboard');
     } catch (error) {
         console.error(error);
        res.redirect('/furnitureRegistration');
@@ -45,8 +45,8 @@ router.post('/woodRegistration',async (req, res)=>{
 try {
     const wood= new woodStock(req.body)
 console.log(wood);
-wood.save()
-res.redirect('/furnitureRegistration');//redirect to a route path not to a file    
+await wood.save()
+res.redirect('/viewboard');//redirect to a route path not to a file    
 } catch (error) {
  res.redirect('/woodRegistration');   
 }
@@ -84,17 +84,6 @@ res.redirect('/furnitureRegistration');//redirect to a route path not to a file
       console.log(error);  
     }
  });
-
-//  router.post('/furniture/:id', async (req, res) => {
-//   try {
-//     await furnitureStock.findByIdAndUpdate(req.params.id, req.body);
-//     res.redirect('/furnitureRegistered');
-//   } catch (error) {
-//     console.log(error);
-//     res.status(400).send('Unable to update furniture in the database');
-//   }
-// });
-
 
  //route for deleting furniture 
  router.post('/deletefurniture/:id', async(req,res)=>{
