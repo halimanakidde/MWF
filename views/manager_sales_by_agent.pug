@@ -4,6 +4,7 @@ html
     title Sales By Agent
     link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css")
     link(rel="stylesheet" href="/css/sales.css")
+
   body
     .container.mt-4
       h1.mb-4 Sales By Agent
@@ -18,15 +19,15 @@ html
               thead
                 tr
                   th Product
-                  th Price (UGX)
+                  th Unit Price (UGX)
                   th Quantity
-                  th Total
+                  th Total (UGX)
                   th Date
               tbody
                 each sale in grouped[agentName]
                   tr
-                    td= sale.product
-                    td #{new Intl.NumberFormat().format(sale.price)}
+                    td= sale.productName
+                    td #{new Intl.NumberFormat().format(sale.unitprice)}
                     td= sale.quantity
-                    td #{new Intl.NumberFormat().format(sale.total)}
-                    td= sale.date.toLocaleDateString()
+                    td #{new Intl.NumberFormat().format(sale.totalprice)}
+                    td= sale.date ? sale.date.toLocaleDateString() : 'N/A'

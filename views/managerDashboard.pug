@@ -8,8 +8,7 @@ html
     link(rel='stylesheet' href='css/sales.css')
     //- material icons 
     link(href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet")
-    script(src="https://cdn.jsdelivr.net/npm/apexcharts")
-    script(src="/js/salesChart.js")
+    
 
 
 body
@@ -50,6 +49,10 @@ body
             span.material-icons-outlined.me-2 point_of_sale
             | Add Furniture Sale
 
+          a(href='/messages')
+            span.material-icons-outlined.me-2 contact_mail
+            | Message List
+
           a(href='/salesReport')
             span.material-icons-outlined.me-2 bar_chart
             | Sales Report
@@ -75,102 +78,138 @@ body
             strong Manager
 
         .card-container
-          .card
+          .card.card.text-bg-warning.mb-3
+            span.material-icons-outlined.icon-display cut
             h3 Expenses on Hardwood
             p Total Expenses on Hardwood : #{new Intl.NumberFormat().format(totalHardwood.totalcost)} UGX
 
-          .card
+          .card.card.text-bg-danger.mb-3
+            span.material-icons-outlined.icon-display forest
             h3 Expenses on Softwood
             p Total Expenses on Softwood : #{new Intl.NumberFormat().format(totalSoftwood.totalcost)} UGX
 
-          .card
+          .card.card.text-bg-info.mb-3
+            span.material-icons-outlined.icon-display construction
             h3 Expenses on Timber
             p Total Expenses on Timber : #{new Intl.NumberFormat().format(totalTimber.totalcost)} UGX
 
-          .card
+          .card.card.text-bg-light.mb-3
+            span.material-icons-outlined.icon-display fence
             h3 Expenses on Poles
             p Total Expenses on Poles : #{new Intl.NumberFormat().format(totalPoles.totalcost)} UGX
 
-          .card
+          .card.card.text-bg-warning.mb-3
+            span.material-icons-outlined.icon-display payments
             h3 Total Wood Expenses
             p #{new Intl.NumberFormat().format(woodExpenses)} UGX
 
-          //- .card
-          //-   h3 Furniture Stock
-          //-   p #{new Intl.NumberFormat().format(woodExpenses)}
-          .card
+          .card.card.text-bg-dark.mb-3
+            span.material-icons-outlined.icon-display inventory_2
             h3 Total Hardwood Stock
             p #{totalHardwood.totalquantity} Pieces
-          .card
+
+          .card.card.text-bg-info.mb-3
+            span.material-icons-outlined.icon-display layers
             h3 Total Softwood Stock
             p #{totalSoftwood.totalquantity} Pieces
 
-          .card
+          .card.card.text-bg-secondary.mb-3
+            span.material-icons-outlined.icon-display stairs
             h3 Total Timber in Stock
             p #{totalTimber.totalquantity} Pieces
 
-          .card
+          .card.card.text-bg-danger.mb-3
+            span.material-icons-outlined.icon-display stairs
             h3 Total Poles in Stock
             p #{totalPoles.totalquantity} Pieces
-          .card
+
+          .card.card.text-bg-primary.mb-3
+            span.material-icons-outlined.icon-display receipt_long
             h3 Total Wood Sales
             p #{woodsales.length} Sales
 
 
-          .card
+          .card.card.text-bg-warning.mb-3
+            span.material-icons-outlined.icon-display weekend
             h3 Total Furniture Sales
             p #{furnitureSales.length} Sales
 
-          .card
+          .card.card.text-bg-info.mb-3
+            span.material-icons-outlined.icon-display trending_up
             h3 Total Wood Revenue
             p #{new Intl.NumberFormat().format(woodExpenses)} UGX
             
-          .card
+          .card.card.text-bg-light.mb-3
+            span.material-icons-outlined.icon-display table_restaurant
             h3 Total furniture Revenue
             p #{new Intl.NumberFormat().format(furnitureRevenue)} UGX
 
-          .card
+          .card.card.text-bg-warning.mb-3
+            span.material-icons-outlined.icon-display show_chart
             h3 Total Revenue
             p #{new Intl.NumberFormat().format(totalRevenue)} UGX
           
-          .card
+          .card.card.text-bg-success.mb-3
+            span.material-icons-outlined.icon-display attach_money
             h3 Total Profits
             p #{new Intl.NumberFormat().format(grossProfit)}UGX
-          
-.col-md-4
-  .card.low-stock-card(style="position: sticky; top: 20px;")
-    .card-header.bg-danger.text-white
-      h5.mb-0
-        i.fas.fa-exclamation-triangle.me-2
-        | Low Stock Alerts
+    
+                  
+        .col-md-4
+          .card.low-stock-card(style="position: sticky; top: 10px;")
+            .card-header.bg-danger.text-white
+              h5.mb-0
+                i.fas.fa-exclamation-triangle.me-2
+                | Low Stock Alerts
 
-    .card-body
-      if lowWoodstock.length > 0 || lowFurniturestock.length > 0
+            .card-body
+              if lowWoodstock.length > 0 || lowFurniturestock.length > 0
 
-        if lowWoodstock.length > 0
-          h6.text-danger Wood Stock (< 10 units):
-          ul.list-group.list-group-flush.mb-3
-            each item in lowWoodstock
-              li.list-group-item.low-item.d-flex.justify-content-between.align-items-center
-                div
-                  strong= item.woodName
-                  br
-                  small.text-muted= item.woodType
-                span.badge.bg-danger= item.quantity + ' units'
+                if lowWoodstock.length > 0
+                  h6.text-danger Wood Stock (< 10 units):
+                  ul.list-group.list-group-flush.mb-3
+                    each item in lowWoodstock
+                      li.list-group-item.low-item.d-flex.justify-content-between.align-items-center
+                        div
+                          strong= item.woodName
+                          br
+                          small.text-muted= item.woodType
+                        span.badge.bg-danger= item.quantity + ' units'
 
-        if lowFurniturestock.length > 0
-          h6.text-danger Furniture Stock (< 10 units):
-          ul.list-group.list-group-flush
-            each item in lowFurniturestock
-              li.list-group-item.low-item.d-flex.justify-content-between.align-items-center
-                div
-                  strong= item.furniturename
-                  br
-                  small.text-muted= item.woodtype
-                span.badge.bg-danger= item.quantity + ' units'
+                if lowFurniturestock.length > 0
+                  h6.text-danger Furniture Stock (< 10 units):
+                  ul.list-group.list-group-flush
+                    each item in lowFurniturestock
+                      li.list-group-item.low-item.d-flex.justify-content-between.align-items-center
+                        div
+                          strong= item.furniturename
+                          br
+                          small.text-muted= item.woodtype
+                        span.badge.bg-danger= item.quantity + ' units'
 
-      else
-        .text-center.text-success
-          i.fas.fa-check-circle.fa-3x.mb-2
-          h6 All Stock Levels Good!
-          p.text-muted No low stock alerts at this time.
+              else
+                .text-center.text-success
+                  i.fas.fa-check-circle.fa-3x.mb-2
+                  h6 All Stock Levels Good!
+                  p.text-muted No low stock alerts at this time.
+
+        .col-lg-6.col-xl-6.col-md-12 
+          .card.shadow.h-100
+            .card-header.bg-primary.text-white
+              h5.mb-0 Wood Expenses Distribution 
+            // 👇 THIS CONTAINER MUST HAVE HEIGHT/SIZE 👇
+            .card-body.d-flex.justify-content-center.align-items-center(style="min-height: 300px;")
+              canvas#expensesPieChart(width="400" height="400")
+
+script.
+  window.chartData = {
+    hardwood: #{totalHardwood.totalcost || 0},
+    softwood: #{totalSoftwood.totalcost || 0},
+    timber: #{totalTimber.totalcost || 0},
+    poles: #{totalPoles.totalcost || 0}
+  };
+  
+script(src="https://cdn.jsdelivr.net/npm/chart.js")
+script(src="/js/Charts.js")    
+script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js' integrity='sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB' crossorigin='anonymous')    
+  

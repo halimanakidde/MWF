@@ -1,0 +1,95 @@
+// Assuming this template is rendered within your main layout or contains the necessary HTML structure
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title= title || 'Customer Messages'
+    link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css')
+    // Link to Material Icons for icons
+    link(href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet")
+    // You might also want to link your main CSS file here
+    // link(rel='stylesheet' href='css/sales.css') 
+
+  body(style="background-color: #b9c2b6ff;") 
+
+    // --- Content Area ---
+    .container.py-5
+      .row
+        .col-12
+          // Title and Header
+          .d-flex.justify-content-between.align-items-center.mb-4
+            h1.text-primary.fw-bold
+              span.material-icons-outlined.me-2 mail
+              | Customer Contact Messages
+            
+            // Optional: Button to return to dashboard
+            a.btn.btn-outline-primary(href='/') 
+              span.material-icons-outlined.me-1 dashboard
+              | Dashboard
+
+          p.lead.text-muted Review communication received from customers via the contact form.
+          
+          hr.mb-5
+
+          // --- Messages List ---
+          if messages && messages.length > 0
+            h3.mb-4 Total Messages: 
+              span.badge.bg-secondary #{messages.length}
+
+            .row
+              each message in messages
+                .col-md-6.col-lg-4.mb-4
+                  // Card for each message
+                  .card.shadow-sm(class=message.isRead ? 'bg-light' : 'border-primary border-3')
+                    .card-header.d-flex.justify-content-between.align-items-center(class=message.isRead ? 'text-muted' : 'bg-primary text-white')
+                      span.fw-bold
+                        | From: #{message.fullName}
+                      
+                      // Status Badge
+                      span.badge(class=message.isRead ? 'bg-secondary' : 'bg-danger pulse')
+                        if message.isRead
+                          | Read
+                        else
+                          | New
+
+                    .card-body
+                      h6.card-subtitle.mb-2.text-muted 
+                        span.material-icons-outlined.small.me-1 email
+                        | #{message.email}
+                      
+                      p.card-text.mt-3
+                        strong Message:
+                        br
+                        | #{message.message}
+
+                    .card-footer.text-end.text-muted.small
+                      // Date formatting using JavaScript's built-in date methods (for client-side display)
+                      | Received: #{new Date(message.receivedAt).toLocaleDateString()} at #{new Date(message.receivedAt).toLocaleTimeString()}
+                      
+                      // Optional: Action button (requires a new server route to handle the update)
+                      .mt-2
+                        if !message.isRead
+                          a.btn.btn-sm.btn-outline-success(href='/manager/messages/mark-read/' + message._id) Mark as Read
+                        else
+                          span.text-success Message Archived
+
+          else
+            // No Messages State
+            .alert.alert-info.text-center.mt-5
+              h4.alert-heading No New Messages!
+              p The contact inbox is currently empty.
+              span.material-icons-outlined.text-info.display-4 check_circle
+
+    // --- Bootstrap JS ---
+    script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js')
+
+    // Optional: Simple CSS for the 'New' badge pulse effect
+    style.
+      .pulse {
+        animation: pulse-animation 1.5s infinite;
+      }
+      @keyframes pulse-animation {
+        0% { box-shadow: 0 0 0 0px rgba(220, 53, 69, 0.7); }
+        100% { box-shadow: 0 0 0 10px rgba(220, 53, 69, 0); }
+      }

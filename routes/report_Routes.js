@@ -1,70 +1,38 @@
-import express from "express";
-import Sale from "../models/sales.js";
-import User from "../models/user.js";
-import Product from "../models/product.js";
+// =====================
+// REPORT ROUTES (COMMONJS)
+// =====================
+
+const express = require("express");
+const WoodSale = require("../models/wood_sale.js");
+const FurnitureSale = require("../models/furniture_sale.js");
+const Registration = require("../models/Registration.js");
 
 const router = express.Router();
 
-//Agent Records a sale
-router.post("/", async (req, res) => {
-    try {
-        const { agentId, productId, quantity } = req.body;
-
-        const sale = await Sale.create({
-            agent: agentId,
-            product: productId,
-            quantity
-        });
-
-        res.status(201).json({ message: "Sale recorded!", sale });
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ error: "Failed to record sale" });
-    }
-});
-
-//Agent Views Their Own Sales
-router.get("/agentDashboard/:id", async (req, res) => {
-    try {
-        const agentId = req.params.id;
-
-        const sales = await Sale.find({ agent: agentId })
-            .populate("product")
-            .populate("agent");
-
-        const agent = sales[0]?.agent || await User.findById(agentId);
-
-        res.render("salesDashboard", {
-            currentUser: agent,
-            sales
-        });
-
-    } catch (error) {
-        console.log(error);
-        res.status(500).send("Failed to load agent dashboard");
-    }
-});
-
-
-//Manager Views All Sales Grouped by Agent
+// =====================
+// 1️⃣ MANAGER – ALL SALES (WOOD + FURNITURE)
+// =====================
 router.get("/manager/all", async (req, res) => {
     try {
-        const sales = await Sale.find()
-            .populate("agent")
-            .populate("product");
+        const woodSales = await WoodSale.find().populate("salesAgent");
+        const furnitureSales = await FurnitureSale.find().populate("salesAgent");
+
+        // merge all sales
+        const combined = [...woodSales, ...furnitureSales];
 
         const grouped = {};
 
-        sales.forEach(sale => {
-            const agentName = sale.agent.name;
+        combined.forEach((sale) => {
+            const agentName = sale.salesAgent ? sale.salesAgent.fullname : "Unknown Agent";
 
             if (!grouped[agentName]) grouped[agentName] = [];
 
             grouped[agentName].push({
-                product: sale.product.name,
-                price: sale.product.price,
+                category: sale.productType,
+                product: sale.productName,
+                price: sale.unitprice,
                 quantity: sale.quantity,
-                total: sale.product.price * sale.quantity,
+                total: sale.totalprice,
                 date: sale.date
             });
         });
@@ -73,23 +41,25 @@ router.get("/manager/all", async (req, res) => {
 
     } catch (err) {
         console.log(err);
-        res.status(500).send("Error loading sales by agent");
+        res.status(500).send("Error loading combined sales report");
     }
 });
 
 
-//Manager Gets Summary Totals
+// =====================
+// 2️⃣ MANAGER – SUMMARY REPORT (WOOD + FURNITURE)
+// =====================
 router.get("/manager/summary", async (req, res) => {
     try {
-        const sales = await Sale.find()
-            .populate("agent")
-            .populate("product");
+        const woodSales = await WoodSale.find().populate("salesAgent");
+        const furnitureSales = await FurnitureSale.find().populate("salesAgent");
+
+        const combined = [...woodSales, ...furnitureSales];
 
         const summary = {};
 
-        sales.forEach(s => {
-            const agent = s.agent.name;
-            const total = s.product.price * s.quantity;
+        combined.forEach((s) => {
+            const agent = s.salesAgent ? s.salesAgent.fullname : "Unknown Agent";
 
             if (!summary[agent]) {
                 summary[agent] = {
@@ -99,8 +69,8 @@ router.get("/manager/summary", async (req, res) => {
                 };
             }
 
-            summary[agent].revenue += total;
-            summary[agent].units += s.quantity;
+            summary[agent].revenue += s.totalprice || 0;
+            summary[agent].units += s.quantity || 0;
             summary[agent].salesCount += 1;
         });
 
@@ -113,8 +83,34 @@ router.get("/manager/summary", async (req, res) => {
 });
 
 
+// =====================
+// 3️⃣ AGENT – VIEW OWN SALES (WOOD + FURNITURE)
+// =====================
+router.get("/agent/:id", async (req, res) => {
+    try {
+        const agentId = req.params.id;
+
+        const woodSales = await WoodSale.find({ salesAgent: agentId });
+        const furnitureSales = await FurnitureSale.find({ salesAgent: agentId });
+
+        const agent = await Registration.findById(agentId);
+
+        const sales = [
+            ...woodSales.map((s) => ({ ...s.toObject(), type: "Wood" })),
+            ...furnitureSales.map((s) => ({ ...s.toObject(), type: "Furniture" }))
+        ];
+
+        res.render("reports/agent_sales", {
+            agent,
+            sales,
+        });
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("Error loading agent sales");
+    }
+});
 
 
-export default router;
 
-
+module.exports = router;

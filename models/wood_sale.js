@@ -1,44 +1,52 @@
 const mongoose = require('mongoose');
 
 const woodsaleSchema = new mongoose.Schema({
-    customerName:{
+    customerName: {
+        type: String,
+        required: true
+    },
+    productType: {
+        type: String,
+        required: true
+    },
+    productName: {
+        type: String,
+        required: true
+    },
+    quantity: {
+        type: Number,        
+        
+        required: true
+    },
+    quality: {
         type: String,
     },
-   productType:{
-        type: String,
-    },
-    productName:{
-        type: String,
-    },
-    quantity:{
+    unitprice: {
         type: Number,
+        required: true
     },
-    quality:{
-        type: String,
-    },
-    unitprice:{
-        type: Number,
-    },
-    date:{
+    date: {
         type: Date,
+        default: Date.now,  
     },
-     paymentType:{
+    paymentType: {
         type: String,
+        required: true
     },
-    transportprovided:{
-        type:String,
-        default: 'No',
+    transportProvided: {
+        type: String,
+        default: "No"
     },
-   salesAgent:{
+    salesAgent: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Registration'
     },
-    totalprice:{
-        type: String,
+    totalprice: {
+        type: Number,      
     },
-    notes:{
-        type: String,
+    notes: {
+        type: String
     }
 });
 
-module.exports=mongoose.model('woodSale', woodsaleSchema)
+module.exports = mongoose.model('woodSale', woodsaleSchema);

@@ -1,87 +1,154 @@
-(function(){
-  let rawData = window.salesData || null;
+// document.addEventListener('DOMContentLoaded', function() {
+    
+//     // Safety check to ensure the canvas element exists before creating the chart
+//     const canvas = document.getElementById('expensesPieChart');
+//     if (!canvas) {
+//         console.error("Canvas element 'expensesPieChart' not found.");
+//         return;
+//     }
+    
+//     // Assuming these variables are correctly passed from your Pug template:
+//     // (Pug should render these as plain numbers in the HTML output)
+//     const hardwoodCost = totalHardwood.totalcost || 0;
+//     const softwoodCost = totalSoftwood.totalcost || 0;
+//     const timberCost = totalTimber.totalcost || 0;
+//     const polesCost = totalPoles.totalcost || 0;
 
-  async function fetchData() {
-    if (rawData) return rawData;
-    try {
-      const res = await fetch('/api/sales-summary');
-      if (!res.ok) throw new Error('Failed to fetch sales data');
-      const json = await res.json();
-      return json;
-    } catch (err) {
-      console.error(err);
-      return [];
+//     const ctx = canvas.getContext('2d');
+
+//     const expensesPieChart = new Chart(ctx, {
+//         type: 'pie',
+//         data: {
+//             labels: ['Hardwood', 'Softwood', 'Timber', 'Poles'],
+//             datasets: [{
+//                 label: 'Expenses (UGX)',
+//                 data: [hardwoodCost, softwoodCost, timberCost, polesCost],
+//                 backgroundColor: [
+//                     'rgba(255, 99, 132, 0.8)',  // Red for Hardwood
+//                     'rgba(54, 162, 235, 0.8)', // Blue for Softwood
+//                     'rgba(255, 206, 86, 0.8)', // Yellow for Timber
+//                     'rgba(75, 192, 192, 0.8)'  // Green for Poles
+//                 ],
+//                 // ... (rest of the chart configuration) ...
+//             }]
+//         },
+//         options: {
+//             responsive: true,
+//             maintainAspectRatio: false, 
+//             plugins: {
+//                 // ... (legend, title, tooltip callbacks for UGX formatting) ...
+//             }
+//         }
+//     });
+// });
+
+// /js/Charts.js
+
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // Check if the global data object exists
+    if (typeof window.chartData === 'undefined') {
+        console.error("Chart data not injected from server.");
+        return;
     }
-  }
+    
+    // Read the data from the global window object
+    const hardwoodCost = window.chartData.hardwood;
+    const softwoodCost = window.chartData.softwood;
+    const timberCost = window.chartData.timber;
+    const polesCost = window.chartData.poles;
 
-  function transformForApex(data) {
-    data.sort((a,b) => new Date(a.date) - new Date(b.date));
-    const categories = data.map(d => d.date);
-    const amounts = data.map(d => Number(d.amount) || 0);
-    return { categories, amounts };
-  }
+    const canvas = document.getElementById('expensesPieChart');
+    if (!canvas) {
+        console.error("Canvas element 'expensesPieChart' not found.");
+        return;
+    }
+    
+    const ctx = canvas.getContext('2d');
 
-  function formatCurrency(value) {
-    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'UGX', maximumFractionDigits: 0 }).format(value);
-  }
+    const expensesPieChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Hardwood', 'Softwood', 'Timber', 'Poles'],
+            datasets: [{
+                label: 'Expenses (UGX)',
+                data: [hardwoodCost, softwoodCost, timberCost, polesCost],
+                backgroundColor: [
+                    'rgba(228, 14, 61, 0.8)',
+                    'rgba(15, 237, 74, 0.8)',
+                    'rgba(247, 255, 86, 0.8)',
+                    'rgba(89, 18, 175, 0.8)'
+                ],
+                borderColor: [
+                    'rgba(51, 186, 24, 1)',
+                    'rgba(18, 140, 222, 1)',
+                    'rgba(242, 78, 37, 1)',
+                    'rgba(217, 217, 23, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            // ... (rest of the options) ...
+        }
+    });
+});
 
-  async function render() {
-    const data = await fetchData();
-    const { categories, amounts } = transformForApex(data);
+// /js/Charts.js
 
-    const total = amounts.reduce((s, n) => s + n, 0);
-    const avg = amounts.length ? Math.round(total / amounts.length) : 0;
-    const summaryEl = document.getElementById('salesSummary');
-    if (summaryEl) {
-      summaryEl.innerHTML = `<strong>Total:</strong> ${formatCurrency(total)} &nbsp;·&nbsp; <strong>Avg/day:</strong> ${formatCurrency(avg)}`;
+// /js/Charts.js
+
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // ... (Data Check and Pie Chart Code remain the same) ...
+
+    // --- LINE CHART LOGIC (Updated for Weekly Sales) ---
+    const lineCanvas = document.getElementById('stockLineChart');
+    if (lineCanvas) {
+        const lineCtx = lineCanvas.getContext('2d');
+        
+        new Chart(lineCtx, {
+            type: 'line',
+            data: {
+                labels: window.chartData.revenueLabels, // Uses the new weekly labels
+                datasets: [
+                    {
+                        label: 'Wood Revenue',
+                        data: window.chartData.woodRevenueData, 
+                        borderColor: 'rgba(54, 162, 235, 1)', 
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        fill: false,
+                        tension: 0.1
+                    },
+                    {
+                        label: 'Furniture Revenue',
+                        data: window.chartData.furnitureRevenueData, 
+                        borderColor: 'rgba(255, 99, 132, 1)', 
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        fill: false,
+                        tension: 0.1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Revenue (UGX)'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Week' // Changed X-axis label from 'Month' to 'Week'
+                        }
+                    }
+                }
+            }
+        });
     }
 
-    const options = {
-      chart: {
-        type: 'line',
-        height: 320,
-        toolbar: { show: true },
-        zoom: { enabled: false },
-        animations: { enabled: true, easing: 'easeinout', speed: 400 }
-      },
-      series: [{
-        name: 'Sales',
-        data: amounts
-      }],
-      stroke: { curve: 'smooth', width: 3 },
-      markers: { size: 4, hover: { size: 7 } },
-      xaxis: {
-        categories: categories,
-        type: 'datetime',
-        labels: { rotate: -45, datetimeUTC: false, format: 'dd MMM' }
-      },
-      yaxis: {
-        labels: { formatter: val => Math.round(val).toLocaleString() },
-        tooltip: { enabled: true }
-      },
-      tooltip: {
-        shared: false,
-        x: { format: 'dd MMM yyyy' },
-        y: { formatter: val => formatCurrency(val) }
-      },
-      grid: { borderColor: '#eee', strokeDashArray: 4 },
-      colors: ['#007bff'],
-      responsive: [
-        { breakpoint: 768, options: { chart: { height: 260 }, xaxis: { labels: { rotate: -30 } } } }
-      ]
-    };
-
-    const el = document.querySelector('#salesChart');
-    if (!el) return;
-
-    if (el._apexChart) {
-      try { el._apexChart.destroy(); } catch(e) {}
-    }
-
-    const chart = new ApexCharts(el, options);
-    el._apexChart = chart;
-    chart.render();
-  }
-
-  document.addEventListener('DOMContentLoaded', render);
-})();
+}); // End of DOMContentLoaded

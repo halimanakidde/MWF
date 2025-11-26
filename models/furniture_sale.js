@@ -1,38 +1,45 @@
 const mongoose = require('mongoose');
 
 const furnituresaleSchema = new mongoose.Schema({
-    customerName:{
+    customerName: {
         type: String,
+        required: true,
     },
-    productType:{
+    productType: {
         type: String,
+        required: true,
     },
-    productName:{
+    productName: {
         type: String,
+        required: true,
     },
-    quantity:{
-        type: String,
+    quantity: {
+        type: Number,       
+        required: true,
     },
-    unitprice:{
+    unitprice: {
         type: Number,
+        required: true,
     },
-    date:{
+    date: {
         type: Date,
+        default: Date.now,  
     },
-   paymentType:{
+    paymentType: {
         type: String,
+        required: true,
     },
-   salesAgent:{
+    salesAgent: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Registration'
     },
-    transportProvided:{
+    transportProvided: {
         type: String,
+        default: "No"
     },
-    totalprice:{
-        type: Number,
-    },
-     
-}, {timestamps: true});
+    totalprice: {
+        type: Number,      
+    }
+}, { timestamps: true });
 
-module.exports=mongoose.model('furnitureSale', furnituresaleSchema)
+module.exports = mongoose.model('furnitureSale', furnituresaleSchema);

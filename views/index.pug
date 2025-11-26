@@ -28,6 +28,8 @@ nav.navbar
       a(href='#contactus') Contact
     li
       a(href='/register') SignUp
+    li
+      a(href='#gallery') Gallery
   .nav-right
     .search-box
       input(type='text' placeholder='Search...')
@@ -95,34 +97,34 @@ nav.navbar
         p.card-text A cozy retreat with style and functionality.
 // Moving cards
 .container.py-5
-  h2.text-center.mb-4
+  h2.text-center.mb-4#gallery
     b Trending Furniture
   .scroll-wrapper
     .card-container
       .card
         img(src='./images/Doors/front_door.webp' alt='Sofa')
         .card-body
-          h5.card-title Modern Sofa
+          h5.card-title ModernDoor
           p.card-text Luxury and comfort for your home.
       .card
         img(src='./images/Office/officereception.jpg' alt='Table')
         .card-body
-          h5.card-title Wooden Table
+          h5.card-title Wooden Reception Table
           p.card-text Timeless design for every space.
       .card
         img(src='./images/Sofas/sofa1.webp' alt='Chair')
         .card-body
-          h5.card-title Comfort Chair
+          h5.card-title Comfort Sofa
           p.card-text Sit back in style.
       .card
         img(src='./images/Tables/table1.jpeg' alt='Bedroom')
         .card-body
-          h5.card-title Bedroom Set
+          h5.card-title Unique Tables
           p.card-text Elegant and cozy designs.
       .card
         img(src='./images/wardrobe/wardrobe.jpg' alt='Bedroom')
         .card-body
-          h5.card-title Bedroom Set
+          h5.card-title wardrobe Designs
           p.card-text Elegant and cozy designs.
       .card
         img(src='./images/Beds/crib.jpg' alt='Bedroom')
@@ -145,23 +147,23 @@ nav.navbar
       .card
         img(src='./images/Dinning/kitchen1.jpg' alt='Bedroom')
         .card-body
-          h5.card-title Bedroom Set
+          h5.card-title Dinning Set
           p.card-text Elegant and cozy designs.
       // Repeat cards to ensure smooth scrolling
       .card
         img(src='./images/Beds/babybed.jpg' alt='Sofa')
         .card-body
-          h5.card-title Modern Sofa
+          h5.card-title Modern Beds
           p.card-text Luxury and comfort for your home.
       .card
         img(src='./images/Doors/front_door.webp' alt='Sofa')
         .card-body
-          h5.card-title Modern Sofa
+          h5.card-title Modern Front Door
           p.card-text Luxury and comfort for your home.
       .card
         img(src='./images/Beds/decker.webp' alt='Sofa')
         .card-body
-          h5.card-title Modern Sofa
+          h5.card-title Modern Decker
           p.card-text Luxury and comfort for your home.
 .services-h2
   h2#services
@@ -304,13 +306,13 @@ section.contact-section
     .contact-form
       h3 Send Us a Message
       form(action="/sendMessage" method="POST")
-      label(for='name') Full Name
-      input#fullName(type='text' name='fullName' placeholder='Enter your name' required='')
-      label(for='email') Email
-      input#email(type='email' name='email' placeholder='Enter your email' required='')
-      label(for='message') Message
-      textarea#message(name='message' rows='5' placeholder='Type your message here' required='')
-      button.btn(type='submit') Send Message
+        label(for='name') Full Name
+        input#fullName(type='text' name='fullName' placeholder='Enter your name' required='')
+        label(for='email') Email
+        input#email(type='email' name='email' placeholder='Enter your email' required='')
+        label(for='message') Message
+        textarea#message(name='message' rows='5' placeholder='Type your message here' required='')
+        button.btn(type='submit') Send Message
 footer
   .footer-content
     .footer-section.about

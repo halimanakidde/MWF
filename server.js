@@ -3,6 +3,7 @@ const express = require('express');//importing dependency
 const path = require('path');//importing path module
 const mongoose = require ('mongoose');
 const passport = require('passport');/*  PASSPORT SETUP  */
+const flash = require('connect-flash');
 const expressSession = require('express-session')({
     secret:"my secret",
     resave: false,
@@ -21,11 +22,19 @@ const salesRoutes=require('./routes/sales_Routes');
 const messagesRoutes=require('./routes/messages_Routes');
 const reportRoutes=require('./routes/report_Routes');
 
+
+
 //2. instantiations
 const app=express();//creating an express application
 const port=3000;
 
+//express session configs
+app.use(expressSession);
+app.use(passport.initialize());
+app.use(passport.session());
+
 //3. configurations
+
 //setting up database connection
 mongoose.connect(process.env.MONGO_URI);
 mongoose.connection
@@ -45,17 +54,15 @@ app.use(express.urlencoded({extended: true}));//middleware to parse urlencoded r
 app.use(express.static(path.join(__dirname, "public")));
 app.use('/public/images/uploads', express.static(__dirname + '/public/images/uploads'));
 
-// app.use(flash());
-// app.use((req,res,next)=>{
-//     res.locals.successMessage = req.flash('successMessage');
-//     res.locals.errorMessage = req.flash('errorMessage')
-//     next();
-// })
+app.use(flash());
 
-//express session configs
-app.use(expressSession);
-app.use(passport.initialize());
-app.use(passport.session());
+app.use((req, res, next) => {
+    res.locals.success = req.flash('success');
+    res.locals.error = req.flash('error');
+    next();
+});
+
+
 
 //passport configurations
 passport.use(Registration.createStrategy());

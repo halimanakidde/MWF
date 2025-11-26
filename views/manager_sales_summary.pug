@@ -3,6 +3,7 @@ html
   head
     title Sales Summary
     link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css")
+
   body
     .container.mt-4
       h1.mb-4 Sales Summary by Agent
@@ -13,11 +14,11 @@ html
             th Agent
             th Total Revenue (UGX)
             th Total Units Sold
-            th Total Sales
+            th Total Sales Count
         tbody
-          each agent, data in summary
+          each agent, row in summary
             tr
               td= agent
-              td #{new Intl.NumberFormat().format(summary[agent].revenue)}
-              td= summary[agent].units
-              td= summary[agent].salesCount
+              td #{new Intl.NumberFormat().format(row.revenue)}
+              td= row.units
+              td= row.salesCount
