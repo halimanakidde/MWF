@@ -115,30 +115,6 @@ router.post("/recordwoodSale", async (req, res) => {
     res.status(500).send("Unable to save wood sale");
   }
 });
-// router.get("/salesReport", async (req, res) => {
-//   try {
-//     const sales = await woodSale.find().sort({ createdAt: -1 });
-    
-
-//      const totalRevenue = sales.reduce((sum, s) => {
-//       return sum + Number(s.totalprice || 0);
-//     }, 0);
-
-//     const totalSales = sales.reduce((sum, s) => {
-//       return sum + Number(s.quantity || 0);
-//     }, 0);
-
-//     res.render("sales_report", {
-//       sales,
-//       totalRevenue,
-//       totalSales
-//     });
-
-//   } catch (error) {
-//     console.log("SALES REPORT ERROR:", error.message);
-//     res.status(500).send("Could not generate sales report");
-//   }
-// });
 
 
  //route for furniture sales
@@ -216,31 +192,28 @@ router.get("/recordfurnitureSale", async (req,res)=>{
    }
  });
 
- // Route that displays furniture and wood sales
+ // Route that displays sales report for furniture and wood sales
 router.get("/salesReport", async (req, res) => {
   try {
-    // 1. Fetch sales from both models concurrently
+    // Fetch sales from both models concurrently
     const [furnitureSales, woodSales] = await Promise.all([
       furnitureSale.find(),
       woodSale.find(),
     ]);
 
-    // 2. Combine the sales records
-    // Use the spread operator to merge the two arrays
-    let allSales = [...furnitureSales, ...woodSales];
+    // Combine the sales records
     
-    // 3. Sort the combined list by creation date (descending)
+    let allSales = [...furnitureSales, ...woodSales]; // spread operator to merge the two arrays
+  
     allSales.sort((a, b) => b.createdAt - a.createdAt);
 
-    // 4. Recalculate Totals using the combined list
+    // Recalculate Totals using the combined list
     const totalRevenue = allSales.reduce((sum, s) => {
-      // Ensure totalprice is a number before summing
-      return sum + Number(s.totalprice || 0);
+      return sum + Number(s.totalprice || 0);// Ensure totalprice is a number before summing
     }, 0);
 
     const totalSales = allSales.reduce((sum, s) => {
-      // Ensure quantity is a number before summing
-      return sum + Number(s.quantity || 0);
+      return sum + Number(s.quantity || 0);   // Ensure quantity is a number before summing
     }, 0);
 
     res.render("sales_report", {
@@ -293,20 +266,6 @@ router.post("/order", async (req, res) => {
     res.status(500).send("Failed to submit order");
   }
 });
-
-
-
-//loads the orders and sends them to the dashboard page
-// router.get("/viewsales", async (req, res) => {
-//   try {
-//     const orders = await Order.find().sort({ createdAt: -1 });
-
-//     res.render("salesDashboard", { orders });
-//   } catch (err) {
-//     console.log(err.message);
-//     res.status(500).send("Failed to load dashboard");
-//   }
-// });
 
 
 

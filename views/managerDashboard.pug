@@ -57,13 +57,10 @@ body
             span.material-icons-outlined.me-2 bar_chart
             | Sales Report
 
-          a(href='/manager/all')
-            span.material-icons-outlined.me-2 bar_chart
-            | Sales By Agent
+          a(href='/salesexecutives')
+            span.material-icons-outlined people
+            | Sales Executives
 
-          a(href='/manager/summary')
-            span.material-icons-outlined.me-2 bar_chart
-            | Sales Summary
 
           a(href='/logout')
             button.login-btn Logout   
@@ -105,15 +102,16 @@ body
 
         .col-lg-6.col-xl-6.col-md-12 
           .card.shadow.h-100
-            .card-header.bg-primary.text-white
+            .card-header.bg-danger.text-white
               h5.mb-0 Wood Expenses Distribution 
 
             //-  THIS CONTAINER MUST HAVE HEIGHT/SIZE 
             .card-body.d-flex.justify-content-center.align-items-center(style="min-height: 300px;")
               canvas#expensesPieChart(width="400" height="400")
+          
 
         .card-container
-          .card.card.text-bg-dark.mb-3
+          .card.card.text-bg-warning.mb-3
             span.material-icons-outlined.icon-display inventory_2
             h3 Total Hardwood Stock
             p #{totalHardwood.totalquantity} Pieces
@@ -123,7 +121,7 @@ body
             h3 Total Softwood Stock
             p #{totalSoftwood.totalquantity} Pieces
 
-          .card.card.text-bg-secondary.mb-3
+          .card.card.text-bg-primary.mb-3
             span.material-icons-outlined.icon-display stairs
             h3 Total Timber in Stock
             p #{totalTimber.totalquantity} Pieces
@@ -132,6 +130,45 @@ body
             span.material-icons-outlined.icon-display stairs
             h3 Total Poles in Stock
             p #{totalPoles.totalquantity} Pieces
+
+        .col-md-4
+        .card.low-stock-card(style="position: sticky; top: 10px;")
+          .card-header.bg-danger.text-white
+            h5.mb-0
+              i.fas.fa-exclamation-triangle.me-2
+              | Low Stock Alerts
+
+          .card-body
+            if lowWoodstock.length > 0 || lowFurniturestock.length > 0
+
+              if lowWoodstock.length > 0
+                h6.text-danger Wood Stock (< 10 units):
+                ul.list-group.list-group-flush.mb-3
+                  each item in lowWoodstock
+                    li.list-group-item.low-item.d-flex.justify-content-between.align-items-center
+                      div
+                        strong= item.woodName
+                        br
+                        small.text-muted= item.woodType
+                      span.badge.bg-danger= item.quantity + ' units'
+
+              if lowFurniturestock.length > 0
+                h6.text-danger Furniture Stock (< 10 units):
+                ul.list-group.list-group-flush
+                  each item in lowFurniturestock
+                    li.list-group-item.low-item.d-flex.justify-content-between.align-items-center
+                      div
+                        strong= item.furniturename
+                        br
+                        small.text-muted= item.woodtype
+                      span.badge.bg-danger= item.quantity + ' units'
+
+            else
+              .text-center.text-success
+                i.fas.fa-check-circle.fa-3x.mb-2
+                h6 All Stock Levels Good!
+                p.text-muted No low stock alerts at this time.
+
 
         .card-container
           .card.card.text-bg-primary.mb-3
@@ -161,50 +198,13 @@ body
             h3 Total Revenue
             p #{new Intl.NumberFormat().format(totalRevenue)} UGX
           
-          .card.card.text-bg-success.mb-3
+          .card.card.text-bg-light.mb-3
             span.material-icons-outlined.icon-display attach_money
             h3 Total Profits
             p #{new Intl.NumberFormat().format(grossProfit)}UGX
     
         .card-container              
-        .col-md-4
-          .card.low-stock-card(style="position: sticky; top: 10px;")
-            .card-header.bg-danger.text-white
-              h5.mb-0
-                i.fas.fa-exclamation-triangle.me-2
-                | Low Stock Alerts
-
-            .card-body
-              if lowWoodstock.length > 0 || lowFurniturestock.length > 0
-
-                if lowWoodstock.length > 0
-                  h6.text-danger Wood Stock (< 10 units):
-                  ul.list-group.list-group-flush.mb-3
-                    each item in lowWoodstock
-                      li.list-group-item.low-item.d-flex.justify-content-between.align-items-center
-                        div
-                          strong= item.woodName
-                          br
-                          small.text-muted= item.woodType
-                        span.badge.bg-danger= item.quantity + ' units'
-
-                if lowFurniturestock.length > 0
-                  h6.text-danger Furniture Stock (< 10 units):
-                  ul.list-group.list-group-flush
-                    each item in lowFurniturestock
-                      li.list-group-item.low-item.d-flex.justify-content-between.align-items-center
-                        div
-                          strong= item.furniturename
-                          br
-                          small.text-muted= item.woodtype
-                        span.badge.bg-danger= item.quantity + ' units'
-
-              else
-                .text-center.text-success
-                  i.fas.fa-check-circle.fa-3x.mb-2
-                  h6 All Stock Levels Good!
-                  p.text-muted No low stock alerts at this time.
-
+        
       
 
 script.

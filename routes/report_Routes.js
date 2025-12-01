@@ -1,137 +1,65 @@
-// =====================
-// REPORT ROUTES (COMMONJS)
-// =====================
-
 const express = require("express");
 const WoodSale = require("../models/wood_sale.js");
 const FurnitureSale = require("../models/furniture_sale.js");
 const Registration = require("../models/Registration.js");
+const PDFDocument = require("pdfkit");
 
 const router = express.Router();
 
-// =====================
-// 1️⃣ MANAGER – ALL SALES (WOOD + FURNITURE)
-// =====================
-router.get("/manager/all", async (req, res) => {
-    try {
-        const woodSales = await WoodSale.find().populate("salesAgent");
-        const furnitureSales = await FurnitureSale.find().populate("salesAgent");
+// ROUTE FOR PDF DOWNLOAD OF SALES REPORT
+router.get("/download/sales-pdf", async (req, res) => {
+  try {
+    const doc = new PDFDocument();
 
-        // merge all sales
-        const combined = [...woodSales, ...furnitureSales];
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader("Content-Disposition", "attachment; filename=sales_report.pdf");
 
-        const grouped = {};
+    doc.pipe(res);
 
-        combined.forEach((sale) => {
-            const agentName = sale.salesAgent ? sale.salesAgent.fullname : "Unknown Agent";
+    doc.fontSize(20).text("Combined Sales Report", { underline: true });
+    doc.moveDown();
 
-            if (!grouped[agentName]) grouped[agentName] = [];
+    // Loading sales from sales models
+    const sources = [
+      WoodSale.find().populate("salesAgent"),
+      FurnitureSale.find().populate("salesAgent"),
+    ];
 
-            grouped[agentName].push({
-                category: sale.productType,
-                product: sale.productName,
-                price: sale.unitprice,
-                quantity: sale.quantity,
-                total: sale.totalprice,
-                date: sale.date
-            });
-        });
+    // Running all queries at the same time
+    const results = await Promise.all(sources);
 
-        res.render("manager_sales_by_agent", { grouped });
+    // 3. Combine everything
+    let allSales = results.flat();
 
-    } catch (err) {
-        console.log(err);
-        res.status(500).send("Error loading combined sales report");
-    }
+    // 4. Sort newest first
+    allSales.sort((a, b) => b.createdAt - a.createdAt);
+
+    // 5. Write each entry to PDF
+    allSales.forEach(s => {
+      doc.fontSize(12).text(`Agent: ${s.salesAgent?.fullname || "N/A"}`);
+      doc.text(`Product: ${s.productName || s.product || "N/A"}`);
+      doc.text(`Unit Price: ${s.unitprice || 0}`);
+      doc.text(`Quantity: ${s.quantity || 0}`);
+      doc.text(`Total: ${s.totalprice || 0}`);
+      doc.text(`Date: ${s.date ? s.date.toLocaleDateString() : "N/A"}`);
+      doc.text(`Sale Type: ${s.constructor.modelName}`); // shows which model it came from
+      doc.moveDown();
+    });
+
+    doc.end();
+
+    doc.on("finish", () => res.end());
+    doc.on("error", (error) => {
+      console.error(error);
+      res.status(500).send("PDF generation error");
+    });
+
+  } catch (error) {
+    console.log("PDF ERROR:", error.message);
+    res.status(500).send("Could not download PDF");
+  }
 });
 
-
-// =====================
-// 2️⃣ MANAGER – SUMMARY REPORT (WOOD + FURNITURE)
-// =====================
-router.get("/manager/summary", async (req, res) => {
-    try {
-        const woodSales = await WoodSale.find().populate("salesAgent");
-        const furnitureSales = await FurnitureSale.find().populate("salesAgent");
-
-        const combined = [...woodSales, ...furnitureSales];
-
-        const summary = {};
-
-        combined.forEach((s) => {
-            const agent = s.salesAgent ? s.salesAgent.fullname : "Unknown Agent";
-
-            if (!summary[agent]) {
-                summary[agent] = {
-                    revenue: 0,
-                    units: 0,
-                    salesCount: 0
-                };
-            }
-
-            summary[agent].revenue += s.totalprice || 0;
-            summary[agent].units += s.quantity || 0;
-            summary[agent].salesCount += 1;
-        });
-
-        res.render("manager_sales_summary", { summary });
-
-    } catch (err) {
-        console.log(err);
-        res.status(500).send("Error loading summary");
-    }
-});
-
-
-// =====================
-// 3️⃣ AGENT – VIEW OWN SALES (WOOD + FURNITURE)
-// =====================
-// router.get("/agent/:id", async (req, res) => {
-//     try {
-//         const agentId = req.params.id;
-
-//         const woodSales = await WoodSale.find({ salesAgent: agentId });
-//         const furnitureSales = await FurnitureSale.find({ salesAgent: agentId });
-
-//         const agent = await Registration.findById(agentId);
-
-//         const sales = [
-//             ...woodSales.map((s) => ({ ...s.toObject(), type: "Wood" })),
-//             ...furnitureSales.map((s) => ({ ...s.toObject(), type: "Furniture" }))
-//         ];
-
-//         res.render("reports/agent_sales", {
-//             agent,
-//             sales,
-//         });
-
-//     } catch (err) {
-//         console.log(err);
-//         res.status(500).send("Error loading agent sales");
-//     }
-// });
-router.get("/agent/:id", async (req, res) => {
-    try {
-        // ... fetching woodSales and furnitureSales ...
-
-        const sales = [
-            // Fix 1: For Wood Sales, use 'woodName' or similar field and map it to 'productName'
-            ...woodSales.map((s) => ({ 
-                ...s.toObject(), 
-                productName: s.woodName || 'N/A Wood Product', // Assuming WoodSale uses woodName
-                type: "Wood" 
-            })),
-            // Fix 2: For Furniture Sales, it's safer to map it even if the key is the same
-            ...furnitureSales.map((s) => ({ 
-                ...s.toObject(), 
-                productName: s.productName || 'N/A Furniture Product',
-                type: "Furniture" 
-            }))
-        ];
-
-        // ... rest of the code ...
-    } catch (err) { /* ... */ }
-});
 
 
 

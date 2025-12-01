@@ -25,10 +25,9 @@ html
           li.nav-item
             a.nav-link(href='/recordwoodSale') Add Wood Sale  |
           li.nav-item
-            a.nav-link(href='/userRegister') User Register  |
+            a.btn.btn-danger(href="/download/sales-pdf") Download PDF Report  |
           li.nav-item
-            a.nav-link(href='/logout')
-              button.login-btn Logout
+            a.btn.btn-danger(href='/logout') Logout
 
   h2.text-center.mb-4.text-primary  Sales Report
 
@@ -51,6 +50,7 @@ html
           th Qty
           th Unit Price
           th Total
+          th Sales Agent
         
 
       tbody
@@ -61,4 +61,5 @@ html
             td= sale.quantity
             td #{new Intl.NumberFormat().format(sale.unitprice)}
             td #{new Intl.NumberFormat().format(sale.totalprice)}
+            td= sale.salesAgent
           

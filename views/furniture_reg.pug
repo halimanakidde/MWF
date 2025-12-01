@@ -7,79 +7,79 @@ head
    //- material icons 
   link(href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet")
 .sidebar
-  h2 MAYONDO INVENTORY MANAGEMENT SYSTEM
-  a.btn.btn-outline-danger(href='/viewboard') 
-    span.material-icons-outlined.me-1 dashboard
-    | Dashboard
-    
-  a(href='/')
-    span.material-icons-outlined.me-2 home
-    | Home
+    h2 MAYONDO INVENTORY MANAGEMENT SYSTEM
+    a(href='/viewboard') 
+      span.material-icons-outlined.me-1 dashboard
+      | Dashboard
+      
+    a(href='/')
+      span.material-icons-outlined.me-2 home
+      | Home
 
-  a(href='/salesReport')
-    span.material-icons-outlined.me-2 bar_chart
-    | Sales Report
+    a(href='/salesReport')
+      span.material-icons-outlined.me-2 bar_chart
+      | Sales Report
 
-  a(href='/furnitureRegistered')
-    span.material-icons-outlined.me-2 view_list
-    | View Furniture Stock
+    a(href='/furnitureRegistered')
+      span.material-icons-outlined.me-2 view_list
+      | View Furniture Stock
 
-  a(href='/woodRegistered')
-    span.material-icons-outlined.me-2 inventory_2
-    | View Wood Stock
+    a(href='/woodRegistered')
+      span.material-icons-outlined.me-2 inventory_2
+      | View Wood Stock
 
-  a(href='/recordfurnitureSale')
-    span.material-icons-outlined.me-2 point_of_sale
-    | Add Furniture Sale
+    a(href='/recordfurnitureSale')
+      span.material-icons-outlined.me-2 point_of_sale
+      | Add Furniture Sale
 
-  a(href='/recordwoodSale')
-    span.material-icons-outlined.me-2 shopping_cart
-    | Add Wood Sale
-  a(href='/logout')
-    button.login-btn Login 
-  a(href='/logout')
-    button.logout-btn Logout 
-div.video-background
-  video(autoplay muted loop playsinline)
-    source(src="/videos/navvideo.mp4" type="video/mp4")
-form#furnitureForm(action='/furnitureRegistration' method='post' enctype='multipart/form-data')
-  h2 Furniture Stock Registration
-  label(for='itemName') Furniture Name
-  input#itemName(type='text' name='furniturename' placeholder='e.g., Console Table')
-  #itemNameError.error
-  label(for='itemName') Furniture Image
-  input#image(type='file' name='furnitureimage' placeholder='upload image')
+    a(href='/recordwoodSale')
+      span.material-icons-outlined.me-2 shopping_cart
+      | Add Wood Sale
+    a(href='/logout')
+      button.login-btn Login 
+    a(href='/logout')
+      button.logout-btn Logout 
+
+form#furnitureForm(action='/furnitureRegistration' method='post')
+        h2 Furniture Stock Registration
         
-  label(for='category') Furniture Category
-  select#category(name='category')
-    option(value='') -- Select Category --
-    option(value='Office') Office Furniture
-    option(value='Home') Home Furniture
-    option(value='Outdoor') Outdoor Furniture
-    option(value='Custom') Custom Orders
-  #categoryError.error
+        label(for='itemName') Furniture Name
+        input#itemName(type='text' name='furniturename' placeholder='e.g., Console Table')
+        #itemNameError.error
 
-  label(for='material') Wood Type / Material
-  select#material(name='material')
-    option(value='') -- Select Material --
-    option(value='Mahogany') Mahogany
-    option(value='Muvule') Muvule
-    option(value='Teak') Teak
-    option(value='Pine') Pine
-    option(value='Metal') Metal Frame
-    option(value='Glass') Glass / Mixed
-  #materialError.error
+        label(for='itemName') Furniture Image
+        input#image(type='file' name='furnitureimage' placeholder='upload image')
+              
+        label(for='category') Furniture Category
+        select#category(name='category')
+          option(value='') -- Select Category --
+          option(value='Office') Office Furniture
+          option(value='Home') Home Furniture
+          option(value='Outdoor') Outdoor Furniture
+          option(value='Custom') Custom Orders
+        #categoryError.error
 
-  label(for='quantity') Quantity
-  input#quantity(type='number' name='quantity' min='1')
-  #quantityError.error
+        label(for='material') Wood Type / Material
+        select#material(name='material')
+          option(value='') -- Select Material --
+          option(value='Mahogany') Mahogany
+          option(value='Muvule') Muvule
+          option(value='Teak') Teak
+          option(value='Pine') Pine
+          option(value='Metal') Metal Frame
+          option(value='Glass') Glass / Mixed
+        #materialError.error
 
-  label(for='price') Unit Price (UGX)
-  input#price(type='number' name='unitprice' min='1')
-  #priceError.error
+        label(for='quantity') Quantity
+        input#quantity(type='number' name='quantity' min='1')
+        #quantityError.error
 
-  label(for='date') Date Produced
-  input#productionDate(type='date' name='date')
-  #dateError.error
+        label(for='price') Unit Price (UGX)
+        input#price(type='number' name='unitprice' min='1')
+        #priceError.error
 
-  button(type='submit') Register
+        label(for='date') Date Produced
+        input#productionDate(type='date' name='date')
+        #dateError.error
+
+        button(type='submit') Register

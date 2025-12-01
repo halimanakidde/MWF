@@ -10,7 +10,7 @@ html
     link(href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet")
     link(rel="stylesheet", href="/css/tables.css")
 
-  body(style="background-color: #b9c2b6ff;") 
+  body(style="background-color: #f6f9faff;") 
     nav.navbar.navbar-expand-lg.navbar-custom
       .container-fluid
         a.navbar-brand(href='/') MAYONDO INVENTORY MANAGEMENT SYSTEM
@@ -29,8 +29,6 @@ html
             li.nav-item
               a.nav-link(href='/recordwoodSale') Add Wood Sale  |
             li.nav-item
-              a.nav-link(href='/userRegister') User Register  |
-            li.nav-item
               a.nav-link(href='/logout')
                 button.login-btn Logout
 
@@ -40,7 +38,6 @@ html
           
           .d-flex.justify-content-between.align-items-center.mb-4
             h1.text-dark.fw-bold
-              span.material-icons-outlined.me-2 mail
               | Customer Contact Messages
             
             a.btn.btn-outline-danger(href='/viewboard') 
@@ -96,11 +93,14 @@ html
                           span.text-success.small Archived
                           
           else
-              //-  No Messages State
-          .alert.alert-info.text-center.mt-5
-              h4.alert-heading No New Messages!
-              p The contact inbox is currently empty.
-              span.material-icons-outlined.text-info.display-4 check_circle
+          //-     //-  No Messages State
+          //- .alert.alert-info.text-center.mt-5
+          //-     h4.alert-heading No New Messages!
+          //-     p The contact inbox is currently empty.
+          //-     span.material-icons-outlined.text-info.display-4 check_circle
+
+
+              
 
    
-    script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js')
+script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js')

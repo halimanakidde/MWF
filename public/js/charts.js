@@ -1,11 +1,5 @@
-// /js/Charts.js (Consolidated and Corrected)
-
 document.addEventListener('DOMContentLoaded', function() {
     
-    // --- 1. DATA SETUP & CHECK ---
-    // If you are using an embedded script in PUG to set a global variable:
-    // This section assumes the data object is attached to the window object 
-    // by a previous script block in the PUG file.
     if (typeof window.chartData === 'undefined') {
         console.error("Chart data (window.chartData) not fully injected from server.");
         // We will assume woodChartData is set in a separate variable if not part of window.chartData

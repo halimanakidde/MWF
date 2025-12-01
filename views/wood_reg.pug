@@ -8,6 +8,10 @@ head
     link(href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet")
 .sidebar
     h2 MAYONDO INVENTORY MANAGEMENT SYSTEM
+    a(href='/viewboard') 
+      span.material-icons-outlined.me-1 dashboard
+      | Dashboard
+
     a(href='/')
       span.material-icons-outlined.me-2 home
       | Home
@@ -72,8 +76,7 @@ form#woodForm(action='/woodRegistration' method='post')
           option(value='') -- Select Quality--
           option(value='firstgrade') first grade
           option(value='Mediumgrade') Medium grade
-        //- label(for='image') Wood Image
-        //- input#image(type='file' name='woodimage' placeholder='upload image')
+        
         label(for='date') Date
         input#date(type='date' name='date' required='')
 

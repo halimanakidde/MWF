@@ -8,6 +8,19 @@ html
     link(rel="stylesheet" href="css/tables.css")
      
   body
+    nav.navbar.navbar-expand-lg.navbar-custom
+      .container-fluid
+        a.navbar-brand(href='/') MAYONDO WOOD AND FURNITURE
+        button.navbar-toggler(type='button', data-bs-toggle='collapse', data-bs-target='#navbarNav', aria-controls='navbarNav', aria-expanded='false', aria-label='Toggle navigation')
+          span.navbar-toggler-icon
+        #navbarNav.collapse.navbar-collapse
+          ul.navbar-nav.ms-auto
+            li.nav-item
+              a.nav-link(href='/') Home  |
+            li.nav-item
+              a.nav-link(href='/gallery') Gallery |
+            li.nav-item
+              a.nav-link(href='/#contactus') Get In Touch  |
     .container
       .order-card
         h2.text-center Make an Order
@@ -33,4 +46,4 @@ html
             label.form-label(for="notes") Additional Notes (Optional)
             textarea.form-control(name="notes" rows="3")
 
-          button.btn.btn-danger.w-100.btn-lg(type="submit") Submit Order
+          button.btn.btn-secondary.w-100.btn-lg(type="submit") Submit Order

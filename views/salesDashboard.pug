@@ -38,8 +38,8 @@ body
 .main-content
       .topbar
       h1 Sales Executive Dashboard
-      p Welcome,
-        span#username= (currentUser && currentUser.fullname) || "Sales Executive"
+      p.text-dark.fw-bold Welcome,
+        span#username.text-warning.fw-bold= (currentUser && currentUser.fullname) || "Sales Executive"
 
         //-  ORDERS SECTION
 

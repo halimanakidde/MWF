@@ -19,6 +19,7 @@
     "multer": "^2.0.2",
     "passport": "^0.7.0",
     "passport-local-mongoose": "^8.0.0",
+    "pdfkit": "^0.17.2",
     "pug": "^3.0.3",
     "session": "^0.1.0"
   },

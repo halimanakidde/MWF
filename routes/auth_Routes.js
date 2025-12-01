@@ -10,6 +10,7 @@ const furnitureSale=require('../models/furniture_sale');
 const WoodStock = require("../models/wood_stock");
 const Order=require("../models/order")
 
+
 router.get('/register', (req, res) => {
     res.render('signup')//rendering signup.pug file
 });
@@ -77,6 +78,7 @@ router.get("/users", async(req,res)=>{
     }
 });
 
+//MANAGER DASHBOARD ROUTE
  router.get('/viewboard', async (req,res)=>{
     try {
       //expenses for buying wood stock  
@@ -135,7 +137,7 @@ const furnitureRevenue = furnitureSales.reduce((sum, sale) => {
 
 const totalRevenue = woodRevenue + furnitureRevenue;
 
-//calculate expenses (prevent NaN)
+//calculate expenses 
 const woodExpenses = woodstocks.reduce((sum, stock) => {
   return sum + ((Number(stock.unitprice) || 0) * (Number(stock.quantity) || 0));
 }, 0);
@@ -169,13 +171,13 @@ const lowFurniturestock = furnitureStocks.filter(stock => Number(stock.quantity)
         }
  });
 
- //SALES 
+ //SALES EXECUTIVE DASHBOARD ROUTE
 router.get("/viewsales", async (req, res) => {
     try {
-        // --- 1. Fetch Orders Data ---
+        //  Fetching Orders Data 
         const orders = await Order.find().sort({ createdAt: -1 });
 
-        // --- 2. Fetch Aggregated Wood Stock Data ---
+        // Fetch Aggregated Wood Stock Data 
         const aggregatedStock = await WoodStock.aggregate([
             {
                 $group: {
@@ -185,7 +187,7 @@ router.get("/viewsales", async (req, res) => {
             }
         ]);
 
-        // --- 3. Format Chart Data ---
+        // Formating pie Chart
         const categories = ['softwood', 'hardwood', 'poles', 'timber'];
         
         const woodChartData = {
@@ -196,7 +198,7 @@ router.get("/viewsales", async (req, res) => {
             })
         };
 
-        // --- 4. Render Final Response ---
+        
         // Combine all necessary data into a single object for the view.
         res.render("salesDashboard", {
             orders: orders,            // For the Recent Orders table
@@ -204,14 +206,14 @@ router.get("/viewsales", async (req, res) => {
             currentUser: req.user      // For the "Welcome, [Name]" display
         });
 
-    } catch (err) {
+    } catch (error) {
         // Ensure you return here to prevent further execution
-        console.error("Error fetching dashboard data:", err);
+        console.error("Error fetching dashboard data:", error);
         return res.status(500).send("Failed to load dashboard data.");
     }
 });
    
-
+// sales executive route for FETCHING DATA FOR LOGGED IN SALES AGENT
 router.get("/viewsales", async (req, res) => {
     try {
         if (!req.user || !req.user._id) {
@@ -219,7 +221,7 @@ router.get("/viewsales", async (req, res) => {
         }
         const agentId = req.user._id;
 
-        // --- 1. Fetch Agent's Sales Records ---
+        //  Fetch sales Agent's Sales Records 
         // Find sales where the agentId matches the logged-in user's ID
         const sales = await SaleRecord.find({ agentId: agentId })
             .sort({ date: -1 })
@@ -242,14 +244,13 @@ router.get("/viewsales", async (req, res) => {
             })
         };
 
-        // --- 4. Render Final Response ---
+        
         res.render("salesDashboard", {
-            // New Data Point for the Sales Records Table
-            sales: sales,             
-            // Existing Data Points
-            orders: orders,            
-            woodChartData: woodChartData, 
-            currentUser: req.user      
+            
+            sales: sales,  // Sales Records Table            
+            orders: orders, //orders table           
+            woodChartData: woodChartData, //chart
+            currentUser: req.user   // logged in agent   
         });
 
     } catch (error) {
@@ -257,10 +258,18 @@ router.get("/viewsales", async (req, res) => {
         return res.status(500).send("Failed to load dashboard data.");
     }
 });
-//    } catch (err) {
-//      console.log(err.message);
-//      res.status(500).send("Failed to load dashboard");
-//    }
-//  });
+
+// ROUTE for fetching SALES EXECUTIVES
+router.get("/salesexecutives", async (req, res) => {
+  try {
+    const salesExecutives = await Registration.find({ role: "salesexecutive" });
+
+    res.render("sales_executives", { salesExecutives });
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send("Failed to load sales executives");
+  }
+});
+
 module.exports=router;
 
