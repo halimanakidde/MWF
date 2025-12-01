@@ -86,29 +86,51 @@ router.get("/manager/summary", async (req, res) => {
 // =====================
 // 3️⃣ AGENT – VIEW OWN SALES (WOOD + FURNITURE)
 // =====================
+// router.get("/agent/:id", async (req, res) => {
+//     try {
+//         const agentId = req.params.id;
+
+//         const woodSales = await WoodSale.find({ salesAgent: agentId });
+//         const furnitureSales = await FurnitureSale.find({ salesAgent: agentId });
+
+//         const agent = await Registration.findById(agentId);
+
+//         const sales = [
+//             ...woodSales.map((s) => ({ ...s.toObject(), type: "Wood" })),
+//             ...furnitureSales.map((s) => ({ ...s.toObject(), type: "Furniture" }))
+//         ];
+
+//         res.render("reports/agent_sales", {
+//             agent,
+//             sales,
+//         });
+
+//     } catch (err) {
+//         console.log(err);
+//         res.status(500).send("Error loading agent sales");
+//     }
+// });
 router.get("/agent/:id", async (req, res) => {
     try {
-        const agentId = req.params.id;
-
-        const woodSales = await WoodSale.find({ salesAgent: agentId });
-        const furnitureSales = await FurnitureSale.find({ salesAgent: agentId });
-
-        const agent = await Registration.findById(agentId);
+        // ... fetching woodSales and furnitureSales ...
 
         const sales = [
-            ...woodSales.map((s) => ({ ...s.toObject(), type: "Wood" })),
-            ...furnitureSales.map((s) => ({ ...s.toObject(), type: "Furniture" }))
+            // Fix 1: For Wood Sales, use 'woodName' or similar field and map it to 'productName'
+            ...woodSales.map((s) => ({ 
+                ...s.toObject(), 
+                productName: s.woodName || 'N/A Wood Product', // Assuming WoodSale uses woodName
+                type: "Wood" 
+            })),
+            // Fix 2: For Furniture Sales, it's safer to map it even if the key is the same
+            ...furnitureSales.map((s) => ({ 
+                ...s.toObject(), 
+                productName: s.productName || 'N/A Furniture Product',
+                type: "Furniture" 
+            }))
         ];
 
-        res.render("reports/agent_sales", {
-            agent,
-            sales,
-        });
-
-    } catch (err) {
-        console.log(err);
-        res.status(500).send("Error loading agent sales");
-    }
+        // ... rest of the code ...
+    } catch (err) { /* ... */ }
 });
 
 

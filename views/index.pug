@@ -13,7 +13,7 @@ nav.navbar1
   a(href='/register') Register
   a(href='/login') Sign In
   a(href='#') Chat
-  a.cart(href='#') shopNow
+  a.cart(href='/gallery') shopNow
   |     We deliver to your door step.....
 nav.navbar
   .logo MAYONDO WOOD AND FURNITURE
@@ -29,7 +29,7 @@ nav.navbar
     li
       a(href='/register') SignUp
     li
-      a(href='#gallery') Gallery
+      a(href='/gallery') Gallery
   .nav-right
     .search-box
       input(type='text' placeholder='Search...')
@@ -313,35 +313,8 @@ section.contact-section
         label(for='message') Message
         textarea#message(name='message' rows='5' placeholder='Type your message here' required='')
         button.btn(type='submit') Send Message
+
 footer
-  .footer-content
-    .footer-section.about
-      p &copy; 2025 MAYONDO WOOD AND FURNITURE. All rights reserved.
-      .social-icons
-        a(href='#') Facebook
-        |  |
-        a(href='#') Twitter
-        |  |
-        a(href='#') LinkedIn
-        .contact-info
-          h3 Our Address
-          p
-            | Mayondo Wood and Furniture Ltd
-            br
-            |         Plot 45, Malangala Road, Kampala, Uganda
-          h3 Email
-          p
-            a(href='mailto:mayondowf@gmail.com') mayondowf@gmail.com
-          h3 Phone
-          p +256 700 123 456 | +256 772 789 101
-          h3 Business Hours
-          p
-            | Mon - Sat: 8:00 AM - 6:00 PM
-            br
-            | Sunday: Closed
-    // Bootstrap JS
-    script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js')
-    footer
       .footer-content
         .footer-section.about
           p &copy; 2025 MAYONDO WOOD AND FURNITURE. All rights reserved.
@@ -390,3 +363,5 @@ footer
               a(href='#aboutus') About Us
             li
               a(href='#contactus') Contact Us
+// Bootstrap JS
+script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js')

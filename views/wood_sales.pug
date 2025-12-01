@@ -13,11 +13,7 @@ head
   a(href='/')
     span.material-icons-outlined.me-2 home
     | Home
-
-  a(href='#')
-    span.material-icons-outlined.me-2 bar_chart
-    | Sales Report
-
+    
   a(href='/furnitureRegistered')
     span.material-icons-outlined.me-2 view_list
     | View Furniture Stock
@@ -50,7 +46,7 @@ head
       label(for='customerName') Customer Name
       input#customerName(type='text' name='customerName' required)
 
-      // PRODUCT TYPE
+      
       label(for='productType') Type of Wood
       select#productType(name='productType' required)
         option(value='') Select type
@@ -59,7 +55,7 @@ head
         option(value='timber') Timber
         option(value='poles') Poles
 
-      // PRODUCT NAME
+     
       label(for='productName') Name of Wood
       select#productName(name='productName' required)
         option(value='') Select product
@@ -71,26 +67,22 @@ head
           if qty > 0
             option(value=name)= name + " (Available: " + qty + " units)"
 
-      // QUANTITY
+     
       label(for='quantity') Quantity Bought/Sold
       input#quantity(type='number' name='quantity' min='1' required)
-
-      // QUALITY (exists in your model)
+     
       label(for='quality') Quality
         select#quality(name='quality')
           option(value='') -- Select Quality--
           option(value='firstgrade') first grade
           option(value='Mediumgrade') Medium grade
 
-      // UNIT PRICE (exists in your model)
       label(for='unitprice') Unit Price (UGX)
       input#unitprice(type='number' name='unitprice' min='0' required)
 
-      // DATE
       label(for='date') Date
       input#date(type='date' name='date' required)
 
-      // PAYMENT TYPE
       label(for='paymentType') Type of Payment
       select#paymentType(name='paymentType' required)
         option(value='') Select payment type
@@ -98,7 +90,7 @@ head
         option(value='cheque') Cheque
         option(value='bankOverdraft') Bank Overdraft
 
-      // SALES AGENT (must be ID from Registration model)
+      
       label(for='salesAgent') Sales Agent Name
       select#salesAgent(name='salesAgent' required)
         option(value='') Select Sales Agent
@@ -117,6 +109,6 @@ head
       label(for="total") Total Cost (UGX)
       input#totalcost(type="text" name="totalcost" readonly)
   
-    button(type='submit') Submit Sale
+      button(type='submit') Submit Sale
   script(src='/js/sales.js')
 

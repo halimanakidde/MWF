@@ -1,5 +1,5 @@
 // models/Sale.js
-import mongoose from "mongoose";
+const mongoose = require('mongoose');
 
 const saleSchema = new mongoose.Schema({
     agent: {
@@ -22,4 +22,4 @@ const saleSchema = new mongoose.Schema({
         }
 });
 
-export default mongoose.model("Sale", saleSchema);
+module.exports= mongoose.model("Sale", saleSchema);

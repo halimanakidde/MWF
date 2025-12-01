@@ -33,7 +33,7 @@ const woodsaleSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    transportProvided: {
+    transportprovided: {
         type: String,
         default: "No"
     },

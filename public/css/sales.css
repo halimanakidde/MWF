@@ -14,6 +14,7 @@
     display: flex;
     flex-direction: column;
     padding: 20px;
+    
   }
 
   .sidebar h2 {
@@ -92,6 +93,7 @@
     padding: 25px;
     border-radius: 12px;
     backdrop-filter: blur(3px); /* optional glass effect */
+    width: 100%;
 }
 
   
@@ -188,9 +190,9 @@
 /* --- Dashboard Container --- */
 .card-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
-  padding: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 10px;
+  padding: 10px;
 }
 
 /* --- Card Styling --- */
@@ -302,6 +304,7 @@ button[type="submit"] {
 button[type="submit"]:hover {
   background-color: #3b82f6;
 }
+
 
 
 

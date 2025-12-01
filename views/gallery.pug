@@ -1,0 +1,262 @@
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title OUR Gallery
+    link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous")
+    link(rel="stylesheet", href="/css/tables.css")
+    link(rel="stylesheet", href="/css/gallery.css")
+    link(rel="stylesheet", href="/css/index.css")
+    
+
+
+  body
+    //- Navigation Bar
+    nav.navbar
+        .logo MAYONDO WOOD AND FURNITURE
+        ul
+             li
+               a(href='/') Home
+             li
+               a(href='/#aboutus') About
+             li
+               a(href='/#services') Services
+             li
+               a(href='/#contactus') Contact
+             li
+               a(href='/register') SignUp
+             li
+               a(href='/gallery') Gallery
+        .nav-right
+          .search-box
+            input(type='text' placeholder='Search...')
+            button Go
+          a(href='/login')
+            button.login-btn Login
+    //- Main Content
+    .container-fluid.mt-5
+      h2.text-center.mb-4.text-dark SHOW ROOM
+.container-fluid.mt-4
+  .row.g-4
+    // Card 1
+    .col
+      .card.h-100
+        img.card-img-top(src='/images/Beds/babybed.jpg' alt='...')
+        .card-body
+          h5.card-title BABY CRIBS
+          a.btn.btn-primary(href='/order') Order Now
+    // Card 2
+    .col
+      .card.h-100
+        img.card-img-top(src='/images/Beds/decker4.webp' alt='...')
+        .card-body
+          h5.card-title DECKERS
+          a.btn.btn-primary(href='/order') Order Now
+    // Card 3
+    .col
+      .card.h-100
+        img.card-img-top(src='/images/Beds/bed3.jpg' alt='...')
+        .card-body
+          h5.card-title BED
+          a.btn.btn-primary(href='/order') Order Now
+    // Card 4
+    .col
+      .card.h-100
+        img.card-img-top(src='/images/Dinning/crafted dinn.webp' alt='...')
+        .card-body
+          h5.card-title DINNING
+          a.btn.btn-primary(href='/order') Order Now
+    .col
+      .card.h-100
+        img.card-img-top(src='/images/Dinning/dinner.jpg' alt='...')
+        .card-body
+          h5.card-title DINNING TABLE
+          a.btn.btn-primary(href='/order') Order Now
+    .col
+      .card.h-100
+        img.card-img-top(src='/images/Dinning/harddinner.jpeg' alt='...')
+        .card-body
+          h5.card-title HARD WOOD DINNER
+          a.btn.btn-primary(href='/order') Order Now
+    .col
+      .card.h-100
+        img.card-img-top(src='/images/Dinning/kitchen1.jpg' alt='...')
+        .card-body
+          h5.card-title KITCHEN CABINS
+          a.btn.btn-primary(href='/order') Order Now
+    .col
+      .card.h-100
+        img.card-img-top(src='/images/Dinning/rounddine.webp' alt='...')
+        .card-body
+          h5.card-title ROUND DINNER
+          a.btn.btn-primary(href='/order') Order Now
+    .col
+      .card.h-100
+        img.card-img-top(src='/images/Sofas/outdoor.jpg' alt='...')
+        .card-body
+          h5.card-title OUT DOORS
+          a.btn.btn-primary(href='/order') Order Now
+    .col
+      .card.h-100
+        img.card-img-top(src='/images/Sofas/sofa3.jpg' alt='...')
+        .card-body
+          h5.card-title LIVING ROOM
+          a.btn.btn-primary(href='/order') Order Now
+    .col
+      .card.h-100
+        img.card-img-top(src='/images/Sofas/sofa2.webp' alt='...')
+        .card-body
+          h5.card-title SITTING ROOM
+          a.btn.btn-primary(href='/order') Order Now
+    .col
+      .card.h-100
+        img.card-img-top(src='/images/Tables/console.jpg' alt='...')
+        .card-body
+          h5.CONSOLE CONSOLE TABLE
+          a.btn.btn-primary(href='/order') Order Now
+    .col
+      .card.h-100
+        img.card-img-top(src='/images/Tables/table3.jpeg' alt='...')
+        .card-body
+          h5.card-title MODERN TABLE
+          a.btn.btn-primary(href='/order') Order Now
+    .col
+      .card.h-100
+        img.card-img-top(src='/images/Tables/table2.jpeg' alt='...')
+        .card-body
+          h5.card-title UNIQUE TABLE
+          a.btn.btn-primary(href='/order') Order Now
+    .col
+      .card.h-100
+        img.card-img-top(src='/images/Drawers/drawer1.webp' alt='...')
+        .card-body
+          h5.card-title DRAWERS
+          a.btn.btn-primary(href='/order') Order Now
+    .col
+      .card.h-100
+        img.card-img-top(src='/images/Drawers/drawer3.webp' alt='...')
+        .card-body
+          h5.card-title LUXURY
+          a.btn.btn-primary(href='/order') Order Now
+    .col
+      .card.h-100
+        img.card-img-top(src='/images/Drawers/dressing table.jpg' alt='...')
+        .card-body
+          h5.card-title DRESSING TABLE
+          a.btn.btn-primary(href='/order') Order Now
+    .col
+      .card.h-100
+        img.card-img-top(src='/images/Drawers/dressingmirror.webp' alt='...')
+        .card-body
+          h5.card-title DRESSING MIRROR
+          a.btn.btn-primary(href='/order') Order Now
+    .col
+      .card.h-100
+        img.card-img-top(src='/images/Office/office1.jpg' alt='...')
+        .card-body
+          h5.card-title OFFICE
+          a.btn.btn-primary(href='/order') Order Now
+    .col
+      .card.h-100
+        img.card-img-top(src='/images/Office/office2.jpg' alt='...')
+        .card-body
+          h5.card-title OFFICE TABLE
+          a.btn.btn-primary(href='/order') Order Now
+    .col
+      .card.h-100
+        img.card-img-top(src='/images/wardrobe/wardrobe.jpg' alt='...')
+        .card-body
+          h5.card-title WARDROBES
+          a.btn.btn-primary(href='/order') Order Now
+    .col
+      .card.h-100
+        img.card-img-top(src='/images/wardrobe/wardrobe2.jpg' alt='...')
+        .card-body
+          h5.card-title MODER TOUCH
+          a.btn.btn-primary(href='/order') Order Now
+    .col
+      .card.h-100
+        img.card-img-top(src='/images/Doors/door2.webp' alt='...')
+        .card-body
+          h5.card-title DOORS
+          a.btn.btn-primary(href='/order') Order Now
+    .col
+      .card.h-100
+        img.card-img-top(src='/images/Doors/door5.jpg' alt='...')
+        .card-body
+          h5.card-title MORE DOORS
+          a.btn.btn-primary(href='/order') Order Now
+    .col
+      .card.h-100
+        img.card-img-top(src='/images/woodMachinery/architectural-wood-varieties.webp' alt='...')
+        .card-body
+          h5.card-title MACHINERY
+          a.btn.btn-primary(href='/order') Order Now
+    // Card 5
+    .col
+      .card.h-100
+        img.card-img-top(src='/images/woodMachinery/timber.webp' alt='...')
+        .card-body
+          h5.card-title TIMBER
+          a.btn.btn-primary(href='/order') Order Now
+    // Card 6
+    .col
+      .card.h-100
+        img.card-img-top(src='/images/woodMachinery/hardwood2.jpeg' alt='...')
+        .card-body
+          h5.card-title ALL WOOD TYPES
+          a.btn.btn-primary(href='/order') Order Now
+
+footer
+  .footer-content
+    .footer-section.about
+      p &copy; 2025 MAYONDO WOOD AND FURNITURE. All rights reserved.
+      .social-icons
+        a(href='#') Facebook
+        |  |
+        a(href='#') Twitter
+        |  |
+        a(href='#') LinkedIn
+        .contact-info
+          h3 Our Address
+          p
+            | Mayondo Wood and Furniture Ltd
+            br
+            |         Plot 45, Malangala Road, Kampala, Uganda
+          h3 Email
+          p
+            a(href='mailto:mayondowf@gmail.com') mayondowf@gmail.com
+          h3 Phone
+          p +256 700 123 456 | +256 772 789 101
+          h3 Business Hours
+          p
+            | Mon - Sat: 8:00 AM - 6:00 PM
+            br
+            | Sunday: Closed
+    
+    .footer-section.quick-links
+          h3 Quick Links
+          ul
+            li
+              a(href='/') Home
+            li
+              a(href='#') Doors
+            li
+              a(href='#') Products
+            li
+              a(href='#') Living Room
+            li
+              a(href='#') Bedroom
+            li
+              a(href='#') Kitchens
+            li
+              a(href='#') Dining Room
+            li
+              a(href='#') Bar Furniture
+            li
+              a(href='#aboutus') About Us
+            li
+              a(href='#contactus') Contact Us
+// Bootstrap JS
+script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js')

@@ -4,63 +4,83 @@ html
     meta(charset='UTF-8')
     meta(name='viewport' content='width=device-width, initial-scale=1.0')
     title Sales Executive Dashboard
-    link(rel='stylesheet' href='/css/sales.css')
+    link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css' integrity='sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB' crossorigin='anonymous')
+    link(rel='stylesheet' href='css/sales.css')
     link(href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet")
 
-  body
-    .sidebar
+body
+.sidebar
       .logo
         h2 MAYONDO INVENTORY MANAGEMENT SYSTEM
+        ul.nav-links
+          a(href='/')
+            span.material-icons-outlined.me-2 home
+            | Home
+          a(href='/woodRegistered')
+            span.material-icons-outlined.me-2 inventory_2
+            | View Wood Stock
+          a(href='/furnitureRegistered')
+            span.material-icons-outlined.me-2 view_list
+            | View Furniture Stock
+          a(href=`/agent/${currentUser && currentUser._id}`)
+            span.material-icons-outlined.me-2 bar_chart
+            | View My Sales
+          a(href='/recordwoodSale')
+            span.material-icons-outlined.me-2 shopping_cart
+            | Add Wood Sale
+          a(href='/recordfurnitureSale')
+            span.material-icons-outlined.me-2 point_of_sale
+            | Add Furniture Sale
+          a(href='/logout')
+            button.login-btn Logout
+          a(href='/login')
+            button.login-btn Login
+.main-content
+      .topbar
+      h1 Sales Executive Dashboard
+      p Welcome,
+        span#username= (currentUser && currentUser.fullname) || "Sales Executive"
 
-      ul.nav-links
-        a(href='/')
-          span.material-icons-outlined.me-2 home
-          | Home
-        a(href='/woodRegistered')
-          span.material-icons-outlined.me-2 inventory_2
-          | View Wood Stock
-        a(href='/furnitureRegistered')
-          span.material-icons-outlined.me-2 view_list
-          | View Furniture Stock
-        a(href=`/agent/${currentUser._id}`)
-          span.material-icons-outlined.me-2 bar_chart
-          | View My Sales
-        a(href='/recordwoodSale')
-          span.material-icons-outlined.me-2 shopping_cart
-          | Add Wood Sale
-        a(href='/recordfurnitureSale')
-          span.material-icons-outlined.me-2 point_of_sale
-          | Add Furniture Sale
-        a(href='/logout')
-          button.login-btn Logout
+        //-  ORDERS SECTION
 
-    .main-content
-      header
-        h1 Sales Executive Dashboard
-        p Welcome,
-          span#username= currentUser?.fullname || "Sales Executive"
+      .section.mt-5
+            h3.mb-3 Recent Orders
+            if orders && orders.length
+                  table.table.table-hover.table-bordered
+                    thead.table-dark
+                      tr
+                        th #
+                        th Product
+                        th Quantity
+                        th Customer
+                        th Phone
+                        th Notes
+                        th Date
 
-      section.mt-4
-        h2 Your Sales Records
+                    tbody
+                      each order, i in orders
+                        tr
+                          td #{i + 1}
+                          td #{order.productName}
+                          td #{order.quantity}
+                          td #{order.customerName}
+                          td #{order.phone}
+                          td #{order.notes || "-"}
+                          td #{order.createdAt.toLocaleDateString()}
 
-        if sales && sales.length > 0
-          table.sales-table
-            thead
-              tr
-                th Product
-                th Unit Price (UGX)
-                th Quantity
-                th Total (UGX)
-                th Sale Type
-                th Date
-            tbody
-              each sale in sales
-                tr
-                  td= sale.productName
-                  td #{new Intl.NumberFormat().format(sale.unitprice)}
-                  td= sale.quantity
-                  td #{new Intl.NumberFormat().format(sale.totalprice)}
-                  td= sale.type
-                  td= sale.date ? sale.date.toLocaleDateString() : 'N/A'
-        else
-          p No sales recorded yet.
+            else
+                  .alert.alert-info.mt-3 No orders yet.
+
+
+                  // --- WOOD STOCK CHART SECTION ---
+      .section.mt-5
+            h3.mb-3 Wood Stock Availability
+            .card.p-4
+              // New Chart Container for Wood Stock
+              canvas#woodStockBarChart(width="400" height="200")
+
+                
+script(src="https://cdn.jsdelivr.net/npm/chart.js")
+script(src="/js/Charts.js")    
+script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js' integrity='sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB' crossorigin='anonymous')    
+  

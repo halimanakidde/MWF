@@ -81,28 +81,38 @@ body
           .card.card.text-bg-warning.mb-3
             span.material-icons-outlined.icon-display cut
             h3 Expenses on Hardwood
-            p Total Expenses on Hardwood : #{new Intl.NumberFormat().format(totalHardwood.totalcost)} UGX
+            p Total Expenses: #{new Intl.NumberFormat().format(totalHardwood.totalcost)} UGX
 
           .card.card.text-bg-danger.mb-3
             span.material-icons-outlined.icon-display forest
             h3 Expenses on Softwood
-            p Total Expenses on Softwood : #{new Intl.NumberFormat().format(totalSoftwood.totalcost)} UGX
+            p Total Expenses: #{new Intl.NumberFormat().format(totalSoftwood.totalcost)} UGX
 
           .card.card.text-bg-info.mb-3
             span.material-icons-outlined.icon-display construction
             h3 Expenses on Timber
-            p Total Expenses on Timber : #{new Intl.NumberFormat().format(totalTimber.totalcost)} UGX
-
-          .card.card.text-bg-light.mb-3
-            span.material-icons-outlined.icon-display fence
-            h3 Expenses on Poles
-            p Total Expenses on Poles : #{new Intl.NumberFormat().format(totalPoles.totalcost)} UGX
+            p Total Expenses: #{new Intl.NumberFormat().format(totalTimber.totalcost)} UGX
 
           .card.card.text-bg-warning.mb-3
+            span.material-icons-outlined.icon-display fence
+            h3 Expenses on Poles
+            p Total Expenses: #{new Intl.NumberFormat().format(totalPoles.totalcost)} UGX
+
+          .card.card.text-bg-light.mb-3
             span.material-icons-outlined.icon-display payments
-            h3 Total Wood Expenses
+            h3 Total Wood Expenses :
             p #{new Intl.NumberFormat().format(woodExpenses)} UGX
 
+        .col-lg-6.col-xl-6.col-md-12 
+          .card.shadow.h-100
+            .card-header.bg-primary.text-white
+              h5.mb-0 Wood Expenses Distribution 
+
+            //-  THIS CONTAINER MUST HAVE HEIGHT/SIZE 
+            .card-body.d-flex.justify-content-center.align-items-center(style="min-height: 300px;")
+              canvas#expensesPieChart(width="400" height="400")
+
+        .card-container
           .card.card.text-bg-dark.mb-3
             span.material-icons-outlined.icon-display inventory_2
             h3 Total Hardwood Stock
@@ -123,6 +133,7 @@ body
             h3 Total Poles in Stock
             p #{totalPoles.totalquantity} Pieces
 
+        .card-container
           .card.card.text-bg-primary.mb-3
             span.material-icons-outlined.icon-display receipt_long
             h3 Total Wood Sales
@@ -134,6 +145,7 @@ body
             h3 Total Furniture Sales
             p #{furnitureSales.length} Sales
 
+        .card-container
           .card.card.text-bg-info.mb-3
             span.material-icons-outlined.icon-display trending_up
             h3 Total Wood Revenue
@@ -154,7 +166,7 @@ body
             h3 Total Profits
             p #{new Intl.NumberFormat().format(grossProfit)}UGX
     
-                  
+        .card-container              
         .col-md-4
           .card.low-stock-card(style="position: sticky; top: 10px;")
             .card-header.bg-danger.text-white
@@ -193,13 +205,7 @@ body
                   h6 All Stock Levels Good!
                   p.text-muted No low stock alerts at this time.
 
-        .col-lg-6.col-xl-6.col-md-12 
-          .card.shadow.h-100
-            .card-header.bg-primary.text-white
-              h5.mb-0 Wood Expenses Distribution 
-            // 👇 THIS CONTAINER MUST HAVE HEIGHT/SIZE 👇
-            .card-body.d-flex.justify-content-center.align-items-center(style="min-height: 300px;")
-              canvas#expensesPieChart(width="400" height="400")
+      
 
 script.
   window.chartData = {

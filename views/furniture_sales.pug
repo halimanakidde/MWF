@@ -8,13 +8,10 @@ head
   link(href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet")
 .sidebar
   h2 MAYONDO INVENTORY MANAGEMENT SYSTEM
+  
   a(href='/')
     span.material-icons-outlined.me-2 home
     | Home
-
-  a(href='#')
-    span.material-icons-outlined.me-2 bar_chart
-    | Sales Report
 
   a(href='/furnitureRegistered')
     span.material-icons-outlined.me-2 view_list
@@ -93,8 +90,6 @@ head
     label(for="total") Total Cost (UGX)
     input#totalcost(type="text" name="totalcost" readonly)
   
-    //- label(for='totalcost') Total Cost
-    //- textarea#totalcost(name='totalcost' rows='2' readonly placeholder='0 UGX')
     button(type='submit') Submit Sale
   script(src='/js/sales.js')
 
