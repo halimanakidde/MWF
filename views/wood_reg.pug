@@ -40,11 +40,10 @@ head
     a(href='/logout')
       button.logout-btn Logout
 
-//- div.video-background
-//-   video(autoplay muted loop playsinline)
-//-     source(src="/videos/furndid.mp4" type="video/mp4")
+
 form#woodForm(action='/woodRegistration' method='post')
         h2 Wood Stock Registration
+        
         label(for='woodName') Wood Name
         select#woodName(name='woodName')
           option(value='') -- Select Wood Name --
@@ -53,6 +52,7 @@ form#woodForm(action='/woodRegistration' method='post')
           option(value='Pine') Pine
           option(value='Teak') Teak
           option(value='Eucalyptus') Eucalyptus
+        span.error-msg#woodNameError
 
         label(for='woodType') Wood Type
         select#woodType(name='woodType')
@@ -61,39 +61,49 @@ form#woodForm(action='/woodRegistration' method='post')
           option(value='poles') Poles
           option(value='hardwood') Hard Wood
           option(value='softwood') Soft Wood
-        
+        span.error-msg#woodTypeError
+
         label(for='woodcolor') Wood Color
         input#woodcolor(type='text' name='woodcolor')
+        span.error-msg#woodColorError
 
         label(for='measurements') Measurements
         select#measurements(name='measurements')
           option(value='') -- Select Measurement --
           option(value='1.2-1.5mm') 1.2-1.5mm
           option(value='1.6-2mm') 1.6-2mm
+        span.error-msg#measurementsError
 
         label(for='quality') Quality
         select#quality(name='quality')
-          option(value='') -- Select Quality--
-          option(value='firstgrade') first grade
+          option(value='') -- Select Quality --
+          option(value='firstgrade') First grade
           option(value='Mediumgrade') Medium grade
-        
+        span.error-msg#qualityError
+
         label(for='date') Date
-        input#date(type='date' name='date' required='')
+        input#date(type='date' name='date')
+        span.error-msg#dateError
 
         label(for='quantity') Quantity
         input#quantity(type='number' name='quantity')
+        span.error-msg#quantityError
 
         label(for='supplier') Supplier Name
         input#supplier(type='text' name='supplier')
-      
+        span.error-msg#supplierError
+
         label(for='contact') Supplier Contact
         input#contact(type='number' name='contact')
-        
+        span.error-msg#contactError
+
         label(for='price') Price per Piece (UGX)
         input#price(type='number' name='unitprice' min='1')
-        
+        span.error-msg#priceError
+
         label(for='location') Storage Location
         input#location(type='text' name='warehouseLocation')
+        span.error-msg#locationError
 
         button(type='submit') Register
-//- script(src='woodreg.js')
+script(src='/js/validateWoodReg.js')

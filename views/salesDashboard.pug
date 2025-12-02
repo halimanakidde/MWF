@@ -22,9 +22,6 @@ body
           a(href='/furnitureRegistered')
             span.material-icons-outlined.me-2 view_list
             | View Furniture Stock
-          a(href=`/agent/${currentUser && currentUser._id}`)
-            span.material-icons-outlined.me-2 bar_chart
-            | View My Sales
           a(href='/recordwoodSale')
             span.material-icons-outlined.me-2 shopping_cart
             | Add Wood Sale
@@ -72,12 +69,7 @@ body
                   .alert.alert-info.mt-3 No orders yet.
 
 
-                  // --- WOOD STOCK CHART SECTION ---
-      .section.mt-5
-            h3.mb-3 Wood Stock Availability
-            .card.p-4
-              // New Chart Container for Wood Stock
-              canvas#woodStockBarChart(width="400" height="200")
+         
 
                 
 script(src="https://cdn.jsdelivr.net/npm/chart.js")

@@ -1,36 +1,33 @@
 doctype html
 head
-  meta(charset='UTF-8')
-  meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  head 
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    
     title Sign up
     link(rel='stylesheet' href='css/styles.css')
     //- link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB' crossorigin='anonymous')
   
-    .signup-container
-      form#signupForm(action="/register" method="POST")
-        h2 Create an Account
-        label(for='fullname') Full Name
-        input#fullname(type='fullname' name='fullname' placeholder='Enter your full name' required='')
+.signup-container
+  form#signupForm(action="/register" method="POST")
+    h2 Create an Account
+    label(for='fullname') Full Name
+    input#fullname(type='fullname' name='fullname' placeholder='Enter your full name' required='')
 
-        //- label(for='date') Date of Birth
-        //- input#password(type='date' placeholder='Enter your date of birth' required='')
-       
-        label(for='email') Email Address
-        input#email(type='email' name='email' placeholder='Enter your email' required='')
+    label(for='email') Email Address
+    input#email(type='email' name='email' placeholder='Enter your email' required='')
 
-        label(for='password') Password
-        input#password(type='password' name='password' placeholder='Create a password' required='')
+    label(for='password') Password
+    input#password(type='password' name='password' placeholder='Create a password' required='')
 
-        label(for='role')  Select Role: 
-        select#userRole(name="role") 
-          option(value="") Select role
-          option(value="manager") Manager 
-          option(value="salesexecutive") Sales Executive
-          
-        button(type='submit') Sign Up
-        p.helper-text
-          | Already have an account? 
-          a(href='/login') Login here<br>
-          a(href='/') HOME
-          //- script(src='signup.js')
+    label(for='role')  Select Role: 
+    select#userRole(name="role") 
+      option(value="") Select role
+      option(value="manager") Manager 
+      option(value="salesexecutive") Sales Executive
+      
+    button(type='submit') Sign Up
+    p.helper-text
+      | Already have an account? 
+      a(href='/login') Login here<br>
+      a(href='/') HOME
+  script(src='signup.js')

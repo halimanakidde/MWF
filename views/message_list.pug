@@ -29,8 +29,21 @@ html
             li.nav-item
               a.nav-link(href='/recordwoodSale') Add Wood Sale  |
             li.nav-item
-              a.nav-link(href='/logout')
-                button.login-btn Logout
+              a.btn.btn-danger(href='/viewboard') Dashboard  |
+            li.nav-item
+              a.btn.btn-danger(href='/logout') Logout
+  
+    //- Check if the success message variable exists and is not empty
+    if success_msg && success_msg.length
+      .alert.alert-success(role='alert')
+        //- The req.flash() returns an array, so we join it into a string
+        p= success_msg.join(', ')
+
+    //- Check if the error message variable exists and is not empty
+    if error_msg && error_msg.length
+      .alert.alert-danger(role='alert')
+        p= error_msg.join(', ')
+    //- -----------------------------
 
     .container.py-5
       .row
@@ -39,10 +52,6 @@ html
           .d-flex.justify-content-between.align-items-center.mb-4
             h1.text-dark.fw-bold
               | Customer Contact Messages
-            
-            a.btn.btn-outline-danger(href='/viewboard') 
-              span.material-icons-outlined.me-1 dashboard
-              | Dashboard
 
           p.lead.text-muted Reviews communication received from customers via the contact form.
           

@@ -3,7 +3,7 @@ const ContactMessage = require('../models/contact_messages')
 
 //route to handle form submission
 router.post('/sendMessage', async (req, res) => {
-    console.log("--- 2. Data received in req.body: ---", req.body);
+    console.log(" Data received in req.body:", req.body);
 
     // Captures data from the request body
     const { fullName, email, message } = req.body;
@@ -41,7 +41,7 @@ router.post('/sendMessage', async (req, res) => {
 router.get('/messages', async (req, res) => {
     try {
         const messages = await ContactMessage.find().sort({ receivedAt: -1 }); // Fetch all messages, sorted by most recent first
-        
+
         res.render('message_list', { 
             title: 'Customer Messages',
             messages: messages

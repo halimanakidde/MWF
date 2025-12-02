@@ -16,8 +16,6 @@ html
             li.nav-item
               a.nav-link(href='/') Home |
             li.nav-item
-              a.nav-link(href='/viewboard') Manager Dashboard | 
-            li.nav-item
               a.nav-link(href='/woodRegistered') View Wood Stock |
             li.nav-item
               a.nav-link(href='/furnitureRegistered') View Furniture Stock |
@@ -26,8 +24,9 @@ html
             li.nav-item
               a.nav-link(href='/recordwoodSale') Add Wood Sale |
             li.nav-item
-              a.nav-link(href='/logout')
-                button.login-btn Logout
+              a.btn.btn-danger(href='/viewboard') Dashboard  |
+            li.nav-item
+              a.btn.btn-danger(href='/logout') Logout
 
     .container-fluid.mt-5
       h2.text-center.mb-4.text-primary Sales Executives

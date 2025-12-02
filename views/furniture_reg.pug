@@ -45,7 +45,7 @@ form#furnitureForm(action='/furnitureRegistration' method='post')
         
         label(for='itemName') Furniture Name
         input#itemName(type='text' name='furniturename' placeholder='e.g., Console Table')
-        #itemNameError.error
+        span.error-msg#itemNameError.error
 
         label(for='itemName') Furniture Image
         input#image(type='file' name='furnitureimage' placeholder='upload image')
@@ -57,7 +57,7 @@ form#furnitureForm(action='/furnitureRegistration' method='post')
           option(value='Home') Home Furniture
           option(value='Outdoor') Outdoor Furniture
           option(value='Custom') Custom Orders
-        #categoryError.error
+        span.error-msg#categoryError.error
 
         label(for='material') Wood Type / Material
         select#material(name='material')
@@ -68,18 +68,20 @@ form#furnitureForm(action='/furnitureRegistration' method='post')
           option(value='Pine') Pine
           option(value='Metal') Metal Frame
           option(value='Glass') Glass / Mixed
-        #materialError.error
+        span.error-msg#materialError.error
 
         label(for='quantity') Quantity
         input#quantity(type='number' name='quantity' min='1')
-        #quantityError.error
+        span.error-msg#quantityError.error
 
         label(for='price') Unit Price (UGX)
         input#price(type='number' name='unitprice' min='1')
-        #priceError.error
+        span.error-msg#priceError.error
 
         label(for='date') Date Produced
         input#productionDate(type='date' name='date')
-        #dateError.error
+        span.error-msg#dateError.error
 
         button(type='submit') Register
+script(src="/js/validateFurnitureReg.js")
+       
