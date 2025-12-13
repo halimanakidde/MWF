@@ -74,12 +74,12 @@ body
             strong Manager
 
         .card-container
-          .card.card.text-bg-warning.mb-3
+          .card.card.text-bg-light.mb-3
             span.material-icons-outlined.icon-display cut
             h3 Expenses on Hardwood
             p Total Expenses: #{new Intl.NumberFormat().format(totalHardwood.totalcost)} UGX
 
-          .card.card.text-bg-danger.mb-3
+          .card.card.text-bg-warning.mb-3
             span.material-icons-outlined.icon-display forest
             h3 Expenses on Softwood
             p Total Expenses: #{new Intl.NumberFormat().format(totalSoftwood.totalcost)} UGX
@@ -101,7 +101,7 @@ body
 
         .col-lg-6.col-xl-6.col-md-12 
           .card.shadow.h-100
-            .card-header.bg-danger.text-white
+            .card-header.bg-warning.text-white
               h5.mb-0 Wood Expenses Distribution 
 
             //-  THIS CONTAINER MUST HAVE HEIGHT/SIZE 
@@ -120,19 +120,19 @@ body
             h3 Total Softwood Stock
             p #{totalSoftwood.totalquantity} Pieces
 
-          .card.card.text-bg-primary.mb-3
+          .card.card.text-bg-warning.mb-3
             span.material-icons-outlined.icon-display stairs
             h3 Total Timber in Stock
             p #{totalTimber.totalquantity} Pieces
 
-          .card.card.text-bg-danger.mb-3
+          .card.card.text-bg-light.mb-3
             span.material-icons-outlined.icon-display stairs
             h3 Total Poles in Stock
             p #{totalPoles.totalquantity} Pieces
 
         .col-md-4
         .card.low-stock-card(style="position: sticky; top: 10px;")
-          .card-header.bg-danger.text-white
+          .card-header.bg-warning.text-white
             h5.mb-0
               i.fas.fa-exclamation-triangle.me-2
               | Low Stock Alerts

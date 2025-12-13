@@ -4,6 +4,7 @@
     display: flex;
     height: 100%;
     font-size: large;
+    background-color: rgb(255, 234, 234);
   }
 
   h5{
@@ -12,8 +13,8 @@
 
   /* Sidebar styles */
   .sidebar {
-    width: 260px;
-    background-color:rgb(123, 84, 47);
+    width: 300px;
+    background-color:rgb(154, 32, 140);
     color: #fff;
     display: flex;
     flex-direction: column;
@@ -38,7 +39,7 @@
   }
 
   .sidebar a:hover {
-    background-color: red;
+    background-color:rgb(225, 18, 153);
   }
 
   /* Main content styles */
@@ -120,7 +121,7 @@
 
   button {
     margin-top: 20px;
-    background-color: rgb(255, 157, 0);
+    background-color: red;
     color: white;
     border: none;
     padding: 10px 15px;
