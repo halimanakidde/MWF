@@ -187,7 +187,7 @@ router.get("/viewsales", async (req, res) => {
             }
         ]);
 
-        // Formating pie Chart
+        // Formating bar graph
         const categories = ['softwood', 'hardwood', 'poles', 'timber'];
         
         const woodChartData = {

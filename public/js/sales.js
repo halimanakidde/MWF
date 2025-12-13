@@ -1,19 +1,3 @@
-// function calculateTotalCost() {
-//   const qty = parseFloat(document.getElementById('quantity').value) || 0;
-//   const price = parseFloat(document.getElementById('unitprice').value) || 0;
-
-//   const cost = qty * price;
-//   const transport = cost * 0.05;
-//   const total = cost + transport;
-
-//   document.getElementById('totalcost').value =
-//     total.toLocaleString() + " UGX";
-// }
-
-// document.addEventListener('input', calculateTotalCost);
-
-
-
   function calculateTotalCost() {
     const qty = Number(document.getElementById("quantity").value);
     const unit = Number(document.getElementById("unitprice").value);
@@ -26,7 +10,7 @@
     }
 
     document.getElementById("totalcost").value = 
-      isNaN(total) ? "" : total.toFixed(2);
+      isNaN(total) ? "" : total.toFixed(2);//converts the number to a string, keeping only two digits after the decimal point
   }
 
   document.addEventListener("DOMContentLoaded", () => {

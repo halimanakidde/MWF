@@ -5,15 +5,15 @@
 
 /* Body styling */
 body{
-  background-color: #218838; /* Green background */
   font-family: 'Poppins', sans-serif;
   margin: 0;
   padding: 0;
+  
 }
 
 /* Navbar customization */
 .navbar-custom {
-  background-color: #970c8cd5; /* Purple color */
+  background-color: rgb(123, 84, 47); /* Purple color */
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
