@@ -76,15 +76,8 @@ table tr:hover {
 .text-center.mb-4 h1.text-primary,
  h2.text-center.mb-4.text-primary,
  h2.text-center.text-primary {
-    color: #ff8800 !important; 
+    color: black !important; 
 }
-
-#updateForm {
-  background-color: #6d99b8; /* light blue */
-  border-radius: 10px;
-  padding: 20px;
-}
-
 
 /* order form */
 body {
