@@ -5,7 +5,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(to right, #c5880f, #c5880f);
+  background-color: rgb(255, 234, 234);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -51,7 +51,7 @@ select{
 }
 
 input:focus {
-  border-color: goldenrod;
+  border-color: rgb(154, 32, 140);
   outline: none;
   box-shadow: 0 0 5px rgba(218, 165, 32, 0.3);
 }
@@ -60,7 +60,7 @@ input:focus {
 button {
   width: 100%;
   padding: 12px;
-  background-color: goldenrod;
+  background-color: rgb(154, 32, 140);
   border: none;
   border-radius: 6px;
   color: white;
@@ -71,7 +71,8 @@ button {
 }
 
 button:hover {
-  background-color: #b8860b;
+  background-color: rgb(255, 234, 234);
+  color: black;
 }
 
 /* ===== Helper Text ===== */
@@ -83,7 +84,7 @@ button:hover {
 }
 
 .helper-text a {
-  color: goldenrod;
+  color: rgb(154, 32, 140);
   text-decoration: none;
   font-weight: 600;
 }

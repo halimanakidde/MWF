@@ -1,15 +1,15 @@
-
 doctype html
 head
   meta(charset='UTF-8')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
   title Wood Sales Form 
   link(rel='stylesheet' href='css/sales.css')
-  //- material icons 
+    //- material icons 
   link(href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet")
 
 .sidebar
   h2 MAYONDO INVENTORY MANAGEMENT SYSTEM
+  
   a(href='/')
     span.material-icons-outlined.me-2 home
     | Home
@@ -33,6 +33,7 @@ head
   a(href='/logout')
     button.logout-btn Logout 
 
+
 .main-content
   h1 Wood Sale
   p Fill in the sales details below:
@@ -40,73 +41,99 @@ head
   if wooditems.length
     form#salesform(action='/recordwoodSale', method='post')
 
-      // CUSTOMER NAME
-      label(for='customerName') Customer Name
-      input#customerName(type='text' name='customerName' required)
+      #progress-bar
+        span#step-1-indicator.active 1. Product Details
+        span#step-2-indicator 2. Customer & Pricing
+        span#step-3-indicator 3. Payment & Logistics
 
+      fieldset.form-step#step-1
+       
+        label(for='productType') Type of Wood
+        select#productType(name='productType' required)
+          option(value='') Select type
+          option(value='hardwood') Hard wood
+          option(value='softwood') Soft Wood
+          option(value='timber') Timber
+          option(value='poles') Poles
       
-      label(for='productType') Type of Wood
-      select#productType(name='productType' required)
-        option(value='') Select type
-        option(value='hardwood') Hard wood
-        option(value='softwood') Soft Wood
-        option(value='timber') Timber
-        option(value='poles') Poles
+        label(for='productName') Name of Wood
+        select#productName(name='productName' required)
+          option(value='') Select product
+          - var groupedWoods = {}
+          each wood in wooditems
+            - if (!groupedWoods[wood.woodName]) groupedWoods[wood.woodName] = 0
+            - groupedWoods[wood.woodName] += Number(wood.quantity)
+          each qty, name in groupedWoods
+            if qty > 0
+              option(value=name)= name + " (Available: " + qty + " units)"
 
-     
-      label(for='productName') Name of Wood
-      select#productName(name='productName' required)
-        option(value='') Select product
-        - var groupedWoods = {}
-        each wood in wooditems
-          - if (!groupedWoods[wood.woodName]) groupedWoods[wood.woodName] = 0
-          - groupedWoods[wood.woodName] += Number(wood.quantity)
-        each qty, name in groupedWoods
-          if qty > 0
-            option(value=name)= name + " (Available: " + qty + " units)"
+        label(for='quantity') Quantity Bought/Sold
+        input#quantity(type='number' name='quantity' min='1' required)
 
-     
-      label(for='quantity') Quantity Bought/Sold
-      input#quantity(type='number' name='quantity' min='1' required)
-     
-      label(for='quality') Quality
-        select#quality(name='quality')
+        label(for='quality') Quality
+        select#quality(name='quality' required)
           option(value='') -- Select Quality--
           option(value='firstgrade') first grade
           option(value='Mediumgrade') Medium grade
 
-      label(for='unitprice') Unit Price (UGX)
-      input#unitprice(type='number' name='unitprice' min='0' required)
+        //- NAVIGATION
+        button.next-btn(type='button') Next: Customer & Price
 
-      label(for='date') Date
-      input#date(type='date' name='date' required)
+      //- 2. STEP 2: CUSTOMER & PRICE
+      fieldset.form-step#step-2
+        //- CUSTOMER NAME
+        label(for='customerName') Customer Name
+        input#customerName(type='text' name='customerName' required)
 
-      label(for='paymentType') Type of Payment
-      select#paymentType(name='paymentType' required)
-        option(value='') Select payment type
-        option(value='cash') Cash
-        option(value='cheque') Cheque
-        option(value='bankOverdraft') Bank Overdraft
+        //- UNIT PRICE
+        label(for='unitprice') Unit Price (UGX)
+        input#unitprice(type='number' name='unitprice' min='0' required)
 
-      
-      label(for='salesAgent') Sales Agent Name
-      select#salesAgent(name='salesAgent' required)
-        option(value='') Select Sales Agent
-        each agent in agents
-          option(value=agent._id)= agent.fullname
+        //- TOTAL COST (READONLY)
+        label(for="total") Total Cost (UGX)
+        input#totalcost(type="text" name="totalcost" readonly)
+        
+        //- DATE
+        label(for='date') Date
+        input#date(type='date' name='date' required)
 
-      label(for='transportprovided') Transport Provided
-      select#transportprovided(name='transportprovided' required)
-        option(value='') Select one 
-        option(value='Yes') Yes 
-        option(value='No') No
+        //- NAVIGATION
+        button.prev-btn(type='button') Previous
+        button.next-btn(type='button') Next: Payment & Logistics
+        
+      //- 3. STEP 3: PAYMENT & LOGISTICS
+      fieldset.form-step#step-3
+        //- PAYMENT TYPE
+        label(for='paymentType') Type of Payment
+        select#paymentType(name='paymentType' required)
+          option(value='') Select payment type
+          option(value='cash') Cash
+          option(value='cheque') Cheque
+          option(value='bankOverdraft') Bank Overdraft
 
-      label(for='notes') Additional Notes
-      textarea#notes(name='notes' rows='3' placeholder='Any additional information...')
+        //- SALES AGENT (Uses backend loop)
+        label(for='salesAgent') Sales Agent Name
+        select#salesAgent(name='salesAgent' required)
+          option(value='') Select Sales Agent
+          each agent in agents
+            option(value=agent._id)= agent.fullname
 
-      label(for="total") Total Cost (UGX)
-      input#totalcost(type="text" name="totalcost" readonly)
+        //- TRANSPORT PROVIDED
+        label(for='transportprovided') Transport Provided
+        select#transportprovided(name='transportprovided' required)
+          option(value='') Select one 
+          option(value='Yes') Yes 
+          option(value='No') No
+
+        //- ADDITIONAL NOTES
+        label(for='notes') Additional Notes
+        textarea#notes(name='notes' rows='3' placeholder='Any additional information...')
+
+        //- NAVIGATION & SUBMIT
+        button.prev-btn(type='button') Previous
+        button(type='submit') Submit Sale
   
-      button(type='submit') Submit Sale
-  script(src='/js/sales.js')
+  else
+    p.alert.alert-warning No wood stock items are currently available for sale.
 
+script(src='/js/sales.js')
