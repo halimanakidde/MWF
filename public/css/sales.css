@@ -1,10 +1,14 @@
+ * {
+    box-sizing: border-box;
+  }
+
  body {
-    margin: 2px;
+    margin: 5px;
     font-family: Arial, sans-serif;
     display: flex;
-    height: 100%;
     font-size: large;
     background-color: rgb(255, 234, 234);
+    min-height: 100vh;   
   }
 
   h5{
@@ -43,62 +47,34 @@
   }
 
   /* Main content styles */
-  .main-content {
+   .main-content {
     flex: 1;
     padding: 30px;
     overflow-y: auto;
-  }
+  } 
 
-  h1 {
-    color: goldenrod;
+  h1,h3 {
+    color: black;
     margin-bottom: 10px;
     text-align: center;
   }
 
-  form {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    max-width: 800px;
-  }
 
-  #furnitureForm,
-  #woodForm {
-    width: 60%;
-    max-width: 700px; 
-    margin: 0 auto;  /* center it */
-}
-
-.video-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    z-index: -1;
-}
-
-.video-background video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(0.45); /* darkens video so form is readable */
-}
 
 .form-wrapper {
     position: relative;
     z-index: 2;
 }
-
+ 
 #furnitureForm,
-#woodForm {
-    background: rgba(255, 255, 255, 0.88); /* semi-transparent white */
-    padding: 25px;
-    border-radius: 12px;
-    backdrop-filter: blur(3px); /* optional glass effect */
+#woodForm{
     width: 100%;
+    max-width: 900px; /* Sets a comfortable maximum width for the form */
+    background-color:rgba(255, 255, 255, 0.88);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin: 0 auto; /* Center the form horizontally */
 }
 
   
@@ -112,14 +88,14 @@
 
   input, select, textarea {
     width: 100%;
-    padding: 10px;
-    margin-top: 5px;
+    padding: 12px;
+    margin-top: 8px;
     border: 1px solid #ccc;
     border-radius: 6px;
     font-size: 14px;
   }
-
-  button {
+ 
+    button {
     margin-top: 20px;
     background-color: red;
     color: white;
@@ -128,13 +104,22 @@
     font-size: 16px;
     border-radius: 6px;
     cursor: pointer;
-  }
+  } 
 
-  button:hover {
-    background-color: #3b82f6;
-  }
+  button.logout-btn:hover {
+    background-color: rgb(154, 32, 140);
+    }
 
-  /* ===== Content Wrapper ===== */
+  /* button[type="submit"] {
+    background-color: rgb(154, 32, 140); 
+    width: 100%;
+} */
+
+  button[type="button"]:hover {
+    background-color: rgb(154, 32, 140);
+}
+
+
 .content {
   margin-left: 260px; /* space for sidebar */
   padding: 30px 40px;
@@ -317,6 +302,32 @@ button[type="submit"]:hover {
     margin-bottom: 10px;
     display: block;
 }
+
+.form-step {
+        display: none; /* Hide all steps initially */
+    }
+    .form-step:first-child {
+        display: block; /* Show the first step */
+    }
+    /* Simple Progress Bar Styling */
+    #progress-bar {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 20px;
+        padding: 10px;
+        background: #f8f8f8;
+        border-radius: 5px;
+    }
+    #progress-bar span {
+        padding: 5px 10px;
+        border-bottom: 3px solid transparent;
+        color: #999;
+        font-weight: bold;
+    }
+    #progress-bar span.active {
+        color: #007bff;
+        border-bottom: 3px solid #007bff;
+    }
 
 
 

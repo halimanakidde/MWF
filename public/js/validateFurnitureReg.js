@@ -55,3 +55,59 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!valid) e.preventDefault();
     });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('furnitureForm');
+        const steps = Array.from(document.querySelectorAll('.form-step'));
+        const progressBarSpans = document.querySelectorAll('#progress-bar span');
+        let currentStep = 0;
+
+        function showStep(stepIndex) {
+            steps.forEach((step, index) => {
+                step.style.display = index === stepIndex ? 'block' : 'none';
+                progressBarSpans[index].classList.toggle('active', index <= stepIndex);
+            });
+            currentStep = stepIndex;
+        }
+
+        function validateCurrentStep() {
+            // This validation is crucial. You must ensure this integrates with 
+            // your external validation script (validateFurnitureReg.js)
+            const currentFields = steps[currentStep].querySelectorAll('[required]');
+            let isValid = true;
+            
+            currentFields.forEach(field => {
+                // Simplified check: ensures field has a value (works for text/select/date/number)
+                if (!field.value) {
+                    isValid = false;
+                    field.style.borderColor = 'red'; 
+                } else {
+                    field.style.borderColor = '';
+                }
+            });
+            return isValid;
+        }
+
+        // Handle Next button click
+        form.querySelectorAll('.next-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                if (validateCurrentStep() && currentStep < steps.length - 1) {
+                    showStep(currentStep + 1);
+                } else if (!validateCurrentStep()) {
+                    alert('Please fill out all required fields in this step.');
+                }
+            });
+        });
+
+        // Handle Previous button click
+        form.querySelectorAll('.prev-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                if (currentStep > 0) {
+                    showStep(currentStep - 1);
+                }
+            });
+        });
+
+        // Ensure only the first step is shown on load
+        showStep(0);
+    });

@@ -4,12 +4,12 @@ head
     meta(name='viewport' content='width=device-width, initial-scale=1.0')
     title Wood Registration
     link(rel='stylesheet' href='css/sales.css')
-     //- material icons 
     link(href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet")
+
 .sidebar
     h2 MAYONDO INVENTORY MANAGEMENT SYSTEM
     a(href='/viewboard') 
-      span.material-icons-outlined.me-1 dashboard
+      span.material-icons-outlined.me-2 dashboard
       | Dashboard
 
     a(href='/')
@@ -37,72 +37,87 @@ head
       | Add Wood Sale
     
     a(href='/logout')
-      button.logout-btn Logout
+        button.logout-btn Logout
 
 
 form#woodForm(action='/woodRegistration' method='post')
-        h2 Wood Stock Registration
-        
+    h3 Wood Stock Registration
+
+    #progress-bar
+        span#step-1-indicator.active 1. Characteristics
+        span#step-2-indicator 2. Stock Details
+        span#step-3-indicator 3. Supplier
+
+    fieldset.form-step#step-1
         label(for='woodName') Wood Name
-        select#woodName(name='woodName')
-          option(value='') -- Select Wood Name --
-          option(value='Mahogany') Mahogany
-          option(value='Muvule') Muvule
-          option(value='Pine') Pine
-          option(value='Teak') Teak
-          option(value='Eucalyptus') Eucalyptus
-        span.error-msg#woodNameError
+        select#woodName(name='woodName' required)
+            option(value='') -- Select Wood Name --
+            option(value='Mahogany') Mahogany
+            option(value='Muvule') Muvule
+            option(value='Pine') Pine
+            option(value='Teak') Teak
+            option(value='Eucalyptus') Eucalyptus
+        span.error-msg#woodNameError.error
 
         label(for='woodType') Wood Type
-        select#woodType(name='woodType')
-          option(value='') -- Select Wood Type --
-          option(value='timber') Timber
-          option(value='poles') Poles
-          option(value='hardwood') Hard Wood
-          option(value='softwood') Soft Wood
-        span.error-msg#woodTypeError
+        select#woodType(name='woodType' required)
+            option(value='') -- Select Wood Type --
+            option(value='timber') Timber
+            option(value='poles') Poles
+            option(value='hardwood') Hard Wood
+            option(value='softwood') Soft Wood
+        span.error-msg#woodTypeError.error
 
         label(for='woodcolor') Wood Color
-        input#woodcolor(type='text' name='woodcolor')
-        span.error-msg#woodColorError
+        input#woodcolor(type='text' name='woodcolor' required)
+        span.error-msg#woodColorError.error
+        
+        button.next-btn(type='button') Next: Stock Details
 
+    fieldset.form-step#step-2
         label(for='measurements') Measurements
-        select#measurements(name='measurements')
-          option(value='') -- Select Measurement --
-          option(value='1.2-1.5mm') 1.2-1.5mm
-          option(value='1.6-2mm') 1.6-2mm
-        span.error-msg#measurementsError
+        select#measurements(name='measurements' required)
+            option(value='') -- Select Measurement --
+            option(value='1.2-1.5mm') 1.2-1.5mm
+            option(value='1.6-2mm') 1.6-2mm
+        span.error-msg#measurementsError.error
 
         label(for='quality') Quality
-        select#quality(name='quality')
-          option(value='') -- Select Quality --
-          option(value='firstgrade') First grade
-          option(value='Mediumgrade') Medium grade
-        span.error-msg#qualityError
+        select#quality(name='quality' required)
+            option(value='') -- Select Quality --
+            option(value='firstgrade') First grade
+            option(value='Mediumgrade') Medium grade
+        span.error-msg#qualityError.error
 
         label(for='date') Date
-        input#date(type='date' name='date')
-        span.error-msg#dateError
+        input#date(type='date' name='date' required)
+        span.error-msg#dateError.error
 
         label(for='quantity') Quantity
-        input#quantity(type='number' name='quantity')
-        span.error-msg#quantityError
+        input#quantity(type='number' name='quantity' min='1' required)
+        span.error-msg#quantityError.error
 
+        
+        button.prev-btn(type='button') Previous
+        button.next-btn(type='button') Next: Supplier Info
+
+    fieldset.form-step#step-3
         label(for='supplier') Supplier Name
-        input#supplier(type='text' name='supplier')
-        span.error-msg#supplierError
+        input#supplier(type='text' name='supplier' required)
+        span.error-msg#supplierError.error
 
         label(for='contact') Supplier Contact
-        input#contact(type='number' name='contact')
-        span.error-msg#contactError
+        input#contact(type='number' name='contact' required)
+        span.error-msg#contactError.error
 
         label(for='price') Price per Piece (UGX)
-        input#price(type='number' name='unitprice' min='1')
-        span.error-msg#priceError
+        input#price(type='number' name='unitprice' min='1' required)
+        span.error-msg#priceError.error
 
         label(for='location') Storage Location
-        input#location(type='text' name='warehouseLocation')
-        span.error-msg#locationError
+        input#location(type='text' name='warehouseLocation' required)
+        span.error-msg#locationError.error
 
-        button(type='submit') Register
+        button.prev-btn(type='button') Previous
+        button(type='submit') Register Wood Stock!
 script(src='/js/validateWoodReg.js')
